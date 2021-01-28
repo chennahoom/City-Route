@@ -1,0 +1,170 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+header,
+main,
+footer,
+nav,
+aside,
+section,
+div {
+  display: block;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: "Open sans", sans-serif;
+  height: 100%;
+}
+
+/* ----------------header--------------- */
+.nav-logo {
+  height: 75px;
+  width: 90px;
+}
+
+
+.profile {
+  display: block;
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  border: 2px solid #aaa;
+}
+
+.headtext {
+  color: black;
+  font-size: 37px;
+  font-weight: bold;
+}
+
+#mainTripsContainer header .navbar {
+  background-color: #e3f2fd;
+}
+
+#mainList header {
+  box-shadow: 2px 2px 12px 0px #aaa;
+}
+
+/* ----------------forms--------------- */
+
+form {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin: 50px auto;
+  width: 300px;
+}
+
+/* register */
+.signin-form {
+  background: #fff;
+  border: 1px solid #eee;
+  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+  width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.signin-title {
+  text-align: center;
+  margin: 5px;
+}
+
+.login-logo {
+  display: block;
+  margin: 10px auto;
+  height: 100px;
+  width: 100px;
+  background-size: 100px;
+}
+
+
+.form-control,
+#submit {
+  margin-left: 20px;
+}
+
+#from-choose {
+  display: flex;
+}
+
+.form-inline {
+  flex: auto;
+  margin-left: 25%;
+}
+
+.options {
+  color: rgb(255, 255, 255);
+  font-size: 50px;
+  font-weight: bold;
+}
+.mb-4 {
+  margin-top: 60px;
+}
+/* ----------------article--------------- */
+
+#pageTitle {
+  position: absolute;
+  display: block;
+  margin-top: 20px;
+  margin-left: 10px;
+  font-family: "Open Sans", sans-serif;
+  color: #454f63;
+  font-size: 26px;
+}
+
+.stretched-link img {
+  height: 270px;
+}
+
+
+
+.join-trip {
+  margin-left: auto;
+  width: 100px;
+  justify-content: space-around;
+}
+
+
+
+/* ----------------map--------------- */
+
+#mapid {
+  height: 400px;
+  width: 600px;
+  margin-top: 30px;
+}
+.card-map {
+  position: absolute;
+  left: 450px;
+  width: 600px;
+}
+
+.card-title#tour-city{
+    font-size: 35px;
+}
+
+.cardd {
+    position: absolute;
+    width: 38rem;
+    left: 35%;
+}
+.card-title#tour-guide{
+    font-size: 25px;
+}
+
+#num-tickets {
+  margin-left: 10px;
+}
+
+#cardSearches {
+  max-width: 18rem;
+  margin-top: 50px;
+}
+
