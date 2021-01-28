@@ -8,6 +8,7 @@ import ResultsPage from './Pages/ResultsPage';
 import HomePage from './Pages/HomePage';
 import MapPage from './Pages/MapPage';
 import Article from './Pages/Article';
+import RegisterPage from './Pages/RegisterPage';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
@@ -49,6 +50,9 @@ function App() {
 					{/* <Route path="/article/:usersId" exact> */}
 					<Route path="/article" exact>
 						<Article userTrips={userTrips} />
+					</Route>
+					<Route path="/register" exact>
+						<RegisterPage />
 					</Route>
 				</Switch>
 			</div>
