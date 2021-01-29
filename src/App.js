@@ -9,6 +9,7 @@ import HomePage from "./Pages/HomePage";
 import MapPage from "./Pages/MapPage";
 import Article from "./Pages/Article";
 import RegisterPage from "./Pages/RegisterPage";
+import Register from "./Pages/Register";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
@@ -35,6 +36,21 @@ function App() {
     console.log(userTrips);
   };
 
+  const addUser = (user) => {
+    fetch(`https://city-route.herokuapp.com/api/users/`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      })
+    .then(response => response.json())
+    .then(user => { 
+      console.log(user);
+    })
+  }
+
+
   console.log("searhTripForm", searhTripForm);
 
   return (
@@ -44,6 +60,9 @@ function App() {
         <Switch>
           <Route path="/trips" exact>
             <TripsPage updateForm={updateForm} />
+          </Route>
+          <Route path="/registerNew" exact>
+            <Register addUser={addUser}/>
           </Route>
           <Route path="/results" exact>
             <ResultsPage

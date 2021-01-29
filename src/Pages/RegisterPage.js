@@ -6,21 +6,6 @@ import { useGoogleLogout } from 'react-google-login'
 
 function RegisterPage() {
 
-  const { signOut, loaded } = useGoogleLogout({
-    jsSrc,
-    onFailure,
-    clientId,
-    cookiePolicy,
-    loginHint,
-    hostedDomain,
-    fetchBasicProfile,
-    discoveryDocs,
-    uxMode,
-    redirectUri,
-    scope,
-    accessType,
-    onLogoutSuccess
-  })
 
   const [results, setResults] = useState([]);
 
@@ -58,11 +43,6 @@ function RegisterPage() {
         cookiePolicy={"single_host_origin"}
       />
 
-      <GoogleLogout
-        clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
-        buttonText="Logout"
-        onLogoutSuccess={logout}
-      />
     </div>
   );
 }
