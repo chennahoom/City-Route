@@ -8,9 +8,14 @@ import ResultsPage from "./Pages/ResultsPage";
 import HomePage from "./Pages/HomePage";
 import MapPage from "./Pages/MapPage";
 import Article from "./Pages/Article";
+<<<<<<< HEAD
 
 import LoginHooks from './Components/LoginHooks';
 import LogoutHooks from './Components/LogoutHooks';
+=======
+import RegisterPage from "./Pages/RegisterPage";
+import Register from "./Pages/Register";
+>>>>>>> 3da1e26b122e0afabe3c717346ae8aa6822deeaa
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
@@ -37,6 +42,24 @@ function App() {
     console.log(userTrips);
   };
 
+  const addUser = (newUser) => {
+    fetch(`https://city-route.herokuapp.com/api/users/`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        // body: JSON.stringify(user),
+        body: JSON.stringify(newUser),
+      })
+    .then(response => response.json())
+    .catch(err => console.error(err)) 
+    .then(newUser => { 
+      console.log(newUser);
+    })
+  }
+
+
   console.log("searhTripForm", searhTripForm);
 
   return (
@@ -46,6 +69,9 @@ function App() {
         <Switch>
           <Route path="/trips" exact>
             <TripsPage updateForm={updateForm} />
+          </Route>
+          <Route path="/registerNew" exact>
+            <Register addUser={addUser}/>
           </Route>
           <Route path="/results" exact>
             <ResultsPage
