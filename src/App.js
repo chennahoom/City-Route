@@ -36,17 +36,20 @@ function App() {
     console.log(userTrips);
   };
 
-  const addUser = (user) => {
+  const addUser = (newUser) => {
     fetch(`https://city-route.herokuapp.com/api/users/`, {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
-        body: JSON.stringify(user),
+        // body: JSON.stringify(user),
+        body: JSON.stringify(newUser),
       })
     .then(response => response.json())
-    .then(user => { 
-      console.log(user);
+    .catch(err => console.error(err)) 
+    .then(newUser => { 
+      console.log(newUser);
     })
   }
 
