@@ -8,7 +8,9 @@ import ResultsPage from "./Pages/ResultsPage";
 import HomePage from "./Pages/HomePage";
 import MapPage from "./Pages/MapPage";
 import Article from "./Pages/Article";
-import RegisterPage from "./Pages/RegisterPage";
+
+import LoginHooks from './Components/LoginHooks';
+import LogoutHooks from './Components/LogoutHooks';
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
@@ -58,9 +60,13 @@ function App() {
           <Route path="/article" exact>
             <Article userTrips={userTrips} />
           </Route>
-          <Route path="/register" exact>
-            <RegisterPage />
+		  <Route path="/loginhooks" exact>
+            <LoginHooks />
           </Route>
+		  <Route path="/logouthooks" exact>
+            <LogoutHooks />
+          </Route>
+
         </Switch>
       </div>
     </BrowserRouter>

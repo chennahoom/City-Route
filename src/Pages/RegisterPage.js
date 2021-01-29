@@ -1,27 +1,13 @@
 import { GoogleLogin } from "react-google-login";
+
+
+
 import { useEffect, useState } from "react";
-
-import { useGoogleLogout } from 'react-google-login'
-
 
 function RegisterPage() {
 
-  const { signOut, loaded } = useGoogleLogout({
-    jsSrc,
-    onFailure,
-    clientId,
-    cookiePolicy,
-    loginHint,
-    hostedDomain,
-    fetchBasicProfile,
-    discoveryDocs,
-    uxMode,
-    redirectUri,
-    scope,
-    accessType,
-    onLogoutSuccess
-  })
 
+  
   const [results, setResults] = useState([]);
 
   useEffect(() => {
@@ -48,8 +34,8 @@ function RegisterPage() {
     // console.log(response.profileObj.givenName);
   };
 
+
   return (
-    <div>
       <GoogleLogin
         clientId="233069535985-vfone0gmelp0cfv62424j18a94av35i3.apps.googleusercontent.com"
         buttonText="Login With Google"
@@ -58,12 +44,6 @@ function RegisterPage() {
         cookiePolicy={"single_host_origin"}
       />
 
-      <GoogleLogout
-        clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
-        buttonText="Logout"
-        onLogoutSuccess={logout}
-      />
-    </div>
   );
 }
 

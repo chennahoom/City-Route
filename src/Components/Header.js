@@ -24,7 +24,7 @@ function Header(props) {
             <img
               className="profile"
               alt="profile"
-              src="https://i.postimg.cc/cJt1JvML/pro.jpg"
+              src=""
             />
           </Link>
           <div
