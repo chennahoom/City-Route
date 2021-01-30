@@ -8,14 +8,10 @@ function TourGuideMenu (props){
         history.push("/addTrip");
     }
 
-    const addTrip = () =>{
-        
-    }
-
 
     return(
         <div>
-            {/* <AddTrip /> */}
+
             <button onClick={add}>Add Trip</button>
             <button>View All Trips</button>
         </div>
