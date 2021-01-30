@@ -1,14 +1,19 @@
 import { useState } from "react";
+import { useHistory  } from "react-router-dom";
 
 
 function Register(props){
     const initForm = {full_name: '', email:'' , type_of_user: '', languages: '', phone:''};
     const [user, setUser] = useState(initForm);
+    const history = useHistory();
+
     
     const onSave = (event) =>{
         event.preventDefault();
         props.addUser(user);
         setUser(initForm);
+        history.push("/register");
+
     }
 
     const handleInputChange = (event) =>{

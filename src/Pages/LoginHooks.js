@@ -21,9 +21,9 @@ function GoogleLogIn(props) {
     .then((res) => res.json())
     .then((body) => {
       setResults(body);
-      console.log(results);
+      // console.log(results);
     });
-  })
+  });
 
   const onSuccess = (res) => {
     props.setName(res.profileObj.name);
@@ -31,6 +31,7 @@ function GoogleLogIn(props) {
     props.setUrl(res.profileObj.imageUrl);
     refreshTokenSetup(res);
     props.setlog(true);
+    // getAllUsers();
     findUserByEmail(res.profileObj.email);
   }
 
