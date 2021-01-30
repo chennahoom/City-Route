@@ -1,38 +1,55 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {Link} from "react";
 import { useState } from "react";
 import GoogleLogin, { useGoogleLogin } from "react-google-login";
-import { refreshTokenSetup } from "./utils/refreshToken";
+import { refreshTokenSetup } from "../Components/utils/refreshToken";
+import { useHistory } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+
+
+
 
 const clientId =
   "233069535985-vfone0gmelp0cfv62424j18a94av35i3.apps.googleusercontent.com";
 
 function GoogleLogIn(props) {
-  
-  // const responseGoogle = (res) => {
-  //   props.setName(res.profileObj.name);
-  //   props.setEmail(res.profileObj.email);
-  //   props.setUrl(res.profileObj.imageUrl);
-  // };
+  const history = useHistory();
+  const [results, setResults] = useState([]);
+
+  useEffect(() =>{
+    fetch(`https://city-route.herokuapp.com/api/users`)
+    .then((res) => res.json())
+    .then((body) => {
+      setResults(body);
+      console.log(results);
+    });
+  })
 
   const onSuccess = (res) => {
     props.setName(res.profileObj.name);
     props.setEmail(res.profileObj.email);
     props.setUrl(res.profileObj.imageUrl);
-
-    console.log("Login Success: currentUser:", res.profileObj);
-    alert(
-      `Logged in successfully welcome ${res.profileObj.email} 😍. \n See console for full profile object.`
-    );
     refreshTokenSetup(res);
-    <Link to="/trips"></Link>
+    props.setlog(true);
+    findUserByEmail(res.profileObj.email);
+  }
+
+  const findUserByEmail = (email) => {
+    let j=0;
+    for (let i = 0; i < results.length; i++) {
+      if (email === results[i].email){
+        history.push("/trips");
+        j++;
+      }
+    }
+
+    if(j===0){
+      history.push("/register");
+    }
   };
 
   const onFailure = (res) => {
-    console.log("Login failed: res:", res);
-    alert(
-      `Failed to login. 😢 Please ping this to repo owner twitter.com/sivanesh_fiz`
-    );
+    alert(`Failed to login 😢, res:`,res);
   };
 
   const { signIn } = useGoogleLogin({
@@ -52,7 +69,6 @@ function GoogleLogIn(props) {
       <img src={props.url} alt={props.name} />
       <button onClick={signIn} className="button">
         <img src="icons/google.svg" alt="google login" className="icon"></img>
-
         <span className="buttonText">Sign in with Google</span>
       </button>
     </div>
