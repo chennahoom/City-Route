@@ -7,7 +7,6 @@ function CardMap(props) {
     const [tourGuide, setTourGuide] = useState([]);
     const[tickets, setTickets] = useState({});
     const[trip, setTrip] = useState("");
-    const [stops, setStops] = useState([]);
 
 
     useEffect(() => {
@@ -15,15 +14,27 @@ function CardMap(props) {
         fetch(`https://city-route.herokuapp.com/api/trips/${props.tripId}`)
             .then(res => res.json())
             .then(body => {
+                console.log("this is first");
                 setResults(body);
-            });
+                console.log("this is second");
+                tourGuideId();
+                console.log(body.tour_guide_id);
+                console.log(results);
+                console.log("this is third");
 
+
+            });
+    },[]);
+
+
+    const tourGuideId = () => {
+        console.log('this is first')
         fetch(`https://city-route.herokuapp.com/api/users/${results.tour_guide_id}`)
             .then(res => res.json())
             .then(body => {
                 setTourGuide(body);
             });
-    }, []);
+    }
 
     const updateSpace = (info) =>{
         fetch(`https://city-route.herokuapp.com/api/trips/${props.tripId}`, {
@@ -40,6 +51,7 @@ function CardMap(props) {
             props.updateTrips(info);
         })
     }
+
 
     const numOfTic = () =>{
         // TODO:need to check id Traveler
@@ -59,23 +71,6 @@ function CardMap(props) {
     const handleTick = (event) => {
 		setTickets(event.target.value);
     }
-
-    
-    // const addStops = (info) => {
-    //     fetch("https://city-route.herokuapp.com/api/stops/", {
-    //         method: 'GET',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //           },
-    //           body: JSON.stringify(info),
-    //         })
-    //     .then(response => response.json())
-    //     .then(info => { 
-    //         setStops(info);
-    //         props.addStops(info);
-    //     })
-    // }
-    
 
     return (
         <div className="card-map">

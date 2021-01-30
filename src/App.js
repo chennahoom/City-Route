@@ -29,6 +29,7 @@ function App() {
   const [userTrips, setUserTrips] = useState([]);
   const [isLogin, setLogin] = useState(false);
 
+
   function updateForm(event) {
     const { value, name } = event.target; // event.target -> DOM ELEMENT THAT FIRE EVENT
     setSearhTripForm({ ...searhTripForm, [name]: value });
@@ -37,7 +38,7 @@ function App() {
   const [results, setResults] = useState([]);
   const history = useHistory();
 
-  const setlog = (res) =>{
+  const setlog = (res) => {
     setLogin(res);
   };
 
@@ -86,7 +87,15 @@ function App() {
             <Article userTrips={userTrips} />
           </Route>
           <Route path="/login" exact>
-            <LoginHooks setName={setName} setEmail={setEmail} setUrl={setUrl} name={name} email={email} url={url} setlog={setlog} />
+            <LoginHooks
+              setName={setName}
+              setEmail={setEmail}
+              setUrl={setUrl}
+              name={name}
+              email={email}
+              url={url}
+              setlog={setlog}
+            />
           </Route>
         </Switch>
       </div>

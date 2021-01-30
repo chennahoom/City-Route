@@ -10,7 +10,7 @@ function TripResult(props) {
 				<div className="card bg-light text-dark">
 					<div className="card-body">
 						<h5 className="card-title">{props.trip.tour_date}</h5>
-						<p className="card-text">{props.stops.stops} </p>
+						<p className="card-text">{props.trip.stops} </p>
 						<p className="card-text">
 							tour ID: {props.trip.id}
 							<br />
