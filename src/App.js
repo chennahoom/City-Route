@@ -87,7 +87,14 @@ function App() {
             <Article userTrips={userTrips} />
           </Route>
           <Route path="/login" exact>
-            <LoginHooks setName={setName} setEmail={setEmail} setUrl={setUrl} name={name} email={email} url={url} />
+            <LoginHooks
+              setName={setName}
+              setEmail={setEmail}
+              setUrl={setUrl}
+              name={name}
+              email={email}
+              url={url}
+            />
           </Route>
           <Route path="/logout" exact>
             <LogoutHooks />
