@@ -12,6 +12,8 @@ import { useHistory  } from "react-router-dom";
 import LoginHooks from "./Pages/LoginHooks";
 import LogoutHooks from "./Components/LogoutHooks";
 import Register from "./Pages/Register";
+import TourGuidMenu from "./Pages/TourGuideMenu";
+import AddTrip from "./Pages/AddTrip";
 
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
@@ -19,6 +21,7 @@ function App() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [url, setUrl] = useState("");
+  const [userId, setUserId] = useState('');
 
   const [searhTripForm, setSearhTripForm] = useState({
     city: "",
@@ -83,6 +86,12 @@ function App() {
           </Route>
           <Route path="/login" exact>
             <LoginHooks setName={setName} setEmail={setEmail} setUrl={setUrl} name={name} email={email} url={url} setlog={setlog} />
+          </Route>
+          <Route path="/tourGuideMenu" exact>
+            <TourGuidMenu userId={userId} />
+          </Route>
+          <Route path="/addTrip" exact>
+            <AddTrip />
           </Route>
         </Switch>
       </div>
