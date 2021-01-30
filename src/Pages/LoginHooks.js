@@ -16,14 +16,14 @@ function GoogleLogIn(props) {
   const history = useHistory();
   const [results, setResults] = useState([]);
 
-  const getAllUsers = () =>{
+  useEffect(() =>{
     fetch(`https://city-route.herokuapp.com/api/users`)
     .then((res) => res.json())
     .then((body) => {
       setResults(body);
       // console.log(results);
     });
-  }
+  });
 
   const onSuccess = (res) => {
     props.setName(res.profileObj.name);
@@ -31,7 +31,7 @@ function GoogleLogIn(props) {
     props.setUrl(res.profileObj.imageUrl);
     refreshTokenSetup(res);
     props.setlog(true);
-    getAllUsers();
+    // getAllUsers();
     findUserByEmail(res.profileObj.email);
   }
 

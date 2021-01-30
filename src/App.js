@@ -9,8 +9,6 @@ import HomePage from "./Pages/HomePage";
 import MapPage from "./Pages/MapPage";
 import Article from "./Pages/Article";
 import { useHistory  } from "react-router-dom";
-
-
 import LoginHooks from "./Pages/LoginHooks";
 import LogoutHooks from "./Components/LogoutHooks";
 import Register from "./Pages/Register";
@@ -31,68 +29,12 @@ function App() {
   const [isLogin, setLogin] = useState(false);
 
   function updateForm(event) {
-    console.log("updateForm", event.target.name, event.target.value);
-
-    //const value = event.target.value;
-    //const name = event.target.name;
     const { value, name } = event.target; // event.target -> DOM ELEMENT THAT FIRE EVENT
-
     setSearhTripForm({ ...searhTripForm, [name]: value });
   }
 
   const [results, setResults] = useState([]);
   const history = useHistory();
-
-  // useEffect(() => {
-  //   // run after render
-  //   fetch(`https://city-route.herokuapp.com/api/users`)
-  //     .then((res) => res.json())
-  //     .then((body) => {
-  //       setResults(body);
-  //     });
-  // }, []);
-
-  const checkEmail = (email) => {
-    fetch(`https://city-route.herokuapp.com/api/users`)
-    .then((res) => res.json())
-    .then((body) => {
-      setResults(body);
-      // check(email);
-    });
-    console.log(email);
-    check(email);
-  }
-
-  const check = (email) =>{
-    console.log("ffff");
-    // results.map(item =>{
-    //   console.log("i, in");
-    //   if(email===item.email){
-    //     console.log("gggg");
-
-    //     <Redirect to='/trips' />
-    //   }
-    //   else{
-    //     console.log("gggg");
-    //     <Redirect to='/register' />
-    //   }
-    // })
-    // console.log("ffff");
-
-    for (let i = 0; i < results.length; i++) {
-      //if the user is already register
-      console.log("didnt found");
-
-      if (email === results[i].email){
-        console.log(results[i].email);
-        <Redirect to='/trips' />
-      }
-      else {
-        console.log("didnt found");
-        <Redirect to='/register' />
-      }
-    }
-  }
 
   const setlog = (res) =>{
     setLogin(res);
@@ -109,7 +51,6 @@ function App() {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      // body: JSON.stringify(user),
       body: JSON.stringify(newUser),
     })
       .then((response) => response.json())
@@ -118,8 +59,6 @@ function App() {
         console.log(newUser);
       });
   };
-
-  // console.log("searhTripForm", searhTripForm);
 
   return (
     <BrowserRouter>
@@ -142,11 +81,8 @@ function App() {
           <Route path="/article" exact>
             <Article userTrips={userTrips} />
           </Route>
-          {/* <Route path="/login" exact>
-            {isLogin? <Redirect to="/trips"/> : <LoginHooks checkEmail={checkEmail} setName={setName} setEmail={setEmail} setUrl={setUrl} name={name} email={email} url={url} setlog={setlog} />}
-          </Route> */}
           <Route path="/login" exact>
-            <LoginHooks checkEmail={checkEmail} setName={setName} setEmail={setEmail} setUrl={setUrl} name={name} email={email} url={url} setlog={setlog} />
+            <LoginHooks setName={setName} setEmail={setEmail} setUrl={setUrl} name={name} email={email} url={url} setlog={setlog} />
           </Route>
         </Switch>
       </div>
