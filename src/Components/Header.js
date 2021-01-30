@@ -38,7 +38,7 @@ function Header(props) {
               Log out
             </Link> */}
 
-            <LogoutHooks setlog={props.setlog} />
+            <LogoutHooks setUser={props.setUser} setlog={props.setlog} />
           </div>
         </section>
       </section>

@@ -14,6 +14,7 @@ function LogoutHooks(props) {
   const onLogoutSuccess = (res) => {
     props.setlog(false)
     history.push("/login");
+    props.setUser(null)
     console.log("signedout")
   };
 

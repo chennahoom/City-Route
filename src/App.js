@@ -22,7 +22,8 @@ function App() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [url, setUrl] = useState("");
-  const [userId, setUserId] = useState('');
+  const [userId, setUserId] = useState("");
+  const [user, setUser] = useState(null);
 
   const [searhTripForm, setSearhTripForm] = useState({
     city: "",
@@ -31,7 +32,6 @@ function App() {
   });
   const [userTrips, setUserTrips] = useState([]);
   const [isLogin, setLogin] = useState(false);
-
 
   function updateForm(event) {
     const { value, name } = event.target; // event.target -> DOM ELEMENT THAT FIRE EVENT
@@ -59,16 +59,19 @@ function App() {
       body: JSON.stringify(newUser),
     })
       .then((response) => response.json())
-      .catch((err) => console.error(err))
       .then((newUser) => {
         console.log(newUser);
-      });
+        setUser(newUser);
+      })
+      .catch((err) => console.error(err));
   };
+
+  console.log('user',user);
 
   return (
     <BrowserRouter>
       <div className="App">
-        <Header setlog={setlog} />
+        <Header setlog={setlog} setUser={setUser} />
         <Switch>
           <Route path="/trips" exact>
             <TripsPage updateForm={updateForm} />
@@ -82,7 +85,7 @@ function App() {
               updateTrips={updateTrips}
             />
           </Route>
-          <Route path="/map/:tripId" exact>
+          <Route path="/map/:city" exact>
             <MapPage />
           </Route>
           {/* <Route path="/article/:usersId" exact> */}
@@ -98,6 +101,7 @@ function App() {
               email={email}
               url={url}
               setlog={setlog}
+              setUser={setUser}
             />
           </Route>
           <Route path="/tourGuideMenu" exact>
