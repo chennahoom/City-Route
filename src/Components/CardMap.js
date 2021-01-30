@@ -50,18 +50,21 @@ function CardMap(props) {
   };
 
   const updateSpace = (info) => {
-    fetch(`https://city-route.herokuapp.com/api/trips/${props.tripId}`, {
+    fetch(`https://city-route.herokuapp.com/api/trips/${tripId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(info),
+      // body: JSON.stringify(info),
+      body: JSON.stringify({
+        spaces_left: info,
+      }),
     })
       .then((response) => response.json())
       .then((info) => {
         // props.updateTrips(info);
         setTrip(info);
-        props.updateTrips(info);
+        // props.updateTrips(info);
       });
   };
 
@@ -69,9 +72,7 @@ function CardMap(props) {
     // TODO:need to check id Traveler
     console.log(tickets);
     if (results.spaces_left >= tickets) {
-      const info = {
-        spaces_left: parseInt(results.spaces_left) - parseInt(tickets),
-      };
+      const info =  parseInt(results.spaces_left) - parseInt(tickets);
       updateSpace(info);
     } else {
       //TODO: add here the num of the tour guide
