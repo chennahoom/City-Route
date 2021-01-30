@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import LogoutHooks from "./LogoutHooks";
+import LoginHooks from "./LoginHooks";
 
 function Header(props) {
   return (
@@ -11,7 +13,8 @@ function Header(props) {
             src="https://i.postimg.cc/L4Y4Dm4L/Logo2.png"
           />
         </a>
-        <span className="headtext">Where to next?</span>
+        <span className="headtext">
+          Where to next?  </span>
         <section className="nav-item dropdown">
           <Link
             className="nav-link dropdown-toggle"
@@ -31,9 +34,11 @@ function Header(props) {
             className="dropdown-menu"
             aria-labelledby="navbarDropdownMenuLink"
           >
-            <Link className="dropdown-item" to="/login">
+            {/* <Link className="dropdown-item" to="/logout" >
               Log out
-            </Link>
+            </Link> */}
+
+            <LogoutHooks />
           </div>
         </section>
       </section>

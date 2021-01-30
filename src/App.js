@@ -9,12 +9,17 @@ import HomePage from "./Pages/HomePage";
 import MapPage from "./Pages/MapPage";
 import Article from "./Pages/Article";
 
-import LoginHooks from './Components/LoginHooks';
-import LogoutHooks from './Components/LogoutHooks';
+import LoginHooks from "./Components/LoginHooks";
+import LogoutHooks from "./Components/LogoutHooks";
+import Register from "./Pages/Register";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 function App() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [url, setUrl] = useState("");
+
   const [searhTripForm, setSearhTripForm] = useState({
     city: "",
     start: "",
@@ -40,21 +45,20 @@ function App() {
 
   const addUser = (newUser) => {
     fetch(`https://city-route.herokuapp.com/api/users/`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        // body: JSON.stringify(user),
-        body: JSON.stringify(newUser),
-      })
-    .then(response => response.json())
-    .catch(err => console.error(err)) 
-    .then(newUser => { 
-      console.log(newUser);
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      // body: JSON.stringify(user),
+      body: JSON.stringify(newUser),
     })
-  }
-
+      .then((response) => response.json())
+      .catch((err) => console.error(err))
+      .then((newUser) => {
+        console.log(newUser);
+      });
+  };
 
   console.log("searhTripForm", searhTripForm);
 
@@ -67,7 +71,7 @@ function App() {
             <TripsPage updateForm={updateForm} />
           </Route>
           <Route path="/registerNew" exact>
-            <Register addUser={addUser}/>
+            <Register addUser={addUser} />
           </Route>
           <Route path="/results" exact>
             <ResultsPage
@@ -82,13 +86,12 @@ function App() {
           <Route path="/article" exact>
             <Article userTrips={userTrips} />
           </Route>
-		  <Route path="/loginhooks" exact>
-            <LoginHooks />
+          <Route path="/login" exact>
+            <LoginHooks setName={setName} setEmail={setEmail} setUrl={setUrl} name={name} email={email} url={url} />
           </Route>
-		  <Route path="/logouthooks" exact>
+          <Route path="/logout" exact>
             <LogoutHooks />
           </Route>
-
         </Switch>
       </div>
     </BrowserRouter>
