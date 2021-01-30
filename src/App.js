@@ -8,7 +8,8 @@ import ResultsPage from "./Pages/ResultsPage";
 import HomePage from "./Pages/HomePage";
 import MapPage from "./Pages/MapPage";
 import Article from "./Pages/Article";
-import { useHistory  } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
 import LoginHooks from "./Pages/LoginHooks";
 import LogoutHooks from "./Components/LogoutHooks";
 import Register from "./Pages/Register";
@@ -31,6 +32,7 @@ function App() {
   const [userTrips, setUserTrips] = useState([]);
   const [isLogin, setLogin] = useState(false);
 
+
   function updateForm(event) {
     const { value, name } = event.target; // event.target -> DOM ELEMENT THAT FIRE EVENT
     setSearhTripForm({ ...searhTripForm, [name]: value });
@@ -39,9 +41,9 @@ function App() {
   const [results, setResults] = useState([]);
   const history = useHistory();
 
-  const setlog = (res) =>{
+  const setlog = (res) => {
     setLogin(res);
-  }
+  };
 
   const updateTrips = (trip) => {
     setUserTrips([...userTrips, trip]);
@@ -75,7 +77,10 @@ function App() {
             <Register addUser={addUser} />
           </Route>
           <Route path="/results" exact>
-            <ResultsPage searhTripForm={searhTripForm} updateTrips={updateTrips} />
+            <ResultsPage
+              searhTripForm={searhTripForm}
+              updateTrips={updateTrips}
+            />
           </Route>
           <Route path="/map/:tripId" exact>
             <MapPage />
@@ -85,7 +90,15 @@ function App() {
             <Article userTrips={userTrips} />
           </Route>
           <Route path="/login" exact>
-            <LoginHooks setName={setName} setEmail={setEmail} setUrl={setUrl} name={name} email={email} url={url} setlog={setlog} />
+            <LoginHooks
+              setName={setName}
+              setEmail={setEmail}
+              setUrl={setUrl}
+              name={name}
+              email={email}
+              url={url}
+              setlog={setlog}
+            />
           </Route>
           <Route path="/tourGuideMenu" exact>
             <TourGuidMenu userId={userId} />

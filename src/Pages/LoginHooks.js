@@ -57,7 +57,7 @@ function GoogleLogIn(props) {
     onSuccess,
     onFailure,
     clientId,
-    isSignedIn: false,
+    isSignedIn: true,
     accessType: "offline",
     // responseType: 'code',
     // prompt: 'consent',
@@ -65,9 +65,6 @@ function GoogleLogIn(props) {
 
   return (
     <div>
-      <h2>Welcome: {props.name} </h2>
-      <h2>Email: {props.email}</h2>
-      <img src={props.url} alt={props.name} />
       <button onClick={signIn} className="button">
         <img src="icons/google.svg" alt="google login" className="icon"></img>
         <span className="buttonText">Sign in with Google</span>

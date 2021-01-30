@@ -14,15 +14,27 @@ function CardMap(props) {
         fetch(`https://city-route.herokuapp.com/api/trips/${props.tripId}`)
             .then(res => res.json())
             .then(body => {
+                console.log("this is first");
                 setResults(body);
-            });
+                console.log("this is second");
+                tourGuideId();
+                console.log(body.tour_guide_id);
+                console.log(results);
+                console.log("this is third");
 
+
+            });
+    },[]);
+
+
+    const tourGuideId = () => {
+        console.log('this is first')
         fetch(`https://city-route.herokuapp.com/api/users/${results.tour_guide_id}`)
             .then(res => res.json())
             .then(body => {
                 setTourGuide(body);
             });
-    }, []);
+    }
 
     const updateSpace = (info) =>{
         fetch(`https://city-route.herokuapp.com/api/trips/${props.tripId}`, {

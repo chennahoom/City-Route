@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 function TripResult(props) {
 
+
 	return (
 		<section className="row row-cols-1 row-cols-md-3" id="All-trips">
 			<section className="col mb-4">
