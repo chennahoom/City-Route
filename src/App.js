@@ -8,14 +8,9 @@ import ResultsPage from "./Pages/ResultsPage";
 import HomePage from "./Pages/HomePage";
 import MapPage from "./Pages/MapPage";
 import Article from "./Pages/Article";
-<<<<<<< HEAD
 
 import LoginHooks from './Components/LoginHooks';
 import LogoutHooks from './Components/LogoutHooks';
-=======
-import RegisterPage from "./Pages/RegisterPage";
-import Register from "./Pages/Register";
->>>>>>> 3da1e26b122e0afabe3c717346ae8aa6822deeaa
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
@@ -26,6 +21,7 @@ function App() {
     end: "",
   });
   const [userTrips, setUserTrips] = useState([]);
+  const [isLogin, setLogin] = useState(false);
 
   function updateForm(event) {
     console.log("updateForm", event.target.name, event.target.value);
