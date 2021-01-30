@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import { useGoogleLogout } from "react-google-login";
 
 const clientId =
@@ -21,11 +23,11 @@ function LogoutHooks() {
   });
 
   return (
-    <button onClick={signOut} className="button">
-      <img src="icons/google.svg" alt="google login" className="icon"></img>
-
-      <span className="buttonText">Sign out</span>
+    <Link to="/login" >
+    <button onClick={signOut} className="button">Sign Out
     </button>
+    </Link>
+
   );
 }
 
