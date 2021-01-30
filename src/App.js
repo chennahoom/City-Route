@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { useState } from "react";
+import { useState, useEffect, Link } from "react";
 
 import Header from "./Components/Header";
 import TripsPage from "./Pages/TripsPage";
@@ -8,12 +8,14 @@ import ResultsPage from "./Pages/ResultsPage";
 import HomePage from "./Pages/HomePage";
 import MapPage from "./Pages/MapPage";
 import Article from "./Pages/Article";
+import { useHistory  } from "react-router-dom";
 
-import LoginHooks from "./Components/LoginHooks";
+
+import LoginHooks from "./Pages/LoginHooks";
 import LogoutHooks from "./Components/LogoutHooks";
 import Register from "./Pages/Register";
 
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
 function App() {
   const [name, setName] = useState("");
@@ -38,9 +40,66 @@ function App() {
     setSearhTripForm({ ...searhTripForm, [name]: value });
   }
 
+  const [results, setResults] = useState([]);
+  const history = useHistory();
+
+  // useEffect(() => {
+  //   // run after render
+  //   fetch(`https://city-route.herokuapp.com/api/users`)
+  //     .then((res) => res.json())
+  //     .then((body) => {
+  //       setResults(body);
+  //     });
+  // }, []);
+
+  const checkEmail = (email) => {
+    fetch(`https://city-route.herokuapp.com/api/users`)
+    .then((res) => res.json())
+    .then((body) => {
+      setResults(body);
+      // check(email);
+    });
+    console.log(email);
+    check(email);
+  }
+
+  const check = (email) =>{
+    console.log("ffff");
+    // results.map(item =>{
+    //   console.log("i, in");
+    //   if(email===item.email){
+    //     console.log("gggg");
+
+    //     <Redirect to='/trips' />
+    //   }
+    //   else{
+    //     console.log("gggg");
+    //     <Redirect to='/register' />
+    //   }
+    // })
+    // console.log("ffff");
+
+    for (let i = 0; i < results.length; i++) {
+      //if the user is already register
+      console.log("didnt found");
+
+      if (email === results[i].email){
+        console.log(results[i].email);
+        <Redirect to='/trips' />
+      }
+      else {
+        console.log("didnt found");
+        <Redirect to='/register' />
+      }
+    }
+  }
+
+  const setlog = (res) =>{
+    setLogin(res);
+  }
+
   const updateTrips = (trip) => {
     setUserTrips([...userTrips, trip]);
-    console.log(userTrips);
   };
 
   const addUser = (newUser) => {
@@ -60,24 +119,21 @@ function App() {
       });
   };
 
-  console.log("searhTripForm", searhTripForm);
+  // console.log("searhTripForm", searhTripForm);
 
   return (
     <BrowserRouter>
       <div className="App">
-        <Header />
+        <Header setlog={setlog} />
         <Switch>
           <Route path="/trips" exact>
             <TripsPage updateForm={updateForm} />
           </Route>
-          <Route path="/registerNew" exact>
+          <Route path="/register" exact>
             <Register addUser={addUser} />
           </Route>
           <Route path="/results" exact>
-            <ResultsPage
-              searhTripForm={searhTripForm}
-              updateTrips={updateTrips}
-            />
+            <ResultsPage searhTripForm={searhTripForm} updateTrips={updateTrips} />
           </Route>
           <Route path="/map/:tripId" exact>
             <MapPage />
@@ -86,18 +142,11 @@ function App() {
           <Route path="/article" exact>
             <Article userTrips={userTrips} />
           </Route>
+          {/* <Route path="/login" exact>
+            {isLogin? <Redirect to="/trips"/> : <LoginHooks checkEmail={checkEmail} setName={setName} setEmail={setEmail} setUrl={setUrl} name={name} email={email} url={url} setlog={setlog} />}
+          </Route> */}
           <Route path="/login" exact>
-            <LoginHooks
-              setName={setName}
-              setEmail={setEmail}
-              setUrl={setUrl}
-              name={name}
-              email={email}
-              url={url}
-            />
-          </Route>
-          <Route path="/logout" exact>
-            <LogoutHooks />
+            <LoginHooks checkEmail={checkEmail} setName={setName} setEmail={setEmail} setUrl={setUrl} name={name} email={email} url={url} setlog={setlog} />
           </Route>
         </Switch>
       </div>

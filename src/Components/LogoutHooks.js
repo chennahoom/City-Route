@@ -1,15 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
+import { Link ,Redirect} from "react-router-dom";
+import { refreshTokenSetup } from "./utils/refreshToken";
 import { useGoogleLogout } from "react-google-login";
+import LoginHooks from "../Pages/LoginHooks";
+import { useHistory } from "react-router-dom";
+
 
 const clientId =
   '233069535985-vfone0gmelp0cfv62424j18a94av35i3.apps.googleusercontent.com';
 
-function LogoutHooks() {
+function LogoutHooks(props) {
+  const history = useHistory();
   const onLogoutSuccess = (res) => {
-    console.log("Logged out Success");
-    alert("Logged out Successfully ✌");
+    props.setlog(false)
+    history.push("/login");
   };
 
   const onFailure = () => {
@@ -17,17 +21,13 @@ function LogoutHooks() {
   };
 
   const { signOut } = useGoogleLogout({
-    clientId,
     onLogoutSuccess,
+    clientId,
     onFailure,
   });
 
   return (
-    <Link to="/login" >
-    <button onClick={signOut} className="button">Sign Out
-    </button>
-    </Link>
-
+    <button onClick={signOut} className="button">Sign Out</button>
   );
 }
 
