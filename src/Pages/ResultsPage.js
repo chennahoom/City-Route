@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 
 function ResultsPage(props) {
   const [results, setResults] = useState([]);
-  const [stops, setStops] = useState({});
 
   useEffect(() => {
     // run after render
@@ -18,13 +17,6 @@ function ResultsPage(props) {
       .then((res) => res.json())
       .then((body) => {
         setResults(body);
-        console.log(body);
-      });
-
-    fetch("https://city-route.herokuapp.com/api/stops")
-      .then((res) => res.json())
-      .then((body) => {
-        setStops(body);
         console.log(body);
       });
   }, []);
@@ -44,7 +36,7 @@ function ResultsPage(props) {
     return validDate && validCity;
   });
 
-  const byCountry = props.stops.stop_region
+
 
   return (
     <div>
@@ -52,7 +44,7 @@ function ResultsPage(props) {
         <h2 className="pageTitle">Where would you like to travel?</h2>
         <section className="row row-cols-1 row-cols-md-3"></section>
         {filteredTrips.map((trip) => (
-          <TripResult trip={trip} />
+          <TripResult trip={trip} sameCity={sameCity} />
         ))}
       </section>
     </div>

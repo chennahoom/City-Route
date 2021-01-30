@@ -8,8 +8,7 @@ import ResultsPage from "./Pages/ResultsPage";
 import HomePage from "./Pages/HomePage";
 import MapPage from "./Pages/MapPage";
 import Article from "./Pages/Article";
-import { useHistory  } from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
 
 import LoginHooks from "./Pages/LoginHooks";
 import LogoutHooks from "./Components/LogoutHooks";
@@ -54,16 +53,16 @@ function App() {
 
   const checkEmail = (email) => {
     fetch(`https://city-route.herokuapp.com/api/users`)
-    .then((res) => res.json())
-    .then((body) => {
-      setResults(body);
-      // check(email);
-    });
+      .then((res) => res.json())
+      .then((body) => {
+        setResults(body);
+        // check(email);
+      });
     console.log(email);
     check(email);
-  }
+  };
 
-  const check = (email) =>{
+  const check = (email) => {
     console.log("ffff");
     // results.map(item =>{
     //   console.log("i, in");
@@ -83,20 +82,19 @@ function App() {
       //if the user is already register
       console.log("didnt found");
 
-      if (email === results[i].email){
+      if (email === results[i].email) {
         console.log(results[i].email);
-        <Redirect to='/trips' />
-      }
-      else {
+        <Redirect to="/trips" />;
+      } else {
         console.log("didnt found");
-        <Redirect to='/register' />
+        <Redirect to="/register" />;
       }
     }
-  }
+  };
 
-  const setlog = (res) =>{
+  const setlog = (res) => {
     setLogin(res);
-  }
+  };
 
   const updateTrips = (trip) => {
     setUserTrips([...userTrips, trip]);
@@ -133,7 +131,10 @@ function App() {
             <Register addUser={addUser} />
           </Route>
           <Route path="/results" exact>
-            <ResultsPage searhTripForm={searhTripForm} updateTrips={updateTrips} />
+            <ResultsPage
+              searhTripForm={searhTripForm}
+              updateTrips={updateTrips}
+            />
           </Route>
           <Route path="/map/:tripId" exact>
             <MapPage />
@@ -146,7 +147,16 @@ function App() {
             {isLogin? <Redirect to="/trips"/> : <LoginHooks checkEmail={checkEmail} setName={setName} setEmail={setEmail} setUrl={setUrl} name={name} email={email} url={url} setlog={setlog} />}
           </Route> */}
           <Route path="/login" exact>
-            <LoginHooks checkEmail={checkEmail} setName={setName} setEmail={setEmail} setUrl={setUrl} name={name} email={email} url={url} setlog={setlog} />
+            <LoginHooks
+              checkEmail={checkEmail}
+              setName={setName}
+              setEmail={setEmail}
+              setUrl={setUrl}
+              name={name}
+              email={email}
+              url={url}
+              setlog={setlog}
+            />
           </Route>
         </Switch>
       </div>
