@@ -1,18 +1,16 @@
 import { Link } from "react-router-dom";
-import { useState,useEffect } from "react";
-
+import { useState, useEffect } from "react";
 
 function TripList(props) {
+  const [trips, setTrips] = useState([]);
 
-	const [trips, setTrips] = useState([]);
-
-	useEffect(() => {
-		fetch('https://city-route.herokuapp.com/api/trips')
-			.then(res => res.json())
-			.then(body => {
-				setTrips(body);
-			});
-	}, []);
+  useEffect(() => {
+    fetch("https://city-route.herokuapp.com/api/trips")
+      .then((res) => res.json())
+      .then((body) => {
+        setTrips(body);
+      });
+  }, []);
 
   return (
     <section className="row row-cols-1 row-cols-md-3" id="All-trips">

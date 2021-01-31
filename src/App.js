@@ -13,7 +13,7 @@ import { useHistory } from "react-router-dom";
 import LoginHooks from "./Pages/LoginHooks";
 import LogoutHooks from "./Components/LogoutHooks";
 import Register from "./Pages/Register";
-import TourGuidMenu from "./Pages/TourGuideMenu";
+import TourGuideMenu from "./Pages/TourGuideMenu";
 
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
@@ -45,7 +45,7 @@ function App() {
   };
 
   const updateTrips = (trip) => {
-    setUserTrips([...userTrips, trip]);
+    setUserTrips([...userTrips, trip.id]);
   };
 
   const addUser = (newUser) => {
@@ -77,12 +77,30 @@ function App() {
       .then((response) => response.json())
       .then((newTrip) => {
         console.log(newTrip);
-        setUser(newTrip);
+        updateTrips(newTrip);
       })
       .catch((err) => console.error(err));
   };
-//Here is the USER!!!
-  console.log('user',user);
+
+  //   const updateUserTrips = (newTrip) => {
+  //     fetch(`https://city-route.herokuapp.com/api/users/${user.id}`, {
+  //       method: "PUT",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Accept: "application/json",
+  //       },
+  //       body: JSON.stringify([newTrip, userTrips]),
+  //     }).then((response) => response.json())
+  //     .then((newTrip) => {
+  //       console.log(newTrip);
+  //       console.log(userTrips);
+  //       updateTrips(newTrip);
+  //     })
+  //     .catch((err) => console.error(err));
+  // };
+
+  //Here is the USER!!!
+  console.log("user", user);
 
   return (
     <BrowserRouter>
@@ -98,7 +116,7 @@ function App() {
           <Route path="/results" exact>
             <ResultsPage
               searhTripForm={searhTripForm}
-              updateTrips={updateTrips}
+              // updateTrips={updateTrips}
             />
           </Route>
           <Route path="/map/:city" exact>
@@ -121,7 +139,11 @@ function App() {
             />
           </Route>
           <Route path="/tourGuideMenu" exact>
-            <TourGuidMenu user={user}addTrip={addTrip} userId={userId} />
+            <TourGuideMenu
+              user={user}
+              addTrip={addTrip}
+              // updateUserTrips={updateUserTrips}
+            />
           </Route>
           {/* <Route path="/addTrip" exact>
             <AddTrip />

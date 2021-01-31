@@ -1,4 +1,4 @@
-import { Link, useParams ,useLocation} from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function CardMap(props) {
@@ -8,15 +8,13 @@ function CardMap(props) {
   const [stops, setStops] = useState([]);
   const [trip, setTrip] = useState("");
 
-
   const { city } = useParams();
   const location = useLocation();
-  
-  
-  const query = new URLSearchParams(location.search)
-  
-  let tripId = query.get('id')
-  console.log('tripId',tripId);
+
+  const query = new URLSearchParams(location.search);
+
+  let tripId = query.get("id");
+  console.log("tripId", tripId);
 
   useEffect(() => {
     // run after render
@@ -25,8 +23,6 @@ function CardMap(props) {
       .then((body) => {
         setResults(body);
         tourGuideId(body.tour_guide_id);
-        
-
       });
   }, []);
 
@@ -36,7 +32,7 @@ function CardMap(props) {
       .then((res) => res.json())
       .then((body) => {
         console.log(city, body);
-        setStops(body)
+        setStops(body);
       });
   }, [city]);
 
@@ -72,7 +68,7 @@ function CardMap(props) {
     // TODO:need to check id Traveler
     console.log(tickets);
     if (results.spaces_left >= tickets) {
-      const info =  parseInt(results.spaces_left) - parseInt(tickets);
+      const info = parseInt(results.spaces_left) - parseInt(tickets);
       updateSpace(info);
     } else {
       //TODO: add here the num of the tour guide
@@ -92,10 +88,9 @@ function CardMap(props) {
         </h5>
         <h3 className="card-title" id="tour-guide">
           Tour Guide: {tourGuide.full_name}
-
         </h3>
         <p className="card-text" id="trip-stops">
-          Stops: {stops.map(stop => stop.stop_name)}
+          Stops: {stops.map((stop) => stop.stop_name)}
         </p>
       </div>
 
