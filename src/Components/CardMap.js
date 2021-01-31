@@ -1,4 +1,6 @@
 import { Link, useParams, useLocation } from "react-router-dom";
+import Map from "./Map";
+
 import { useEffect, useState } from "react";
 
 function CardMap(props) {
@@ -81,7 +83,9 @@ function CardMap(props) {
 
   return (
     <div className="card-map">
-      <div id="mapid"></div>
+      <div id="mapid">
+        <Map></Map>
+      </div>
       <div className="card-body">
         <h5 className="card-title" id="tour-city">
           City: {results.trip_name_city}
