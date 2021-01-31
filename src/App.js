@@ -14,7 +14,6 @@ import LoginHooks from "./Pages/LoginHooks";
 import LogoutHooks from "./Components/LogoutHooks";
 import Register from "./Pages/Register";
 import TourGuidMenu from "./Pages/TourGuideMenu";
-import AddTrip from "./Pages/AddTrip";
 
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
@@ -65,6 +64,23 @@ function App() {
       })
       .catch((err) => console.error(err));
   };
+
+  const addTrip = (newTrip) => {
+    fetch(`https://city-route.herokuapp.com/api/trips/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(newTrip),
+    })
+      .then((response) => response.json())
+      .then((newTrip) => {
+        console.log(newTrip);
+        setUser(newTrip);
+      })
+      .catch((err) => console.error(err));
+  };
 //Here is the USER!!!
   console.log('user',user);
 
@@ -105,11 +121,11 @@ function App() {
             />
           </Route>
           <Route path="/tourGuideMenu" exact>
-            <TourGuidMenu userId={userId} />
+            <TourGuidMenu user={user}addTrip={addTrip} userId={userId} />
           </Route>
-          <Route path="/addTrip" exact>
+          {/* <Route path="/addTrip" exact>
             <AddTrip />
-          </Route>
+          </Route> */}
         </Switch>
       </div>
     </BrowserRouter>

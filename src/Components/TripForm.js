@@ -1,7 +1,8 @@
 import { useState } from "react";
 
-function TripForm(){
-    const initForm = {trip_name_city: '', tour_date:'' , tour_time: '', tour_time: '', start_time:''};
+function TripForm(props){
+    //TODO: need to add the ID of user
+    const initForm = {trip_name_city: '', tour_date:'' , tour_time: '', start_time:'', spaces_left:10};
     const [trip, setTrip] = useState(initForm);
 
     const handleInputChange = (event) =>{
@@ -11,14 +12,10 @@ function TripForm(){
 
     const onSave = (event) =>{
         event.preventDefault();
-        // props.addUser(user);
-        // setUser(initForm);
-        // history.push("/register");
-
+        props.addTrip(trip);
     }
 
     return(
-        //TODO: add map and add stops on map
         <form onSubmit={onSave}>
             <label>
                 City:

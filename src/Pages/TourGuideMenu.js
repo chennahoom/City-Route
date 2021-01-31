@@ -1,5 +1,6 @@
 import { useHistory  } from "react-router-dom";
-import AddTrip from './AddTrip';
+import TripForm from '../Components/TripForm';
+import TripsList from '../Components/TripsList';
 
 function TourGuideMenu (props){
     const history = useHistory();
@@ -11,8 +12,8 @@ function TourGuideMenu (props){
 
     return(
         <div>
-
-            <button onClick={add}>Add Trip</button>
+            <TripForm user={props.user} addTrip={props.addTrip} />
+            {/* <button onClick={add}>Add Trip</button> */}
             <button>View All Trips</button>
         </div>
     )

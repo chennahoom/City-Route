@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
+import { useState,useEffect } from "react";
+
 
 function TripList(props) {
 
-
-function ResultsPage(props) {
-	const [users, setUsers] = useState([]);
+	const [trips, setTrips] = useState([]);
 
 	useEffect(() => {
-		fetch('https://city-route.herokuapp.com/api/users')
+		fetch('https://city-route.herokuapp.com/api/trips')
 			.then(res => res.json())
 			.then(body => {
-				setUsers(body);
+				setTrips(body);
 			});
 	}, []);
 
