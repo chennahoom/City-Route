@@ -4,6 +4,8 @@ import TripsList from '../Components/TripsList';
 
 function TourGuideMenu (props){
     const history = useHistory();
+    console.log(props.user);
+    console.log(props.user.id);
 
     const add = () =>{
         history.push("/addTrip");

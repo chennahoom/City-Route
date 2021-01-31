@@ -2,7 +2,7 @@ import { useState } from "react";
 
 function TripForm(props){
     //TODO: need to add the ID of user
-    const initForm = {trip_name_city: '', tour_date:'' , tour_time: '', start_time:'', spaces_left:10};
+    const initForm = {trip_name_city: '', tour_date:'' , tour_time: '', start_time:'', spaces_left:10, tour_guide_id:props.user.id};
     const [trip, setTrip] = useState(initForm);
 
     const handleInputChange = (event) =>{

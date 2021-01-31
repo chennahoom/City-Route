@@ -23,6 +23,7 @@ function Register(props) {
     event.preventDefault();
     props.addUser(user);
     setUser(initForm);
+    //TODO: add if tour guide or traveler
     history.push("/register");
   };
 

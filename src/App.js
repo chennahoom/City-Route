@@ -31,6 +31,7 @@ function App() {
   });
   const [userTrips, setUserTrips] = useState([]);
   const [isLogin, setLogin] = useState(false);
+  const [myTrips, setMyTrip] = useState([]);
 
   function updateForm(event) {
     const { value, name } = event.target; // event.target -> DOM ELEMENT THAT FIRE EVENT
@@ -78,6 +79,7 @@ function App() {
       .then((newTrip) => {
         console.log(newTrip);
         setUser(newTrip);
+        setMyTrip(user.my_trips);
       })
       .catch((err) => console.error(err));
   };
@@ -121,7 +123,7 @@ function App() {
             />
           </Route>
           <Route path="/tourGuideMenu" exact>
-            <TourGuidMenu user={user}addTrip={addTrip} userId={userId} />
+            <TourGuidMenu user={user} addTrip={addTrip} userId={userId} />
           </Route>
           {/* <Route path="/addTrip" exact>
             <AddTrip />
