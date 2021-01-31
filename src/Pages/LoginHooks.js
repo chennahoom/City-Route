@@ -40,10 +40,21 @@ function GoogleLogIn(props) {
       .then((res) => res.json())
       .then((user) => {
         if (!user) {
-          return history.push(`/register?email=${res.profileObj.email}&name=${res.profileObj.name}`);
+          return history.push(
+            `/register?email=${res.profileObj.email}&name=${res.profileObj.name}`
+          );
         }
         props.setUser(user);
-        history.push("/trips");
+
+        console.log(user.type_of_user);
+
+        if (user.type_of_user === "Traveler") {
+          history.push("/trips");
+        } else {
+          history.push("/tourGuideMenu");
+        }
+        console.log(user.type_of_user);
+        console.log(user);
       });
     // getAllUsers();
 

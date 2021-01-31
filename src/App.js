@@ -13,7 +13,7 @@ import { useHistory } from "react-router-dom";
 import LoginHooks from "./Pages/LoginHooks";
 import LogoutHooks from "./Components/LogoutHooks";
 import Register from "./Pages/Register";
-import TourGuidMenu from "./Pages/TourGuideMenu";
+import TourGuideMenu from "./Pages/TourGuideMenu";
 
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
@@ -21,7 +21,7 @@ function App() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [url, setUrl] = useState("");
-  const [userId, setUserId] = useState("");
+  // const [userId, setUserId] = useState("");
   const [user, setUser] = useState(null);
 
   const [searhTripForm, setSearhTripForm] = useState({
@@ -31,22 +31,18 @@ function App() {
   });
   const [userTrips, setUserTrips] = useState([]);
   const [isLogin, setLogin] = useState(false);
-  const [myTrips, setMyTrip] = useState([]);
+
 
   function updateForm(event) {
     const { value, name } = event.target; // event.target -> DOM ELEMENT THAT FIRE EVENT
     setSearhTripForm({ ...searhTripForm, [name]: value });
   }
 
-  const [results, setResults] = useState([]);
+  // const [results, setResults] = useState([]);
   const history = useHistory();
 
   const setlog = (res) => {
     setLogin(res);
-  };
-
-  const updateTrips = (trip) => {
-    setUserTrips([...userTrips, trip]);
   };
 
   const addUser = (newUser) => {
@@ -78,13 +74,41 @@ function App() {
       .then((response) => response.json())
       .then((newTrip) => {
         console.log(newTrip);
-        setUser(newTrip);
-        setMyTrip(user.my_trips);
+        console.log(newTrip.id);
+        updateUserTrips(newTrip.id);
+        // console.log(newTripId);
       })
       .catch((err) => console.error(err));
   };
-//Here is the USER!!!
-  console.log('user',user);
+
+
+
+    const updateUserTrips = (newTrip) => {
+      // setMyTrips();
+      var newMyTrips = user.my_trips;
+      newMyTrips.push(newTrip);
+      fetch(`https://city-route.herokuapp.com/api/users/${user.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          my_trips: newMyTrips
+        }
+          
+        ),
+      }).then((response) => response.json())
+      .then((newTrip) => {
+        console.log(newTrip);
+        console.log(userTrips);
+        // updateTrips(newTrip);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  //Here is the USER!!!
+  console.log("user", user);
 
   return (
     <BrowserRouter>
@@ -100,7 +124,7 @@ function App() {
           <Route path="/results" exact>
             <ResultsPage
               searhTripForm={searhTripForm}
-              updateTrips={updateTrips}
+              // updateTrips={updateTrips}
             />
           </Route>
           <Route path="/map/:city" exact>
@@ -123,7 +147,11 @@ function App() {
             />
           </Route>
           <Route path="/tourGuideMenu" exact>
-            <TourGuidMenu user={user} addTrip={addTrip} userId={userId} />
+            <TourGuideMenu
+              user={user}
+              addTrip={addTrip}
+              updateUserTrips={updateUserTrips}
+            />
           </Route>
           {/* <Route path="/addTrip" exact>
             <AddTrip />
