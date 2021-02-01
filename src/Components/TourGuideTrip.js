@@ -1,7 +1,7 @@
 import {useEffect, useState } from "react";
 
 
-function TourGuidTrip(props){
+function TourGuideTrip(props){
     const [tripData, setTripData] = useState(props.data);
     console.log(tripData);
 
