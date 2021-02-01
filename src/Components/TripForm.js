@@ -20,6 +20,7 @@ function TripForm(props) {
 
   const onSave = (event) => {
     event.preventDefault();
+    if (!trip.trip_name_city || !trip.tour_date || !trip.spaces_left || !trip.tour_time || !trip.start_time) return;
     setMyTrips(props.user.my_trips);
 
     props.addTrip(trip);
