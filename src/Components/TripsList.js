@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import TourGuidTrip from './TourGuidTrip';
+import TourGuideTrip from "./TourGuideTrip";
 
 function TripList(props) {
   const [tourGuidTrips, setTourGuidTrips] = useState([]);
@@ -14,18 +14,12 @@ function TripList(props) {
       });
   }, []);
 
-
-  
-
   return (
-      <div>
-        {tourGuidTrips.map((tripId, i) =>(
-          <TourGuidTrip
-            key={i}
-            data={tripId}
-          />
-        ))}
-      </div>
+    <div>
+      {tourGuidTrips.map((tripId, i) => (
+        <TourGuideTrip key={i} data={tripId} />
+      ))}
+    </div>
   );
 }
 export default TripList;

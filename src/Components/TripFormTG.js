@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function TripForm(props) {
+function AddTripForm(props) {
   //TODO: need to add the ID of user
   const initForm = {
     trip_name_city: "",
@@ -63,4 +63,4 @@ function TripForm(props) {
   );
 }
 
-export default TripForm;
+export default AddTripForm;

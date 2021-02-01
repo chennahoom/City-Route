@@ -1,11 +1,11 @@
-import TripForm from "../Components/TripForm";
+import AddTripForm from "../Components/TripFormTG";
 import TripsList from "../Components/TripsList";
 
-function TourGuideMenu(props) {
+function TourGuidePage(props) {
 
   return (
     <div>
-      <TripForm
+      <AddTripForm
         user={props.user}
         addTrip={props.addTrip}
         updateUserTrips={props.updateUserTrips}
@@ -17,4 +17,4 @@ function TourGuideMenu(props) {
   );
 }
 
-export default TourGuideMenu;
+export default TourGuidePage;

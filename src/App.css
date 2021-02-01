@@ -135,6 +135,11 @@ form {
 
 /* ----------------map--------------- */
 
+.leaflet-container {
+  width: 600px;
+  height: 400px;
+}
+
 #mapid {
   height: 400px;
   width: 600px;

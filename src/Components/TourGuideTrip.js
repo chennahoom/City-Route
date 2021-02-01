@@ -1,7 +1,7 @@
 import {useEffect, useState } from "react";
 
 
-function TourGuidTrip(props){
+function TourGuideTrip(props){
     const [tripData, setTripData] = useState('');
 
     useEffect(() => {
@@ -30,4 +30,4 @@ function TourGuidTrip(props){
 
 }
 
-export default TourGuidTrip;
+export default TourGuideTrip;

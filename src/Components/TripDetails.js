@@ -1,9 +1,9 @@
 import { Link, useParams, useLocation } from "react-router-dom";
-import Map from "./Map";
+import MapView from "./MapView";
 
 import { useEffect, useState } from "react";
 
-function CardMap(props) {
+function TripDetails(props) {
   const [results, setResults] = useState([]);
   const [tourGuide, setTourGuide] = useState([]);
   const [tickets, setTickets] = useState({});
@@ -15,8 +15,7 @@ function CardMap(props) {
 
   const query = new URLSearchParams(location.search);
 
-  let tripId = query.get("id");
-  console.log("tripId", tripId);
+  const tripId = query.get("id");
 
   useEffect(() => {
     // run after render
@@ -25,6 +24,7 @@ function CardMap(props) {
       .then((body) => {
         setResults(body);
         tourGuideId(body.tour_guide_id);
+        setTrip(tripId);
       });
   }, []);
 
@@ -35,11 +35,11 @@ function CardMap(props) {
       .then((body) => {
         console.log(city, body);
         setStops(body);
+        console.log(body);
       });
   }, [city]);
 
   const tourGuideId = (id) => {
-    console.log("this is first");
     fetch(`https://city-route.herokuapp.com/api/users/${id}`)
       .then((res) => res.json())
       .then((body) => {
@@ -84,7 +84,7 @@ function CardMap(props) {
   return (
     <div className="card-map">
       <div id="mapid">
-        <Map></Map>
+        <MapView trip={trip} stops={stops} />
       </div>
       <div className="card-body">
         <h5 className="card-title" id="tour-city">
@@ -167,7 +167,7 @@ function CardMap(props) {
               >
                 Close
               </button>
-              <Link to={`/article`}>
+              <Link to={`/MyTripsPage`}>
                 <button
                   type="button"
                   className="btn btn-primary"
@@ -185,4 +185,4 @@ function CardMap(props) {
   );
 }
 
-export default CardMap;
+export default TripDetails;
