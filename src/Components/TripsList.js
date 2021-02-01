@@ -11,15 +11,20 @@ function TripList(props) {
       .then((body) => {
         setTourGuidTrips(body.my_trips);
         console.log(body.my_trips);
+        console.log(props.userTrips)
       });
   }, []);
 
   return (
-    <div>
-      {tourGuidTrips.map((tripId, i) => (
-        <TourGuideTrip key={i} data={tripId} />
-      ))}
-    </div>
+      <div>
+        {tourGuidTrips.map((tripId, i) =>(
+          <TourGuidTrip
+            key={i}
+            data={tripId}
+            userTrips={props.userTrips}
+          />
+        ))}
+      </div>
   );
 }
 export default TripList;
