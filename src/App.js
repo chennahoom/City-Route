@@ -23,6 +23,7 @@ function App() {
   const [url, setUrl] = useState("");
   // const [userId, setUserId] = useState("");
   const [user, setUser] = useState(null);
+  // const [userTrips, setUserTrips] = ('');
 
   const [searhTripForm, setSearhTripForm] = useState({
     city: "",
@@ -102,6 +103,7 @@ function App() {
       .then((newTrip) => {
         console.log(newTrip);
         console.log(userTrips);
+        setUserTrips(user.my_trips);
         // updateTrips(newTrip);
       })
       .catch((err) => console.error(err));
@@ -151,6 +153,7 @@ function App() {
               user={user}
               addTrip={addTrip}
               updateUserTrips={updateUserTrips}
+              userTrips={userTrips}
             />
           </Route>
           {/* <Route path="/addTrip" exact>

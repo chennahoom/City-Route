@@ -45,7 +45,7 @@ function TripForm(props) {
       </label>
       <label>
         Tour-Date:
-        <input type="date" name="tour_date" onChange={handleInputChange} />
+        <input type="text" placeholder="01/06/2021" name="tour_date" onChange={handleInputChange} />
         <br />
       </label>
       <label>
