@@ -10,8 +10,7 @@ function TourGuideMenu(props) {
         addTrip={props.addTrip}
         updateUserTrips={props.updateUserTrips}
       />
-      {/* <TripsList user={props.user} userTrips={props.userTrips}/> */}
-      {/* <button onClick={add}>Add Trip</button> */}
+      <TripsList user={props.user} userTrips={props.userTrips}/>
       <button>View All Trips</button>
     </div>
   );

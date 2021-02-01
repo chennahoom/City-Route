@@ -34,6 +34,8 @@ function App() {
   const [isLogin, setLogin] = useState(false);
 
 
+
+
   function updateForm(event) {
     const { value, name } = event.target; // event.target -> DOM ELEMENT THAT FIRE EVENT
     setSearhTripForm({ ...searhTripForm, [name]: value });
@@ -103,7 +105,7 @@ function App() {
       .then((newTrip) => {
         console.log(newTrip);
         console.log(userTrips);
-        setUserTrips(user.my_trips);
+        // setUserTrips(user.my_trips);
         // updateTrips(newTrip);
       })
       .catch((err) => console.error(err));

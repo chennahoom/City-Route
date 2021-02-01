@@ -22,7 +22,7 @@ function TripForm(props) {
     event.preventDefault();
     if (!trip.trip_name_city || !trip.tour_date || !trip.spaces_left || !trip.tour_time || !trip.start_time) return;
     setMyTrips(props.user.my_trips);
-
+    // props.getUserTrip();
     props.addTrip(trip);
     const newTrip = { my_trips: props.user.my_trips}
     // props.updateUserTrips(newTrip)

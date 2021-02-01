@@ -11,10 +11,8 @@ function TripList(props) {
       .then((body) => {
         setTourGuidTrips(body.my_trips);
         console.log(body.my_trips);
-        console.log(props.userTrips)
       });
   }, []);
-
 
   
 
@@ -24,7 +22,6 @@ function TripList(props) {
           <TourGuidTrip
             key={i}
             data={tripId}
-            userTrips={props.userTrips}
           />
         ))}
       </div>
