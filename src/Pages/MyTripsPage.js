@@ -1,4 +1,4 @@
-function Article(props) {
+function MyTripsPage(props) {
   return (
     <div>
       <h2 id="pageTitle">My Trips</h2>
@@ -9,4 +9,4 @@ function Article(props) {
   );
 }
 
-export default Article;
+export default MyTripsPage;

@@ -1,10 +1,5 @@
-import SearchForm from "../Components/SearchForm";
 
-import Trip from "../Components/Trip";
-import TripResult from "../Components/TripResult";
-
-import { Link } from "react-router-dom";
-
+import TripResults from "../Components/TripResults";
 import { useEffect, useState } from "react";
 
 function ResultsPage(props) {
@@ -41,7 +36,7 @@ function ResultsPage(props) {
         <h2 className="pageTitle">Where would you like to travel?</h2>
         <section className="row row-cols-1 row-cols-md-3"></section>
         {filteredTrips.map((trip) => (
-          <TripResult trip={trip} />
+          <TripResults trip={trip} />
         ))}
       </section>
     </div>

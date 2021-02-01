@@ -1,4 +1,4 @@
-import SearchForm from "../Components/SearchForm";
+import SearchTripForm from "../Components/SearchTripForm";
 import Trip from "../Components/Trip";
 
 let trips = [
@@ -6,10 +6,10 @@ let trips = [
   { name: "London", image: "https://i.postimg.cc/85GL85n7/image.jpg" },
 ];
 
-function TripsPage(props) {
+function SearchTripsPage(props) {
   return (
     <div>
-      <SearchForm updateForm={props.updateForm} />
+      <SearchTripForm updateForm={props.updateForm} />
 
       <section className="container">
         <h2 id="pageTitle">Where would you like to travel?</h2>
@@ -28,4 +28,4 @@ function TripsPage(props) {
   );
 }
 
-export default TripsPage;
+export default SearchTripsPage;

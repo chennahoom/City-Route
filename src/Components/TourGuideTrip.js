@@ -1,8 +1,14 @@
 import {useEffect, useState } from "react";
 
 
+<<<<<<< HEAD:src/Components/TourGuidTrip.js
 function TourGuidTrip(props){
     const [tripData, setTripData] = useState('');
+=======
+function TourGuideTrip(props){
+    const [tripData, setTripData] = useState(props.data);
+    console.log(tripData);
+>>>>>>> 919b7aec22ac9811be8e17829d0ed22c49b65f10:src/Components/TourGuideTrip.js
 
     useEffect(() => {
         fetch(`https://city-route.herokuapp.com/api/trips/${props.data}`)
@@ -30,4 +36,4 @@ function TourGuidTrip(props){
 
 }
 
-export default TourGuidTrip;
+export default TourGuideTrip;

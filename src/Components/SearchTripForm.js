@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom";
 
-function SearchForm(props) {
+function SearchTripForm(props) {
   const history = useHistory();
 
   function onSubmit(event) {
@@ -45,4 +45,4 @@ function SearchForm(props) {
   );
 }
 
-export default SearchForm;
+export default SearchTripForm;

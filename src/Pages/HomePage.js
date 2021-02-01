@@ -1,5 +1,3 @@
-import SearchForm from "../Components/SearchForm";
-
 import Trip from "../Components/Trip";
 
 //<img src="https://i.postimg.cc/85GL85n7/image.jpg"

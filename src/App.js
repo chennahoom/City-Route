@@ -1,21 +1,20 @@
 import "./App.css";
 
-import { useState, useEffect, Link } from "react";
+import { useState} from "react";
 
 import Header from "./Components/Header";
-import TripsPage from "./Pages/TripsPage";
+import SearchTripPage from "./Pages/SearchTripsPage";
 import ResultsPage from "./Pages/ResultsPage";
-import HomePage from "./Pages/HomePage";
-import MapPage from "./Pages/MapPage";
-import Article from "./Pages/Article";
+import TripDetailsPage from "./Pages/TripDetailsPage";
+import MyTripsPage from "./Pages/MyTripsPage";
 import { useHistory } from "react-router-dom";
+import Map from "./Components/MapView";
 
-import LoginHooks from "./Pages/LoginHooks";
-import LogoutHooks from "./Components/LogoutHooks";
+import Login from "./Pages/Login";
 import Register from "./Pages/Register";
-import TourGuideMenu from "./Pages/TourGuideMenu";
+import TourGuidePage from "./Pages/TourGuidePage";
 
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 function App() {
   const [name, setName] = useState("");
@@ -120,7 +119,7 @@ function App() {
         <Header setlog={setlog} setUser={setUser} />
         <Switch>
           <Route path="/trips" exact>
-            <TripsPage updateForm={updateForm} />
+            <SearchTripPage updateForm={updateForm} />
           </Route>
           <Route path="/register" exact>
             <Register addUser={addUser} />
@@ -132,14 +131,17 @@ function App() {
             />
           </Route>
           <Route path="/map/:city" exact>
-            <MapPage />
+            <TripDetailsPage />
+          </Route>
+          <Route path="/map/:city" exact>
+            <Map />
           </Route>
           {/* <Route path="/article/:usersId" exact> */}
           <Route path="/article" exact>
-            <Article userTrips={userTrips} />
+            <MyTripsPage userTrips={userTrips} />
           </Route>
           <Route path="/login" exact>
-            <LoginHooks
+            <Login
               setName={setName}
               setEmail={setEmail}
               setUrl={setUrl}
@@ -151,7 +153,7 @@ function App() {
             />
           </Route>
           <Route path="/tourGuideMenu" exact>
-            <TourGuideMenu
+            <TourGuidePage
               user={user}
               addTrip={addTrip}
               updateUserTrips={updateUserTrips}

@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import LogoutHooks from "./LogoutHooks";
-import LoginHooks from "../Pages/LoginHooks";
+import Logout from "./Logout";
 
 function Header(props) {
   return (
@@ -38,7 +37,7 @@ function Header(props) {
               Log out
             </Link> */}
 
-            <LogoutHooks setUser={props.setUser} setlog={props.setlog} />
+            <Logout setUser={props.setUser} setlog={props.setlog} />
           </div>
         </section>
       </section>
@@ -63,7 +62,7 @@ function Header(props) {
                 <a className="dropdown-item" href="trips.html">
                   Find a trip
                 </a>
-                <a className="dropdown-item" href="article.html">
+                <a className="dropdown-item" href="MyTripsPage.html">
                   My trips
                 </a>
               </div>
