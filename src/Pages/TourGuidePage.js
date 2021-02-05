@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useState } from "react";
 import AddTripForm from "../Components/TripFormTG";
 import TripsList from "../Components/TripsList";
 
 
 
 function TourGuidePage(props) {
+  const [listChanged, setListChanged] = useState(true);
 
   const addTrip = (newTrip) => {
     fetch(`https://city-route.herokuapp.com/api/trips/`, {
@@ -41,6 +42,7 @@ function TourGuidePage(props) {
       .then((response) => response.json())
       .then((newTrip) => {
         console.log(newTrip);
+        setListChanged(false);
         // console.log(userTrips);
       })
       .catch((err) => console.error(err));
@@ -57,7 +59,7 @@ function TourGuidePage(props) {
 
         updateUserTrips={props.updateUserTrips}
       />
-      <TripsList user={props.user} userTrips={props.userTrips}/>
+      <TripsList user={props.user} userTrips={props.userTrips} setListChanged={setListChanged} listChanged={listChanged}/>
       <button>View All Trips</button>
     </div>
   );
