@@ -89,11 +89,11 @@ function LoginPage(props) {
 
         console.log(user.type_of_user);
 
-        // if (user.type_of_user === "Traveler") {
-        //   history.push("/trips");
-        // } else {
-        //   history.push("/tourGuideMenu");
-        // }
+        if (user.type_of_user === "Traveler") {
+          history.push("/trips");
+        } else {
+          history.push("/tourGuideMenu");
+        }
         console.log(user.type_of_user);
         console.log(user);
       });
@@ -101,19 +101,7 @@ function LoginPage(props) {
 
     //findUserByEmail(res.profileObj.email);
   };
-  const findUserByEmail = (email) => {
-    let j = 0;
-    for (let i = 0; i < results.length; i++) {
-      if (email === results[i].email) {
-        history.push("/trips");
-        j++;
-      }
-    }
 
-    if (j === 0) {
-      history.push("/register");
-    }
-  };
 
   const onFailure = (res) => {
     alert(`Failed to login 😢, res:`, res);

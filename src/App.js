@@ -90,10 +90,10 @@ function App() {
       .catch((err) => console.error(err));
   };
 
-  const updateUserTrips = (newTrip) => {
+  const updateUserTrips = (newTripId) => {
     // setMyTrips();
     var newMyTrips = user.my_trips;
-    newMyTrips.push(newTrip);
+    newMyTrips.push(newTripId);
     fetch(`https://city-route.herokuapp.com/api/users/${user.id}`, {
       method: "PUT",
       headers: {
