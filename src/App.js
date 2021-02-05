@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { useState} from "react";
+import { useState } from "react";
 
 import Header from "./Components/Header";
 import SearchTripPage from "./Pages/SearchTripsPage";
@@ -15,6 +15,7 @@ import Register from "./Pages/Register";
 import TourGuidePage from "./Pages/TourGuidePage";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import LoginPage from "./Pages/LoginPage";
 
 function App() {
   const [name, setName] = useState("");
@@ -32,9 +33,6 @@ function App() {
   const [userTrips, setUserTrips] = useState([]);
   const [isLogin, setLogin] = useState(false);
 
-
-
-
   function updateForm(event) {
     const { value, name } = event.target; // event.target -> DOM ELEMENT THAT FIRE EVENT
     setSearhTripForm({ ...searhTripForm, [name]: value });
@@ -45,6 +43,14 @@ function App() {
 
   const setlog = (res) => {
     setLogin(res);
+  };
+
+  const signUp = (newUser) => {
+    if (newUser.type_of_user === "Traveler") {
+      history.push("/trips");
+    } else {
+      history.push("/tourGuideMenu");
+    }
   };
 
   const addUser = (newUser) => {
@@ -60,6 +66,7 @@ function App() {
       .then((newUser) => {
         console.log(newUser);
         setUser(newUser);
+        signUp(newUser);
       })
       .catch((err) => console.error(err));
   };
@@ -83,24 +90,21 @@ function App() {
       .catch((err) => console.error(err));
   };
 
-
-
-    const updateUserTrips = (newTrip) => {
-      // setMyTrips();
-      var newMyTrips = user.my_trips;
-      newMyTrips.push(newTrip);
-      fetch(`https://city-route.herokuapp.com/api/users/${user.id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          my_trips: newMyTrips
-        }
-          
-        ),
-      }).then((response) => response.json())
+  const updateUserTrips = (newTrip) => {
+    // setMyTrips();
+    var newMyTrips = user.my_trips;
+    newMyTrips.push(newTrip);
+    fetch(`https://city-route.herokuapp.com/api/users/${user.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        my_trips: newMyTrips,
+      }),
+    })
+      .then((response) => response.json())
       .then((newTrip) => {
         console.log(newTrip);
         console.log(userTrips);
@@ -114,7 +118,6 @@ function App() {
   console.log("user", user);
 
   return (
-    <BrowserRouter>
       <div className="App">
         <Header setlog={setlog} setUser={setUser} />
         <Switch>
@@ -141,7 +144,7 @@ function App() {
             <MyTripsPage userTrips={userTrips} />
           </Route>
           <Route path="/login" exact>
-            <Login
+            <LoginPage
               setName={setName}
               setEmail={setEmail}
               setUrl={setUrl}
@@ -150,6 +153,7 @@ function App() {
               url={url}
               setlog={setlog}
               setUser={setUser}
+              addUser={addUser}
             />
           </Route>
           <Route path="/tourGuideMenu" exact>
@@ -165,7 +169,6 @@ function App() {
           </Route> */}
         </Switch>
       </div>
-    </BrowserRouter>
   );
 }
 

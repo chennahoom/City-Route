@@ -1,8 +1,8 @@
 import AddTripForm from "../Components/TripFormTG";
 import TripsList from "../Components/TripsList";
 
-function TourGuidePage(props) {
 
+function TourGuidePage(props) {
   return (
     <div>
       <AddTripForm

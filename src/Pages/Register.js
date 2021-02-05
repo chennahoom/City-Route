@@ -24,8 +24,16 @@ function Register(props) {
     props.addUser(user);
     setUser(initForm);
     //TODO: add if tour guide or traveler
-    history.push("/register");
+    //signUp();
   };
+
+  // const signUp = () => {
+  //   if (user.type_of_user === "Traveler") {
+  //     history.push("/trips");
+  //   } else {
+  //     history.push("/tourGuideMenu");
+  //   }
+  // };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
