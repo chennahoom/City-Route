@@ -5,11 +5,12 @@ import GoogleLogin, { useGoogleLogin } from "react-google-login";
 import { refreshTokenSetup } from "../Components/utils/refreshToken";
 import { useHistory } from "react-router-dom";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import Register from "./Register";
 
 const clientId =
   "233069535985-vfone0gmelp0cfv62424j18a94av35i3.apps.googleusercontent.com";
 
-function GoogleLogIn(props) {
+function LoginPage(props) {
   const history = useHistory();
   const [results, setResults] = useState([]);
 
@@ -88,11 +89,11 @@ function GoogleLogIn(props) {
 
         console.log(user.type_of_user);
 
-        if (user.type_of_user === "Traveler") {
-          history.push("/trips");
-        } else {
-          history.push("/tourGuideMenu");
-        }
+        // if (user.type_of_user === "Traveler") {
+        //   history.push("/trips");
+        // } else {
+        //   history.push("/tourGuideMenu");
+        // }
         console.log(user.type_of_user);
         console.log(user);
       });
@@ -134,8 +135,13 @@ function GoogleLogIn(props) {
         <img src="icons/google.svg" alt="google login" className="icon"></img>
         <span className="buttonText">Sign in with Google</span>
       </button>
+
+      <Register addUser={props.addUser}>
+          
+      </Register>
     </div>
-  );
+
+    );
 }
 
-export default GoogleLogIn;
+export default LoginPage;

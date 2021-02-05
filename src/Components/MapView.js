@@ -1,24 +1,33 @@
-import React from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { React, useState } from "react";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  Polyline,
+  useMapEvents,
+} from "react-leaflet";
 
 import "../App.css";
 
 function MapView(props) {
   console.log(props.stops);
 
+//   console.log(props.stops[0].location_coords);
 
-  // let long = props.stops[0].location_coords[0];
-  // let lat = props.stops[0].location_coords[1];
 
-  // console.log(long);
-  // console.log(lat);
+// const polyline = props.stops[0].location_coords;
+
+//   const redOptions = { color: "red" };
+
+  // console.log(props.stops.location_coords[0], props.stops.location_coords[1])
 
   return (
     <MapContainer
       className="leaflet-container"
-      center={[0,0]}
-      zoom={13}
-      scrollWheelZoom={false}
+      center={[52.51862, 13.37618]}
+      zoom={12}
+      scrollWheelZoom={true}
     >
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -29,7 +38,16 @@ function MapView(props) {
         <Marker
           key={stop.stop_name}
           position={[stop.location_coords[0], stop.location_coords[1]]}
-        ></Marker>
+        >
+          {/* <Polyline pathOptions={redOptions} positions={polyline}></Polyline> */}
+          <Popup position={[stop.location_coords[0], stop.location_coords[1]]}>
+            <div>
+              <h6>{stop.stop_name}</h6>
+              <p>{"Is a ticket needed? " + stop.is_ticket_needed}</p>
+            </div>
+          </Popup>
+
+        </Marker>
       ))}
     </MapContainer>
   );

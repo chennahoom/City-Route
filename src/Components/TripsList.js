@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import TourGuideTrip from "./TourGuideTrip";
 
@@ -14,11 +13,6 @@ function TripList(props) {
       });
   }, []);
 
-<<<<<<< HEAD
-  
-
-=======
->>>>>>> 919b7aec22ac9811be8e17829d0ed22c49b65f10
   return (
       <div>
         {tourGuideTrips.map((tripId, i) =>(
