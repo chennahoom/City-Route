@@ -48,15 +48,20 @@ function App() {
 		setLogin(res);
 	};
 
-	const signUp = newUser => {
+	const signUp = (newUser) => {
+    console.log("im in signup");
+    console.log(newUser.type_of_user);
+
+
 		if (newUser.type_of_user === 'Traveler') {
+      console.log(newUser.type_of_user);
 			history.push('/trips');
 		} else {
 			history.push('/tourGuideMenu');
 		}
 	};
 
-	const addUser = newUser => {
+	const addUser = (newUser) => {
 		fetch(`https://city-route.herokuapp.com/api/users/`, {
 			method: 'POST',
 			headers: {
@@ -66,18 +71,19 @@ function App() {
 			body: JSON.stringify(newUser),
 		})
 			.then(response => response.json())
-			.then(newUser => {
-				console.log(newUser);
+			.then(UserNew => {
+				console.log(UserNew);
 				setUser(newUser);
+        console.log(UserNew.type_of_user);
 				signUp(newUser);
 			})
 			.catch(err => console.error(err));
 	};
 
 	const onSuccess = res => {
-		setName(res.profileObj.name);
-		setEmail(res.profileObj.email);
-		setUrl(res.profileObj.imageUrl);
+		// setName(res.profileObj.name);
+		// setEmail(res.profileObj.email);
+		// setUrl(res.profileObj.imageUrl);
 		refreshTokenSetup(res);
 		setlog(true);
 		fetch(`https://city-route.herokuapp.com/api/users/email`, {
@@ -92,7 +98,7 @@ function App() {
 			.then(res => res.json())
 			.then(user => {
 				if (!user) {
-					return history.push(`/register?email=${res.profileObj.email}&name=${res.profileObj.name}`);
+					return history.push(`/login?email=${res.profileObj.email}&name=${res.profileObj.name}`);
 				}
 				setUser(user);
 
@@ -105,7 +111,7 @@ function App() {
 				}
 				console.log(user.type_of_user);
 				console.log(user);
-			});
+  });
 		// getAllUsers();
 
 		//findUserByEmail(res.profileObj.email);
@@ -202,9 +208,9 @@ function App() {
 				</Route>
 				<Route path="/login" exact>
 					<LoginPage
-						setName={setName}
-						setEmail={setEmail}
-						setUrl={setUrl}
+						// setName={setName}
+						// setEmail={setEmail}
+						// setUrl={setUrl}
 						name={name}
 						email={email}
 						url={url}
