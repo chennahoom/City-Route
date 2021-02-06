@@ -6,7 +6,6 @@ function Register(props) {
     full_name: "",
     email: "",
     type_of_user: "",
-    languages: "",
     phone: "",
   };
   const [user, setUser] = useState(initForm);

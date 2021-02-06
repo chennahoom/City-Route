@@ -1,11 +1,11 @@
-import TripDetails from "../Components/TripDetails";
+import TripDetails from '../Components/TripDetails';
 
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
 function TripDetailsPage(props) {
-  const params = useParams();
-  console.log(params);
-  return <TripDetails tripId={params.tripId} updateUserTrips={props.updateUserTrips} />;
+	const params = useParams();
+	console.log(params);
+	return <TripDetails user={props.user} tripId={params.tripId} updateTrips={props.updateTrips} />;
 }
 
 export default TripDetailsPage;
