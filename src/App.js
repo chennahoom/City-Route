@@ -145,7 +145,6 @@ function App() {
 				console.log(newTrip);
 				console.log(newTrip.id);
 				updateUserTrips(newTrip.id);
-				// console.log(newTripId);
 			})
 			.catch(err => console.error(err));
 	};
