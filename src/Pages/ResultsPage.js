@@ -17,15 +17,15 @@ function ResultsPage(props) {
 
   let filteredTrips = results.filter((item) => {
     const tripDate = stringToDate(item.tour_date);
-    const startDate = stringToDate(props.searhTripForm.start);
-    const endData = stringToDate(props.searhTripForm.end);
+    const startDate = stringToDate(props.searchTripForm.start);
+    const endData = stringToDate(props.searchTripForm.end);
 
     const validDate =
       tripDate.getTime() <= endData.getTime() &&
       tripDate.getTime() >= startDate.getTime();
 
-    const validCity = props.searhTripForm.city
-      ? item.trip_name_city === props.searhTripForm.city
+    const validCity = props.searchTripForm.city
+      ? item.trip_name_city === props.searchTripForm.city
       : true;
     return validDate && validCity;
   });

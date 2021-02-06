@@ -9,12 +9,10 @@ import TripDetailsPage from "./Pages/TripDetailsPage";
 import MyTripsPage from "./Pages/MyTripsPage";
 import { useHistory } from "react-router-dom";
 import Map from "./Components/MapView";
-
-import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import TourGuidePage from "./Pages/TourGuidePage";
 
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import LoginPage from "./Pages/LoginPage";
 
 function App() {
@@ -25,7 +23,7 @@ function App() {
   const [user, setUser] = useState(null);
   // const [userTrips, setUserTrips] = ('');
 
-  const [searhTripForm, setSearhTripForm] = useState({
+  const [searchTripForm, setSearchTripForm] = useState({
     city: "",
     start: "",
     end: "",
@@ -35,7 +33,7 @@ function App() {
 
   function updateForm(event) {
     const { value, name } = event.target; // event.target -> DOM ELEMENT THAT FIRE EVENT
-    setSearhTripForm({ ...searhTripForm, [name]: value });
+    setSearchTripForm({ ...searchTripForm, [name]: value });
   }
 
   // const [results, setResults] = useState([]);
@@ -117,6 +115,7 @@ function App() {
   //Here is the USER!!!
   console.log("user", user);
 
+
   return (
       <div className="App">
         <Header setlog={setlog} setUser={setUser} />
@@ -129,7 +128,7 @@ function App() {
           </Route>
           <Route path="/results" exact>
             <ResultsPage
-              searhTripForm={searhTripForm}
+              searchTripForm={searchTripForm}
               // updateTrips={updateTrips}
             />
           </Route>
@@ -140,8 +139,11 @@ function App() {
             <Map />
           </Route>
           {/* <Route path="/article/:usersId" exact> */}
-          <Route path="/article" exact>
-            <MyTripsPage userTrips={userTrips} />
+          {/* <Route path="/article/:usersId" exact>
+            <MyTripsPage user={user} userTrips={userTrips} />
+          </Route> */}
+          <Route path="/MyTripsPage/:usersId" exact>
+            <MyTripsPage user={user} userTrips={userTrips} />
           </Route>
           <Route path="/login" exact>
             <LoginPage
