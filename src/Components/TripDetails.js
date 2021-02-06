@@ -1,16 +1,39 @@
 import { Link, useParams, useLocation } from 'react-router-dom';
 import MapView from './MapView';
-
+import Modal from '@material-ui/core/Modal';
 import { useEffect, useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
 import Api from '../Api';
 
+const useStyles = makeStyles(theme => ({
+  modal: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+  },
+  paper: {
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+  },
+}));
+
 function TripDetails(props) {
+
+  const classes = useStyles();
+  // const [open, setOpen] = React.useState(false);
 	const [results, setResults] = useState([]);
 	const [tourGuide, setTourGuide] = useState([]);
 	const [tickets, setTickets] = useState({});
 	const [stops, setStops] = useState([]);
-	const [trip, setTrip] = useState('');
+  const [trip, setTrip] = useState('');
+  const [open, setOpen] = useState(false);
 
 	const { city } = useParams();
 	const location = useLocation();
@@ -82,7 +105,15 @@ function TripDetails(props) {
 
 	const handleTick = event => {
 		setTickets(event.target.value);
-	};
+  };
+  
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
 	return (
 		<div className="card-map">
@@ -115,48 +146,47 @@ function TripDetails(props) {
 					Spaces Left: {results.spaces_left}
 				</li>
 			</ul>
-			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+			{/* <button type="button" onClick={handleOpen}>
 				Join Trip
-			</button>
-			<div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div className="modal-dialog" role="document">
-					<div className="modal-content">
-						<div className="modal-header">
-							<h5 className="modal-title" id="exampleModalLabel">
-								Join Trip
-							</h5>
-							<button type="button" className="close" data-dismiss="modal" aria-label="Close" id="join-trip">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div className="modal-body">
-							How many spaces do you want to save?
-							<div className="form-group">
-								<label for="spaces">Example select</label>
-								<select id="spaces" onChange={handleTick}>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-								</select>
-								<p id="ticketsError"></p>
-							</div>
-						</div>
+			</button> */}
 
-						<div className="modal-footer">
-							<button type="button" className="btn btn-secondary" data-dismiss="modal">
-								Close
-							</button>
-							<Link to={`/MyTripsPage`}>
-								<button type="button" className="btn btn-primary" id="save-tickets" onClick={numOfTic}>
-									Save Changes
-								</button>
-							</Link>
-						</div>
-					</div>
-				</div>
-			</div>
+      <Button variant="contained" color="secondary" onClick={handleOpen}>
+        Join Trip
+      </Button>
+
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+            timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+            <div className={classes.paper}>
+                <h2>How many spaces do you want to save?</h2>
+                <p>
+                  <label for="spaces">Number of Tickets:</label>
+                  <select id="spaces" onChange={handleTick}>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>                
+                </p>
+                <Link to={`/MyTripsPage`}>
+                  <button type="button" className="btn btn-primary" id="save-tickets" onClick={numOfTic}>
+                    Save Changes
+                  </button>
+                </Link>
+            </div>
+        </Fade>
+      </Modal>
 		</div>
 	);
 }
