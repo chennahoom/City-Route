@@ -24,7 +24,6 @@ function TourGuidePage(props) {
         console.log(newTrip);
         console.log(newTrip.id);
         updateUserTrips(newTrip.id);
-        // console.log(newTripId);
       })
       .catch((err) => console.error(err));
   };
@@ -54,7 +53,6 @@ function TourGuidePage(props) {
     <div>
       <AddTripForm
         user={props.user}
-        // addTrip={props.addTrip}
         addTrip={addTrip}
 
         updateUserTrips={props.updateUserTrips}
