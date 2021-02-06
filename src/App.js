@@ -134,14 +134,14 @@ function App() {
             />
           </Route>
           <Route path="/map/:city" exact>
-            <TripDetailsPage />
+            <TripDetailsPage updateUserTrips={updateUserTrips}/>
           </Route>
           <Route path="/map/:city" exact>
             <Map />
           </Route>
           {/* <Route path="/article/:usersId" exact> */}
-          <Route path="/article" exact>
-            <MyTripsPage userTrips={userTrips} />
+          <Route path="/MyTripsPage" exact>
+            <MyTripsPage user={user} updateUserTrips={updateUserTrips} />
           </Route>
           <Route path="/login" exact>
             <LoginPage

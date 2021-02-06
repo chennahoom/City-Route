@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
+
 
 function AddTripForm(props) {
+  const history = useHistory();
   //TODO: need to add the ID of user
   console.log(props.user)
   const initForm = {
@@ -25,6 +28,8 @@ function AddTripForm(props) {
     setMyTrips(props.user.my_trips);
     // props.getUserTrip();
     props.addTrip(trip);
+    // history.push('/tourGuideMenu');
+
     const newTrip = { my_trips: props.user.my_trips}
     // props.updateUserTrips(newTrip)
     // props.updateUserTrips(myTrips);

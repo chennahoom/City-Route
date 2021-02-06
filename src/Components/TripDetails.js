@@ -71,7 +71,10 @@ function TripDetails(props) {
     console.log(tickets);
     if (results.spaces_left >= tickets) {
       const info = parseInt(results.spaces_left) - parseInt(tickets);
+      console.log(results.id);
+      props.updateUserTrips(results.id);
       updateSpace(info);
+
     } else {
       //TODO: add here the num of the tour guide
     }

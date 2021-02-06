@@ -35,8 +35,8 @@ function ResultsPage(props) {
       <section className="container">
         <h2 className="pageTitle">Where would you like to travel?</h2>
         <section className="row row-cols-1 row-cols-md-3"></section>
-        {filteredTrips.map((trip) => (
-          <TripResults trip={trip} />
+        {filteredTrips.map((trip, i) => (
+          <TripResults trip={trip} key={i}/>
         ))}
       </section>
     </div>

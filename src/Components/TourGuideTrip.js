@@ -12,7 +12,7 @@ function TourGuideTrip(props){
             setTripData(body);
             console.log(body);
             console.log(props.data);
-            });
+        });
     }, []);
     
 
