@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 import Header from './Components/Header';
 import SearchTripPage from './Pages/SearchTripsPage';
