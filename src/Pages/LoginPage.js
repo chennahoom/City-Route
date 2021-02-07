@@ -1,11 +1,7 @@
 import React, { useEffect } from "react";
-import { Link } from "react";
 import { useState } from "react";
-import GoogleLogin, { useGoogleLogin } from "react-google-login";
-import { refreshTokenSetup } from "../Components/utils/refreshToken";
 import { useHistory } from "react-router-dom";
-import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import Register from "./Register";
+import Register from "./SignUp";
 
 
 function LoginPage(props) {

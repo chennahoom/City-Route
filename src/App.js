@@ -9,7 +9,7 @@ import TripDetailsPage from './Pages/TripDetailsPage';
 import MyTripsPage from './Pages/MyTripsPage';
 import { useHistory } from 'react-router-dom';
 import Map from './Components/MapView';
-import Register from './Pages/Register';
+import SignUp from './Pages/SignUp';
 import TourGuidePage from './Pages/TourGuidePage';
 
 import { Switch, Route } from 'react-router-dom';
@@ -49,14 +49,12 @@ function App() {
 	};
 
 	const signUp = (newUser) => {
-    console.log("im in signup");
-    console.log(newUser.type_of_user);
-
-
+		console.log("im in signup");
+		console.log(newUser.type_of_user);
 		if (newUser.type_of_user === 'Traveler') {
-      console.log(newUser.type_of_user);
 			history.push('/trips');
-		} else {
+		} 
+		else {
 			history.push('/tourGuideMenu');
 		}
 	};
@@ -72,9 +70,7 @@ function App() {
 		})
 			.then(response => response.json())
 			.then(UserNew => {
-				console.log(UserNew);
 				setUser(newUser);
-        console.log(UserNew.type_of_user);
 				signUp(newUser);
 			})
 			.catch(err => console.error(err));
@@ -183,8 +179,8 @@ function App() {
 				<Route path="/trips" exact>
 					<SearchTripPage updateForm={updateForm} />
 				</Route>
-				<Route path="/register" exact>
-					<Register addUser={addUser} />
+				<Route path="/signUp" exact>
+					<SignUp addUser={addUser} signIn={signIn}/>
 				</Route>
 				<Route path="/results" exact>
 					<ResultsPage
@@ -205,7 +201,7 @@ function App() {
 				<Route path="/MyTripsPage/:usersId" exact>
 					<MyTripsPage user={user} userTrips={userTrips} />
 				</Route>
-				<Route path="/login" exact>
+				{/* <Route path="/login" exact>
 					<LoginPage
 						// setName={setName}
 						// setEmail={setEmail}
@@ -218,7 +214,7 @@ function App() {
 						addUser={addUser}
 						signIn={signIn}
 					/>
-				</Route>
+				</Route> */}
 				<Route path="/tourGuideMenu" exact>
 					<TourGuidePage user={user} addTrip={addTrip} updateUserTrips={updateUserTrips} userTrips={userTrips} />
 				</Route>
