@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddTripForm from "../Components/TripFormTG";
 import TripsList from "../Components/TripsList";
 import { useHistory } from "react-router-dom";
@@ -8,7 +8,10 @@ import { useHistory } from "react-router-dom";
 function TourGuidePage(props) {
   const history = useHistory();
   const [listChanged, setListChanged] = useState(false);
-  
+
+
+
+
 
   const addTrip = (newTrip) => {
     fetch(`https://city-route.herokuapp.com/api/trips/`, {
@@ -23,13 +26,14 @@ function TourGuidePage(props) {
       .then((newTrip) => {
         console.log(newTrip);
         console.log(newTrip.id);
-        updateUserTrips(newTrip.id);
+        serverUpdateUserTrips(newTrip.id);
+        props.updateUserTrips(newTrip.id);
       })
       .catch((err) => console.error(err));
   };
 
-  const updateUserTrips = (newTripId) => {
-    var newMyTrips = props.user.my_trips;
+  const serverUpdateUserTrips = (newTripId) => {
+    var newMyTrips = [...props.user.my_trips];
     newMyTrips.push(newTripId);
     fetch(`https://city-route.herokuapp.com/api/users/${props.user.id}`, {
       method: "PUT",
@@ -55,9 +59,12 @@ function TourGuidePage(props) {
         user={props.user}
         addTrip={addTrip}
 
-        updateUserTrips={props.updateUserTrips}
       />
-      <TripsList  user={props.user} userTrips={props.userTrips} setListChanged={setListChanged} listChanged={listChanged}/>
+      <TripsList
+        tourGuideTrips={props.user?.my_trips || []}
+
+
+        user={props.user} userTrips={props.userTrips} setListChanged={setListChanged} listChanged={listChanged} />
       <button>View All Trips</button>
     </div>
   );

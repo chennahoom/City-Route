@@ -9,7 +9,7 @@ function AddTripForm(props) {
   const initForm = {
     trip_name_city: "",
     tour_date: "",
-    tour_guide_id: props.user.id,
+    tour_guide_id: props.user?.id,
     tour_time: "",
     start_time: "",
     spaces_left: 10,
@@ -30,7 +30,7 @@ function AddTripForm(props) {
     props.addTrip(trip);
     // history.push('/tourGuideMenu');
 
-    const newTrip = { my_trips: props.user.my_trips}
+    const newTrip = { my_trips: props.user?.my_trips}
     // props.updateUserTrips(newTrip)
     // props.updateUserTrips(myTrips);
   };

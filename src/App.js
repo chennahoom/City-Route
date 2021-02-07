@@ -1,6 +1,6 @@
 import './App.css';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Header from './Components/Header';
 import SearchTripPage from './Pages/SearchTripsPage';
@@ -53,7 +53,7 @@ function App() {
 		console.log(newUser.type_of_user);
 		if (newUser.type_of_user === 'Traveler') {
 			history.push('/trips');
-		} 
+		}
 		else {
 			history.push('/tourGuideMenu');
 		}
@@ -70,6 +70,7 @@ function App() {
 		})
 			.then(response => response.json())
 			.then(UserNew => {
+				localStorage.setItem('userId', UserNew.id)
 				setUser(newUser);
 				signUp(newUser);
 			})
@@ -107,7 +108,7 @@ function App() {
 				}
 				console.log(user.type_of_user);
 				console.log(user);
-  });
+			});
 		// getAllUsers();
 
 		//findUserByEmail(res.profileObj.email);
@@ -147,30 +148,50 @@ function App() {
 
 	const updateUserTrips = newTripId => {
 		// setMyTrips();
-		var newMyTrips = user.my_trips;
+		var newMyTrips = [...user.my_trips || []];
+		newMyTrips.push(newTripId)
+		setUser({ ...user, my_trips: newMyTrips })
+	};
+
+
+	const serverUpdateUserTrips = (newTripId) => {
+		var newMyTrips = [...user.my_trips || []];
 		newMyTrips.push(newTripId);
-		fetch(`https://city-route.herokuapp.com/api/users/${user.id}`, {
-			method: 'PUT',
+		fetch(`https://city-route.herokuapp.com/api/users/${user?.id}`, {
+			method: "PUT",
 			headers: {
-				'Content-Type': 'application/json',
-				Accept: 'application/json',
+				"Content-Type": "application/json",
+				Accept: "application/json",
 			},
 			body: JSON.stringify({
 				my_trips: newMyTrips,
 			}),
 		})
-			.then(response => response.json())
-			.then(newTrip => {
+			.then((response) => response.json())
+			.then((newTrip) => {
 				console.log(newTrip);
-				console.log(userTrips);
-				// setUserTrips(user.my_trips);
-				// updateTrips(newTrip);
+				updateUserTrips(newTripId)
+				history.push('/myTripsPage')
 			})
-			.catch(err => console.error(err));
+			.catch((err) => console.error(err));
 	};
 
 	//Here is the USER!!!
 	console.log('user', user);
+
+
+	useEffect(() => {
+		const id = localStorage.getItem('userId');
+		if (id) {
+			fetch(`https://city-route.herokuapp.com/api/users/${id}`, {
+
+			})
+				.then((response) => response.json())
+				.then((body) => {
+					setUser(body)
+				})
+		}
+	}, [])
 
 	return (
 		<div className="App">
@@ -180,16 +201,16 @@ function App() {
 					<SearchTripPage updateForm={updateForm} />
 				</Route>
 				<Route path="/signUp" exact>
-					<SignUp addUser={addUser} signIn={signIn}/>
+					<SignUp addUser={addUser} signIn={signIn} />
 				</Route>
 				<Route path="/results" exact>
 					<ResultsPage
 						searchTripForm={searchTripForm}
-						// updateTrips={updateTrips}
+					// updateTrips={updateTrips}
 					/>
 				</Route>
 				<Route path="/map/:city" exact>
-					<TripDetailsPage user={user} updateUserTrips={updateUserTrips}  />
+					<TripDetailsPage user={user} serverUpdateUserTrips={serverUpdateUserTrips} />
 				</Route>
 				<Route path="/map/:city" exact>
 					<Map />
@@ -198,7 +219,7 @@ function App() {
 				{/* <Route path="/article/:usersId" exact>
             <MyTripsPage user={user} userTrips={userTrips} />
           </Route> */}
-				<Route path="/MyTripsPage" exact>
+				<Route path="/myTripsPage" exact>
 					<MyTripsPage user={user} userTrips={userTrips} />
 				</Route>
 				{/* <Route path="/login" exact>

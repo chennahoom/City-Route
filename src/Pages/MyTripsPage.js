@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import TripResults from '../Components/TripResults';
 
 function MyTripsPage(props) {
-	console.log('USER', props.user);
+	console.log('USER', props.user?.my_trips);
 	return (
 		<div>
 			<h2 id="pageTitle">My Trips</h2>

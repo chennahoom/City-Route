@@ -1,4 +1,4 @@
-import { Link, useParams, useLocation } from 'react-router-dom';
+import { useHistory, useParams, useLocation } from 'react-router-dom';
 import MapView from './MapView';
 import Modal from '@material-ui/core/Modal';
 import { useEffect, useState } from 'react';
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function TripDetails(props) {
-
+	const history = useHistory()
 	const classes = useStyles();
 	// const [open, setOpen] = React.useState(false);
 	const [results, setResults] = useState([]);
@@ -92,12 +92,13 @@ function TripDetails(props) {
 			});
 	};
 
-	const numOfTic = () => {
+	const numOfTic = () => { //MyTripsPage
 		// TODO:need to check id Traveler
 		console.log(tickets);
 		if (results.spaces_left >= tickets) {
 			const info = parseInt(results.spaces_left) - parseInt(tickets);
 			updateSpace(info);
+			props.serverUpdateUserTrips(tripId)
 		} else {
 			//TODO: add here the num of the tour guide
 		}
@@ -176,11 +177,11 @@ function TripDetails(props) {
 								<option value="5">5</option>
 							</select>
 						</p>
-						<Link to={`/MyTripsPage/`}>
-							<button type="button" className="btn btn-primary" id="save-tickets" onClick={numOfTic}>
-								Save Changes
-                  			</button>
-						</Link>
+
+						<button type="button" className="btn btn-primary" id="save-tickets" onClick={numOfTic}>
+							Save Changes
+                  		</button>
+
 					</div>
 				</Fade>
 			</Modal>
