@@ -15,5 +15,3 @@ function MyTripsPage(props) {
 }
 
 export default MyTripsPage;
-
-//article where all travelers trips are

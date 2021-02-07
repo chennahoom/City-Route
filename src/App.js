@@ -1,6 +1,10 @@
-import './App.css';
+import "./App.css";
 
+<<<<<<< HEAD
 import { useState, useEffect } from 'react';
+=======
+import { useState } from "react";
+>>>>>>> 5916770b59089cea42a63ad252600cea9e6dde03
 
 import Header from './Components/Header';
 import SearchTripPage from './Pages/SearchTripsPage';
@@ -12,13 +16,14 @@ import Map from './Components/MapView';
 import SignUp from './Pages/SignUp';
 import TourGuidePage from './Pages/TourGuidePage';
 
-import { Switch, Route } from 'react-router-dom';
-import LoginPage from './Pages/LoginPage';
+import { Switch, Route } from "react-router-dom";
+import LoginPage from "./Pages/LoginPage";
 
-import GoogleLogin, { useGoogleLogin } from 'react-google-login';
-import { refreshTokenSetup } from './Components/utils/refreshToken';
+import GoogleLogin, { useGoogleLogin } from "react-google-login";
+import { refreshTokenSetup } from "./Components/utils/refreshToken";
 
-const clientId = '233069535985-vfone0gmelp0cfv62424j18a94av35i3.apps.googleusercontent.com';
+const clientId =
+  "233069535985-vfone0gmelp0cfv62424j18a94av35i3.apps.googleusercontent.com";
 
 function App() {
 	const [name, setName] = useState('');
