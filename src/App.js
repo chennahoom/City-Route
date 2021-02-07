@@ -189,7 +189,7 @@ function App() {
 					/>
 				</Route>
 				<Route path="/map/:city" exact>
-					<TripDetailsPage user={user} />
+					<TripDetailsPage user={user} updateUserTrips={updateUserTrips}  />
 				</Route>
 				<Route path="/map/:city" exact>
 					<Map />
@@ -198,7 +198,7 @@ function App() {
 				{/* <Route path="/article/:usersId" exact>
             <MyTripsPage user={user} userTrips={userTrips} />
           </Route> */}
-				<Route path="/MyTripsPage/:usersId" exact>
+				<Route path="/MyTripsPage" exact>
 					<MyTripsPage user={user} userTrips={userTrips} />
 				</Route>
 				{/* <Route path="/login" exact>

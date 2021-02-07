@@ -11,29 +11,29 @@ import Fade from '@material-ui/core/Fade';
 import Api from '../Api';
 
 const useStyles = makeStyles(theme => ({
-  modal: {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-  },
-  paper: {
-      backgroundColor: theme.palette.background.paper,
-      border: '2px solid #000',
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
-  },
+	modal: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	paper: {
+		backgroundColor: theme.palette.background.paper,
+		border: '2px solid #000',
+		boxShadow: theme.shadows[5],
+		padding: theme.spacing(2, 4, 3),
+	},
 }));
 
 function TripDetails(props) {
 
-  const classes = useStyles();
-  // const [open, setOpen] = React.useState(false);
+	const classes = useStyles();
+	// const [open, setOpen] = React.useState(false);
 	const [results, setResults] = useState([]);
 	const [tourGuide, setTourGuide] = useState([]);
 	const [tickets, setTickets] = useState({});
 	const [stops, setStops] = useState([]);
-  const [trip, setTrip] = useState('');
-  const [open, setOpen] = useState(false);
+	const [trip, setTrip] = useState('');
+	const [open, setOpen] = useState(false);
 
 	const { city } = useParams();
 	const location = useLocation();
@@ -86,14 +86,14 @@ function TripDetails(props) {
 			.then(response => response.json())
 			.then(info => {
 				// props.updateTrips(info);
+				console.log(tripId);
 				setTrip(info);
 				// props.updateTrips(info);
 			});
 	};
 
-	const numOfTic = async () => {
+	const numOfTic = () => {
 		// TODO:need to check id Traveler
-		const res = await Api.addTripToUser(props.user, Number(tripId));
 		console.log(tickets);
 		if (results.spaces_left >= tickets) {
 			const info = parseInt(results.spaces_left) - parseInt(tickets);
@@ -105,15 +105,15 @@ function TripDetails(props) {
 
 	const handleTick = event => {
 		setTickets(event.target.value);
-  };
-  
-  const handleOpen = () => {
-    setOpen(true);
-  };
+	};
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+	const handleOpen = () => {
+		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+	};
 
 	return (
 		<div className="card-map">
@@ -146,47 +146,44 @@ function TripDetails(props) {
 					Spaces Left: {results.spaces_left}
 				</li>
 			</ul>
-			{/* <button type="button" onClick={handleOpen}>
+
+			<Button variant="contained" color="secondary" onClick={handleOpen}>
 				Join Trip
-			</button> */}
+      		</Button>
 
-      <Button variant="contained" color="secondary" onClick={handleOpen}>
-        Join Trip
-      </Button>
-
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={classes.modal}
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-            timeout: 500,
-        }}
-      >
-        <Fade in={open}>
-            <div className={classes.paper}>
-                <h2>How many spaces do you want to save?</h2>
-                <p>
-                  <label for="spaces">Number of Tickets:</label>
-                  <select id="spaces" onChange={handleTick}>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                  </select>                
-                </p>
-                <Link to={`/MyTripsPage`}>
-                  <button type="button" className="btn btn-primary" id="save-tickets" onClick={numOfTic}>
-                    Save Changes
-                  </button>
-                </Link>
-            </div>
-        </Fade>
-      </Modal>
+			<Modal
+				aria-labelledby="transition-modal-title"
+				aria-describedby="transition-modal-description"
+				className={classes.modal}
+				open={open}
+				onClose={handleClose}
+				closeAfterTransition
+				BackdropComponent={Backdrop}
+				BackdropProps={{
+					timeout: 500,
+				}}
+			>
+				<Fade in={open}>
+					<div className={classes.paper}>
+						<h2>How many spaces do you want to save?</h2>
+						<p>
+							<label for="spaces">Number of Tickets:</label>
+							<select id="spaces" onChange={handleTick}>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+							</select>
+						</p>
+						<Link to={`/MyTripsPage/`}>
+							<button type="button" className="btn btn-primary" id="save-tickets" onClick={numOfTic}>
+								Save Changes
+                  			</button>
+						</Link>
+					</div>
+				</Fade>
+			</Modal>
 		</div>
 	);
 }
