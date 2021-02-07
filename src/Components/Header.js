@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 import Logout from "./Logout";
 
 function Header(props) {
+
+
   return (
     <header>
+  
       <section className="navbar navbar-light bg-light">
         <a href="trips.html">
           <img
