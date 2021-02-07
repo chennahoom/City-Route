@@ -9,7 +9,7 @@ function Logout(props) {
   const history = useHistory();
   const onLogoutSuccess = (res) => {
     props.setlog(false);
-    history.push("/login");
+    history.push("/signUp");
     props.setUser(null);
     console.log("signedout");
   };

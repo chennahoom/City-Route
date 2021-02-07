@@ -1,3 +1,4 @@
+import { useParams } from 'react-router-dom';
 import TripResults from '../Components/TripResults';
 
 function MyTripsPage(props) {
