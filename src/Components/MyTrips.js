@@ -8,15 +8,20 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {useEffect, useState } from "react";
+import Berlin from '../static/Berlin.jpg';
+import Amsterdam from '../static/Amsterdam.jpg';
+import TelAviv from '../static/Tel-Aviv.jpg';
+import { useTheme } from "@material-ui/styles";
+
 
 
 const useStyles = makeStyles({
     root: {
-        maxWidth: 345,
-        marginTop:100,
+      maxWidth: 200,  
+      
     },
     media: {
-        height: 140,
+        height: 200,    
     },
 });
 
@@ -30,18 +35,20 @@ function MyTrips(props) {
                 setTripData(body);
                 console.log(body);
                 console.log(props.data);
+
             });
     }, []);
     
-    console.log(tripData);
+    console.log(tripData.trip_name_city);
+
     return (
         <Card className={classes.root}>
             <CardActionArea>
-                {/* <CardMedia
+                <CardMedia
                     className={classes.media}
-                    image="#"
+                    image={Berlin}
                     title="Contemplative Reptile"
-                /> */}
+                />
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="h2">
                         {tripData.trip_name_city}
