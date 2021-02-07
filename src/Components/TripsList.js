@@ -4,6 +4,11 @@ import React from 'react';
 
 function TripList(props) {
 
+  //   useEffect(() => {  
+  //     if (props.user.my_trips ==! undefined)
+  //     setTourGuideTrips(props.user.my_trips);
+  //     // forceUpdate();
+  // }, [props.user.my_trips]);
 
 
 
