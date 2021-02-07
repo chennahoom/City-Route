@@ -33,7 +33,10 @@ function TourGuidePage(props) {
   };
 
   const serverUpdateUserTrips = (newTripId) => {
-    var newMyTrips = [...props.user.my_trips];
+    var newMyTrips = [];
+    if(props.user.my_trips){
+      newMyTrips = [...props.user.my_trips];
+    }
     newMyTrips.push(newTripId);
     fetch(`https://city-route.herokuapp.com/api/users/${props.user.id}`, {
       method: "PUT",

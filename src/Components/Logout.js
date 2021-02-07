@@ -8,7 +8,7 @@ const clientId =
 function Logout(props) {
   const history = useHistory();
   const onLogoutSuccess = (res) => {
-    localStorage.removeItem('userId')
+    localStorage.removeItem('userId');
     props.setlog(false);
     history.push("/signUp");
     props.setUser(null);
