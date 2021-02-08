@@ -4,14 +4,8 @@ import TripsList from "../Components/TripsList";
 import { useHistory } from "react-router-dom";
 
 
-
 function TourGuidePage(props) {
-  const history = useHistory();
   const [listChanged, setListChanged] = useState(false);
-
-
-
-
 
   const addTrip = (newTrip) => {
     fetch(`https://city-route.herokuapp.com/api/trips/`, {
@@ -61,12 +55,9 @@ function TourGuidePage(props) {
       <AddTripForm
         user={props.user}
         addTrip={addTrip}
-
       />
       <TripsList
         tourGuideTrips={props.user?.my_trips || []}
-
-
         user={props.user} userTrips={props.userTrips} setListChanged={setListChanged} listChanged={listChanged} />
       <button>View All Trips</button>
     </div>
