@@ -49,6 +49,9 @@ function TripDetails(props) {
 			.then(body => {
 				setResults(body);
 				tourGuideId(body.tour_guide_id);
+				console.log(body.tickets_bought);
+				let i = body.tickets_bought + 2;
+				console.log(i);
 				setTrip(tripId);
 			});
 	}, []);
@@ -73,6 +76,7 @@ function TripDetails(props) {
 	};
 
 	const updateSpace = (info) => {
+		console.log(info);
 		fetch(`https://city-route.herokuapp.com/api/trips/${tripId}`, {
 			method: 'PUT',
 			headers: {
@@ -80,13 +84,14 @@ function TripDetails(props) {
 				Accept: "application/json",
 			},
 			body: JSON.stringify({
-				tickets_bought:parseInt(12),
+				ticketsBought:2,
+				tour_guide_id: 6,
 			}),
 		})
 			.then(response => response.json())
 			.then(info => {
 				console.log(tripId);
-				console.log(info)
+				console.log(info.tickets_bought)
 				setTrip(info);
 				// props.updateTrips(info);
 			});
