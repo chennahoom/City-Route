@@ -19,7 +19,7 @@ function TripResults(props) {
               <br />
               start time: {props.trip.start_time}
               <br />
-              spaces left: {props.trip.spaces_left}
+              spaces left: {props.trip.tickets_bought}
               <br />
             </p>
             <Link to={`/map/${props.trip.trip_name_city}?id=${props.trip.id}`}>

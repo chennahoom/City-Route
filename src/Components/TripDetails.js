@@ -95,8 +95,8 @@ function TripDetails(props) {
 	const numOfTic = () => { //MyTripsPage
 		// TODO:need to check id Traveler
 		console.log(tickets);
-		if (results.spaces_left >= tickets) {
-			const info = parseInt(results.spaces_left) - parseInt(tickets);
+		if (results.tickets_bought >= tickets) {
+			const info = parseInt(results.tickets_bought) - parseInt(tickets);
 			updateSpace(info);
 			props.serverUpdateUserTrips(tripId)
 		} else {
