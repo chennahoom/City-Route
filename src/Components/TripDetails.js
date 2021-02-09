@@ -80,7 +80,7 @@ function TripDetails(props) {
 				Accept: "application/json",
 			},
 			body: JSON.stringify({
-				tickets_bought:parseInt(12),
+				ticketsBought:6,
 			}),
 		})
 			.then(response => response.json())
