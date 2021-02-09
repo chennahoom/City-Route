@@ -46,8 +46,8 @@ function MyTrips(props) {
                 <CardActionArea>
                     <CardMedia
                         className={classes.media}
-                        
-                        image={Berlin}
+                        src={Berlin}
+                        // image={Berlin}
                         title="Contemplative Reptile"
                     />
                     <CardContent>

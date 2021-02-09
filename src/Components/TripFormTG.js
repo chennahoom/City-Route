@@ -12,7 +12,7 @@ function AddTripForm(props) {
     tour_guide_id: props.user?.id,
     tour_time: "",
     start_time: "",
-    tickets_bought: 10,
+    tickets_bought: 0,
   };
   const [trip, setTrip] = useState(initForm);
   const [myTrips, setMyTrips] = useState([]);

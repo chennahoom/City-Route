@@ -64,7 +64,7 @@ function TripDetails(props) {
 			});
 	}, [city]);
 
-	const tourGuideId = id => {
+	const tourGuideId = (id) => {
 		fetch(`https://city-route.herokuapp.com/api/users/${id}`)
 			.then(res => res.json())
 			.then(body => {
@@ -72,36 +72,37 @@ function TripDetails(props) {
 			});
 	};
 
-	const updateSpace = info => {
+	const updateSpace = (info) => {
 		fetch(`https://city-route.herokuapp.com/api/trips/${tripId}`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
+				Accept: "application/json",
 			},
-			// body: JSON.stringify(info),
 			body: JSON.stringify({
-				spaces_left: info,
+				tickets_bought:parseInt(12),
 			}),
 		})
 			.then(response => response.json())
 			.then(info => {
-				// props.updateTrips(info);
 				console.log(tripId);
+				console.log(info)
 				setTrip(info);
 				// props.updateTrips(info);
 			});
 	};
 
 	const numOfTic = () => { //MyTripsPage
-		// TODO:need to check id Traveler
-		console.log(tickets);
-		if (results.tickets_bought >= tickets) {
-			const info = parseInt(results.tickets_bought) - parseInt(tickets);
-			updateSpace(info);
-			props.serverUpdateUserTrips(tripId)
-		} else {
-			//TODO: add here the num of the tour guide
-		}
+		const info =  parseInt(results.tickets_bought) + parseInt(tickets);
+		updateSpace(info);
+		props.serverUpdateUserTrips(tripId);
+		// if (results.tickets_bought >= tickets) {
+		// 	const info = parseInt(results.tickets_bought) - parseInt(tickets);
+		// 	updateSpace(info);
+		// 	props.serverUpdateUserTrips(tripId)
+		// } else {
+		// 	//TODO: add here the num of the tour guide
+		// }
 	};
 
 	const handleTick = event => {
@@ -144,7 +145,7 @@ function TripDetails(props) {
 					Start time: {results.start_time}
 				</li>
 				<li className="list-group-item" id="spacesLeft">
-					Spaces Left: {results.spaces_left}
+					Tickets bought: {results.tickets_bought}
 				</li>
 			</ul>
 
