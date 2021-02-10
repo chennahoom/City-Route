@@ -84,30 +84,29 @@ function TripDetails(props) {
 				Accept: "application/json",
 			},
 			body: JSON.stringify({
-				ticketsBought:2,
-				tour_guide_id: 6,
+				ticketsBought:1,
 			}),
 		})
 			.then(response => response.json())
 			.then(info => {
 				console.log(tripId);
-				console.log(info.tickets_bought)
+				console.log(info.ticketsBought)
 				setTrip(info);
 				// props.updateTrips(info);
 			});
 	};
 
 	const numOfTic = () => { //MyTripsPage
-		const info =  parseInt(results.tickets_bought) + parseInt(tickets);
-		updateSpace(info);
-		props.serverUpdateUserTrips(tripId);
-		// if (results.tickets_bought >= tickets) {
-		// 	const info = parseInt(results.tickets_bought) - parseInt(tickets);
-		// 	updateSpace(info);
-		// 	props.serverUpdateUserTrips(tripId)
-		// } else {
-		// 	//TODO: add here the num of the tour guide
-		// }
+		const info =  parseInt(results.ticketsBought) + parseInt(tickets);
+		if(info > 10){
+			updateSpace(info);
+			props.serverUpdateUserTrips(tripId);
+		}
+		else{
+			handleClose();
+			history.push('/saleTrips');
+		}
+
 	};
 
 	const handleTick = event => {
@@ -150,7 +149,7 @@ function TripDetails(props) {
 					Start time: {results.start_time}
 				</li>
 				<li className="list-group-item" id="spacesLeft">
-					Tickets bought: {results.tickets_bought}
+					Tickets bought: {results.ticketsBought}
 				</li>
 			</ul>
 

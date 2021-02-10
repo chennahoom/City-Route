@@ -8,6 +8,7 @@ function TourGuidePage(props) {
   const [listChanged, setListChanged] = useState(false);
 
   const addTrip = (newTrip) => {
+    console.log(newTrip);
     fetch(`https://city-route.herokuapp.com/api/trips/`, {
       method: "POST",
       headers: {
@@ -58,8 +59,7 @@ function TourGuidePage(props) {
       />
       <TripsList
         tourGuideTrips={props.user?.my_trips || []}
-        user={props.user} userTrips={props.userTrips} setListChanged={setListChanged} listChanged={listChanged} />
-      <button>View All Trips</button>
+        user={props.user} userTrips={props.userTrips} deleteTrip={props.deleteTrip} setListChanged={setListChanged} listChanged={listChanged} />
     </div>
   );
 }
