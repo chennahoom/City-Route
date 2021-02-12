@@ -84,7 +84,7 @@ function TourGuidePage(props) {
 
 	return (
 		<div>
-			<AddTripForm user={props.user} addTrip={addTrip} />
+			<AddTripForm user={props.user} addTrip={addTrip} isEditing={props.isEditing} />
 			<TripsList
 				tourGuideTrips={props.user?.my_trips || []}
 				user={props.user}
@@ -118,7 +118,7 @@ function TourGuidePage(props) {
 						<input type="text" name="start_time" onChange={onChange} />
 						<br />
 
-						<button onClick={duplicateTrip} type="button" className="btn btn-primary" id="save-tickets">
+						<button onClick={duplicateTrip} type="button" className="btn btn-primary">
 							next
 						</button>
 					</div>

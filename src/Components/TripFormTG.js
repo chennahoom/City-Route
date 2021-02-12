@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function AddTripForm(props) {
 
@@ -11,7 +11,6 @@ function AddTripForm(props) {
     ticketsBought: 0, 
   };
   const [trip, setTrip] = useState(initForm);
-  const [myTrips, setMyTrips] = useState([]);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -21,10 +20,7 @@ function AddTripForm(props) {
   const onSave = (event) => {
     event.preventDefault();
     if (!trip.trip_name_city || !trip.tour_date || !trip.tour_time || !trip.start_time) return;
-    setMyTrips(props.user.my_trips);
     props.addTrip(trip);
-    const newTrip = { my_trips: props.user?.my_trips }
-    // setTrip(initForm);
   };
 
   return (
@@ -56,7 +52,7 @@ function AddTripForm(props) {
         <input type="text" name="start_time" onChange={handleInputChange} />
         <br />
       </label>
-      <button>Add Trip</button>
+      <button>Save</button>
     </form>
   );
 }

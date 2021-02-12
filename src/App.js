@@ -202,6 +202,8 @@ function App() {
 			});
 	};
 
+
+
 	return (
 		<div className="App">
 			<Header setlog={setlog} setUser={setUser} />
@@ -234,6 +236,7 @@ function App() {
 						updateUserTrips={updateUserTrips}
 						userTrips={userTrips}
 						deleteTrip={deleteTrip}
+
 					/>
 				</Route>
 				<Route path="/saleTrips" exact>

@@ -1,6 +1,8 @@
 import { useHistory, useParams, useLocation } from 'react-router-dom';
 import MapView from './MapView';
 import MapPage from '../Pages/MapPage';
+import { Link } from "react-router-dom";
+
 
 import Modal from '@material-ui/core/Modal';
 import { useEffect, useState } from 'react';
@@ -87,7 +89,7 @@ function TripDetails(props) {
 				Accept: 'application/json',
 			},
 			body: JSON.stringify({
-				ticketsBought: 1,
+				ticketsBought: info,
 			}),
 		})
 			.then(response => response.json())
@@ -99,29 +101,44 @@ function TripDetails(props) {
 			});
 	};
 
+	const saleTrip = () => {
+		if (props.lowPriceTrips.length) {
+			setOpenInfoModal(true);
+		} 
+		else {
+			// history.push('/saleTrips');
+			setOpenInfoModal(false); 
+			setOpen(true);
+		}	
+	}
+
 	const numOfTic = () => {
+		// setOpenInfoModal(false); 
+		// setOpen(true);
 		//MyTripsPage
 		const info = parseInt(results.ticketsBought) + parseInt(tickets);
-		if (info > 10) {
-			updateSpace(info);
-			props.serverUpdateUserTrips(tripId);
-		} else {
-			handleClose();
-			if (props.lowPriceTrips.length) {
-				setOpenInfoModal(true);
-			} else {
-				history.push('/saleTrips');
-			}
-		}
+		// if (info > 10) {
+		updateSpace(info);
+		props.serverUpdateUserTrips(tripId);
+		// } 
+		// else {
+		// 	handleClose();
+		// 	if (props.lowPriceTrips.length) {
+		// 		setOpenInfoModal(true);
+		// 	} else {
+		// 		history.push('/saleTrips');
+		// 	}
+		// }
 	};
 
-	const handleTick = event => {
+	const handleTick = (event) => {
+		event.preventDefault();
 		setTickets(event.target.value);
 	};
 
-	const handleOpen = () => {
-		setOpen(true);
-	};
+	// const handleOpen = () => {
+	// 	setOpen(true);
+	// };
 
 	const handleClose = () => {
 		setOpen(false);
@@ -160,9 +177,64 @@ function TripDetails(props) {
 				</li>
 			</ul>
 
-			<Button variant="contained" color="secondary" onClick={handleOpen}>
+			<Button variant="contained" color="secondary" onClick={saleTrip}>
 				Join Trip
 			</Button>
+
+			{/* info modal */}
+			<Modal
+				aria-labelledby="transition-modal-title"
+				aria-describedby="transition-modal-description"
+				className={classes.modal}
+				open={openInfoModal}
+				onClose={() => setOpenInfoModal(false)}
+				closeAfterTransition
+				BackdropComponent={Backdrop}
+				BackdropProps={{
+					timeout: 500,
+				}}>
+				<Fade in={openInfoModal}>
+					<div className={classes.paper}>
+						<h2>How many spaces do you want to save?</h2>
+						<div>
+							{props.lowPriceTrips.map(trip => {
+								return (
+									<div key={trip.id}>
+										<span>{trip.trip_name_city} + {trip.id} + {trip.ticketsBought}</span>
+										<button onClick={() => {history.push(`/maps/${trip.trip_name_city}?id=${trip.id}`)}}>Get info</button>
+{/* 
+										<Link to={`/maps/${trip.trip_name_city}?id=${trip.id}`}>
+											<button className="join-trip" onClick={setOpenInfoModal(false)}>
+												Get info
+											</button>
+										</Link> */}
+
+									</div>
+								);
+							})}
+						</div>
+
+						<button onClick={() =>{
+							setOpenInfoModal(false);
+							setOpen(true);
+							// numOfTic();
+
+						}}>
+							Current trip</button>
+
+						{/* <button
+							onClick={() => {
+								setOpenInfoModal(false);
+								history.push('/saleTrips');
+							}}
+							type="button"
+							className="btn btn-primary"
+							id="save-tickets">
+							next
+						</button> */}
+					</div>
+				</Fade>
+			</Modal>
 
 			<Modal
 				aria-labelledby="transition-modal-title"
@@ -196,45 +268,6 @@ function TripDetails(props) {
 				</Fade>
 			</Modal>
 
-			{/* info modal */}
-			<Modal
-				aria-labelledby="transition-modal-title"
-				aria-describedby="transition-modal-description"
-				className={classes.modal}
-				open={openInfoModal}
-				onClose={() => setOpenInfoModal(false)}
-				closeAfterTransition
-				BackdropComponent={Backdrop}
-				BackdropProps={{
-					timeout: 500,
-				}}>
-				<Fade in={openInfoModal}>
-					<div className={classes.paper}>
-						<h2>How many spaces do you want to save?</h2>
-						<div>
-							{props.lowPriceTrips.map(trip => {
-								return (
-									<div key={trip.id}>
-										<span>{trip.trip_name_city}</span>
-										<span>{trip.ticketsBought}</span>
-									</div>
-								);
-							})}
-						</div>
-
-						<button
-							onClick={() => {
-								setOpenInfoModal(false);
-								history.push('/saleTrips');
-							}}
-							type="button"
-							className="btn btn-primary"
-							id="save-tickets">
-							next
-						</button>
-					</div>
-				</Fade>
-			</Modal>
 		</div>
 	);
 }
