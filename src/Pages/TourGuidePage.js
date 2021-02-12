@@ -51,6 +51,7 @@ function TourGuidePage(props) {
   };
 
 
+
   return (
     <div>
       <AddTripForm
@@ -59,7 +60,7 @@ function TourGuidePage(props) {
       />
       <TripsList
         tourGuideTrips={props.user?.my_trips || []}
-        user={props.user} userTrips={props.userTrips} deleteTrip={props.deleteTrip} setListChanged={setListChanged} listChanged={listChanged} />
+        user={props.user} userTrips={props.userTrips} addTrip={addTrip} deleteTrip={props.deleteTrip} setListChanged={setListChanged} listChanged={listChanged} />
     </div>
   );
 }

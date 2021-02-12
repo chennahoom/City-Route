@@ -12,6 +12,7 @@ function TripList(props) {
           data={tripId}
           listChanged={props.listChanged}
           deleteTrip={props.deleteTrip}
+          addTrip = {props.addTrip}
         />
       ))}
     </div>
