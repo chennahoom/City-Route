@@ -24,7 +24,7 @@ function TripResults(props) {
               spaces left: {props.trip.ticketsBought}
               <br />
             </p>
-            <Link to={`/map/${props.trip.trip_name_city}?id=${props.trip.id}`}>
+            <Link to={`/maps/${props.trip.trip_name_city}?id=${props.trip.id}`}>
               <button className="join-trip" id={props.trip.id}>
                 Join Trip
               </button>

@@ -35,6 +35,7 @@ function TourGuideTrip(props){
 
     const handleDuplicate = () =>{
         // TODO: not working 100%, need to ask the user about date to duplicat
+        // TODO: not working 100%, need to ask the user about date to duplicat
         fetch(`https://city-route.herokuapp.com/api/trips/${props.data}`)
         .then((res) => res.json())
         .then((body) => {
@@ -56,7 +57,7 @@ function TourGuideTrip(props){
                 <li>trip name city: {tripData?.trip_name_city}</li>
                 <li>tour date: {tripData?.tour_date}</li>
                 <li>tour time: {tripData?.tour_time}</li>
-                <button onClick={handleDuplicate}>Duplicate</button>
+                <button onClick={() => props.onDuplicate(tripData)}>Duplicate</button>
                 <button>Edit</button>
                 <button onClick={handleDelete}>Delete</button>
             </ul>
