@@ -1,9 +1,12 @@
+import { useState, useEffect } from "react";
+
 import React from "react";
 import {
   GoogleMap,
   useLoadScript,
   Marker,
   InfoWindow,
+  Polyline,
 } from "@react-google-maps/api";
 import usePlacesAutocomplete, {
   getGeocode,
@@ -24,7 +27,7 @@ import SearchMap from "../Components/SearchMap";
 
 const libraries = ["places"];
 const mapContainerStyle = {
-  width: "500px",
+  width: "750px",
   height: "500px",
 };
 const options = {
@@ -37,76 +40,68 @@ const center = {
   lng: 13.37618,
 };
 
-// function Search({ panTo }) {
-//   const {
-//     ready,
-//     value,
-//     suggestions: { status, data },
-//     setValue,
-//     clearSuggestions,
-//   } = usePlacesAutocomplete({
-//     requestOptions: {
-//       location: { lat: () => 43.6532, lng: () => -79.3832 },
-//       radius: 100 * 1000,
-//     },
-//   });
+function MapPage(props) {
+  console.log(props.stops);
+  // const center = {
+  //   lat: props.stops[2].location_coords[0],
+  //   lng: props.stops[1].location_coords[0].longitude,
+  // };
 
-//   const handleInput = (e) => {
-//     setValue(e.target.value);
-//   };
-//   return (
-//     <div className="search">
-//       <Combobox
-//         onSelect={async (address) => {
-//           setValue(address, false);
-//           clearSuggestions();
-//           try {
-//             const results = await getGeocode({ address });
-//             const { lat, lng } = await getLatLng(results[0]);
-//             panTo({ lat, lng });
-//           } catch (error) {
-//             console.log("error");
-//           }
-//         }}
-//       >
-//         <ComboboxInput
-//           value={value}
-//           onChange={handleInput}
-//           disabled={!ready}
-//           placeholder="Search your location"
-//         />
-//         <ComboboxPopover>
-//           <ComboboxList>
-//             {status === "OK" &&
-//               data.map(({ id, description }) => (
-//                 <ComboboxOption key={id} value={description} />
-//               ))}
-//           </ComboboxList>
-//         </ComboboxPopover>
-//       </Combobox>
-//     </div>
-//   );
-// }
+  // console.log(props.stops[1].location_coords[0].latitude);
 
-function MapPage() {
+  // console.log(lat);
+
+  // const center = {
+  //   lat: {lat},
+  //   lng: {lng},
+  // };
+
+  // console.log(center);
+
+  // const center = {
+  //   lat ,
+  //   lng: props.stops[1].location_coords[0].longitude,
+  // };
+
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: "AIzaSyCqp3XhCNtt2GaQgDAhRvrjfO-A8zVQPWc",
     libraries,
   });
 
-  const [markers, setMarkers] = React.useState([]);
-  const [selected, setSelected] = React.useState(null);
+  const [markers, setMarkers] = useState([]);
+  // const [selected, setSelected] = React.useState(null);
 
-  const onMapClick = React.useCallback((e) => {
-    setMarkers((current) => [
-      ...current,
-      {
-        lat: e.latLng.lat(),
-        lng: e.latLng.lng(),
-        time: new Date(),
-      },
-    ]);
-  }, []);
+  // const onMapClick = React.useCallback((e) => {
+  //   setMarkers((current) => [
+  //     ...current,
+  //     {
+  //       lat: e.latLng.lat(),
+  //       lng: e.latLng.lng(),
+  //       time: new Date(),
+  //     },
+  //   ]);
+  // }, []);
+
+  // useEffect(() => {
+  //   const flightPlan = [
+
+  //   ]
+
+  //   const flight = new ({
+  //     path: props.sto
+  //   })
+    
+  //     props.stops.map((stop, i) => (
+  //         key={stop.stop_name}
+  //         position={{
+  //           lat: stop.location_coords[0].lat,
+  //           lng: stop.location_coords[0].lng,
+  //         }}
+  //     );
+    
+  // }, []);
+
+  
 
   const mapRef = React.useRef();
   const onMapLoad = React.useCallback((map) => {
@@ -129,12 +124,16 @@ function MapPage() {
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={13}
-        center={center}
+        center={{
+          lat: props.stops[1].location_coords[0]?.lat,
+          lng: props.stops[1].location_coords[0]?.lng,
+        }}
+        // center={center}
         options={options}
-        onClick={onMapClick}
+        // onClick={onMapClick}
         onLoad={onMapLoad}
       >
-        {markers.map((marker) => (
+        {/* {markers.map((marker) => (
           <Marker
             key={marker.time.toISOString()}
             position={{ lat: marker.lat, lng: marker.lng }}
@@ -142,8 +141,18 @@ function MapPage() {
               setSelected(marker);
             }}
           />
-        ))}
+        ))} */}
 
+        {props.stops.map((stop, i) => (
+          <Marker
+            key={stop.stop_name}
+            position={{
+              lat: stop.location_coords[0]?.lat,
+              lng: stop.location_coords[0]?.lng,
+            }}
+          />
+        ))}
+        {/* 
         {selected ? (
           <InfoWindow
             position={{ lat: selected.lat, lng: selected.lng }}
@@ -155,10 +164,33 @@ function MapPage() {
               <h5>Ticket needed?</h5>
             </div>
           </InfoWindow>
-        ) : null}
+        ) : null} */}
       </GoogleMap>
     </div>
+    // <div></div>
   );
 }
 
 export default MapPage;
+
+// function MapPage(props) {
+// const center = {
+//   lat: 52.51862,
+//   lng: 13.37618,
+// };
+
+// return (
+//   <div>
+//     <GoogleMap
+//     defaultZoom={10}
+//     defaultCenter={center}
+
+//     >
+
+//     </GoogleMap>
+//   </div>
+
+// )
+// }
+
+// export default MapPage;

@@ -12,7 +12,7 @@ function AddTripForm(props) {
     tour_guide_id: props.user?.id,
     tour_time: "",
     start_time: "",
-    tickets_bought: 0,
+    ticketsBought: 0,
   };
   const [trip, setTrip] = useState(initForm);
   const [myTrips, setMyTrips] = useState([]);
@@ -24,7 +24,7 @@ function AddTripForm(props) {
 
   const onSave = (event) => {
     event.preventDefault();
-    if (!trip.trip_name_city || !trip.tour_date || !trip.tickets_bought || !trip.tour_time || !trip.start_time) return;
+    if (!trip.trip_name_city || !trip.tour_date || !trip.ticketsBought || !trip.tour_time || !trip.start_time) return;
     setMyTrips(props.user.my_trips);
     // props.getUserTrip();
     props.addTrip(trip);

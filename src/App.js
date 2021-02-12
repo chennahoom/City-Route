@@ -206,14 +206,15 @@ function App() {
     }
   }, []);
 
-
-
   return (
     <div className="App">
       <Header setlog={setlog} setUser={setUser} />
       <Switch>
-        <Route path="/maps" exact>
-          <MapPage />
+        <Route path="/maps/:city" exact>
+          <TripDetailsPage
+            user={user}
+            serverUpdateUserTrips={serverUpdateUserTrips}
+          />
         </Route>
         <Route path="/trips" exact>
           <SearchTripPage updateForm={updateForm} />
@@ -227,7 +228,7 @@ function App() {
             // updateTrips={updateTrips}
           />
         </Route>
-        <Route path="/map/:city" exact>
+        {/* <Route path="/map/:city" exact>
           <TripDetailsPage
             user={user}
             serverUpdateUserTrips={serverUpdateUserTrips}
@@ -235,7 +236,7 @@ function App() {
         </Route>
         <Route path="/map/:city" exact>
           <Map />
-        </Route>
+        </Route> */}
         {/* <Route path="/article/:usersId" exact> */}
         {/* <Route path="/article/:usersId" exact>
             <MyTripsPage user={user} userTrips={userTrips} />

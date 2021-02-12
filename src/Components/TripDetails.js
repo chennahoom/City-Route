@@ -1,5 +1,7 @@
 import { useHistory, useParams, useLocation } from 'react-router-dom';
 import MapView from './MapView';
+import MapPage from '../Pages/MapPage';
+
 import Modal from '@material-ui/core/Modal';
 import { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
@@ -93,7 +95,7 @@ function TripDetails(props) {
 	};
 
 	const numOfTic = () => { //MyTripsPage
-		const info =  parseInt(results.tickets_bought) + parseInt(tickets);
+		const info =  parseInt(results.ticketsBought) + parseInt(tickets);
 		updateSpace(info);
 		props.serverUpdateUserTrips(tripId);
 		// if (results.tickets_bought >= tickets) {
@@ -119,8 +121,8 @@ function TripDetails(props) {
 
 	return (
 		<div className="card-map">
-			<div id="mapid">
-				<MapView trip={trip} stops={stops} />
+			<div>
+				<MapPage trip={trip} stops={stops} />
 			</div>
 			<div className="card-body">
 				<h5 className="card-title" id="tour-city">
@@ -130,7 +132,7 @@ function TripDetails(props) {
 					Tour Guide: {tourGuide.full_name}
 				</h3>
 				<p className="card-text" id="trip-stops">
-					Stops: {stops.map(stop => stop.stop_name)}
+					Stops: {stops.map(stop => stop.stop_name)} 
 				</p>
 			</div>
 
@@ -145,7 +147,7 @@ function TripDetails(props) {
 					Start time: {results.start_time}
 				</li>
 				<li className="list-group-item" id="spacesLeft">
-					Tickets bought: {results.tickets_bought}
+					Tickets bought: {results.ticketsBought}
 				</li>
 			</ul>
 
