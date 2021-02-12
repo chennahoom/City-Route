@@ -124,11 +124,11 @@ function MapPage(props) {
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={13}
-        center={{
-          lat: props.stops[1].location_coords[0]?.lat,
-          lng: props.stops[1].location_coords[0]?.lng,
-        }}
-        // center={center}
+        // center={{
+        //   lat: props.stops[1].location_coords[0]?.lat,
+        //   lng: props.stops[1].location_coords[0]?.lng,
+        // }}
+        center={center}
         options={options}
         // onClick={onMapClick}
         onLoad={onMapLoad}
