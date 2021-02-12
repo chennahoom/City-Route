@@ -51,6 +51,9 @@ function TripDetails(props) {
 			.then(body => {
 				setResults(body);
 				tourGuideId(body.tour_guide_id);
+				console.log(body.tickets_bought);
+				let i = body.tickets_bought + 2;
+				console.log(i);
 				setTrip(tripId);
 			});
 	}, []);
@@ -75,6 +78,7 @@ function TripDetails(props) {
 	};
 
 	const updateSpace = (info) => {
+		console.log(info);
 		fetch(`https://city-route.herokuapp.com/api/trips/${tripId}`, {
 			method: 'PUT',
 			headers: {
@@ -82,13 +86,13 @@ function TripDetails(props) {
 				Accept: "application/json",
 			},
 			body: JSON.stringify({
-				ticketsBought:6,
+				ticketsBought:1,
 			}),
 		})
 			.then(response => response.json())
 			.then(info => {
 				console.log(tripId);
-				console.log(info)
+				console.log(info.ticketsBought)
 				setTrip(info);
 				// props.updateTrips(info);
 			});
@@ -96,6 +100,7 @@ function TripDetails(props) {
 
 	const numOfTic = () => { //MyTripsPage
 		const info =  parseInt(results.ticketsBought) + parseInt(tickets);
+<<<<<<< HEAD
 		updateSpace(info);
 		props.serverUpdateUserTrips(tripId);
 		// if (results.tickets_bought >= tickets) {
@@ -105,6 +110,17 @@ function TripDetails(props) {
 		// } else {
 		// 	//TODO: add here the num of the tour guide
 		// }
+=======
+		if(info > 10){
+			updateSpace(info);
+			props.serverUpdateUserTrips(tripId);
+		}
+		else{
+			handleClose();
+			history.push('/saleTrips');
+		}
+
+>>>>>>> b5c620800246b65919e9e7431ef028f36a674ef1
 	};
 
 	const handleTick = event => {

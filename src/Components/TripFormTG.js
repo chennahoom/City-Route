@@ -1,18 +1,18 @@
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
-
+import { useEffect, useState } from "react";
 
 function AddTripForm(props) {
-  const history = useHistory();
-  //TODO: need to add the ID of user
-  console.log(props.user)
+
   const initForm = {
     trip_name_city: "",
     tour_date: "",
     tour_guide_id: props.user?.id,
     tour_time: "",
     start_time: "",
+<<<<<<< HEAD
     ticketsBought: 0,
+=======
+    ticketsBought: 0, 
+>>>>>>> b5c620800246b65919e9e7431ef028f36a674ef1
   };
   const [trip, setTrip] = useState(initForm);
   const [myTrips, setMyTrips] = useState([]);
@@ -20,19 +20,19 @@ function AddTripForm(props) {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setTrip({ ...trip, [name]: value });
+    console.log(trip);
   };
-
   const onSave = (event) => {
     event.preventDefault();
+<<<<<<< HEAD
     if (!trip.trip_name_city || !trip.tour_date || !trip.ticketsBought || !trip.tour_time || !trip.start_time) return;
+=======
+    if (!trip.trip_name_city || !trip.tour_date || !trip.tour_time || !trip.start_time) return;
+>>>>>>> b5c620800246b65919e9e7431ef028f36a674ef1
     setMyTrips(props.user.my_trips);
-    // props.getUserTrip();
     props.addTrip(trip);
-    // history.push('/tourGuideMenu');
-
-    const newTrip = { my_trips: props.user?.my_trips}
-    // props.updateUserTrips(newTrip)
-    // props.updateUserTrips(myTrips);
+    const newTrip = { my_trips: props.user?.my_trips }
+    // setTrip(initForm);
   };
 
   return (
@@ -68,5 +68,4 @@ function AddTripForm(props) {
     </form>
   );
 }
-
 export default AddTripForm;

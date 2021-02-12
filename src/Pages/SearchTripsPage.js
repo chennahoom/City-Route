@@ -15,7 +15,7 @@ function SearchTripsPage(props) {
         <h2 id="pageTitle">Where would you like to travel?</h2>
 
         <section className="row row-cols-1 row-cols-md-3">
-          {trips.map((trip) => {
+          {trips.map((trip, i) => {
             return (
               <section className="col mb-4">
                 <Trip trip={trip} key={trip.id} />

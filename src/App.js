@@ -1,7 +1,5 @@
 import "./App.css";
-
 import { useState, useEffect } from "react";
-
 import Header from "./Components/Header";
 import SearchTripPage from "./Pages/SearchTripsPage";
 import ResultsPage from "./Pages/ResultsPage";
@@ -9,13 +7,11 @@ import TripDetailsPage from "./Pages/TripDetailsPage";
 import MyTripsPage from "./Pages/MyTripsPage";
 import { useHistory } from "react-router-dom";
 import Map from "./Components/MapView";
+import SaleTrips from "./Components/SaleTrips";
 import SignUp from "./Pages/SignUp";
 import TourGuidePage from "./Pages/TourGuidePage";
 import MapPage from "./Pages/MapPage";
-
 import { Switch, Route } from "react-router-dom";
-import LoginPage from "./Pages/LoginPage";
-
 import GoogleLogin, { useGoogleLogin } from "react-google-login";
 import { refreshTokenSetup } from "./Components/utils/refreshToken";
 
@@ -37,13 +33,7 @@ const clientId =
   "233069535985-vfone0gmelp0cfv62424j18a94av35i3.apps.googleusercontent.com";
 
 function App() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [url, setUrl] = useState("");
-  // const [userId, setUserId] = useState("");
   const [user, setUser] = useState(null);
-  // const [userTrips, setUserTrips] = ('');
-
   const [searchTripForm, setSearchTripForm] = useState({
     city: "",
     start: "",
@@ -164,7 +154,6 @@ function App() {
   };
 
   const updateUserTrips = (newTripId) => {
-    // setMyTrips();
     var newMyTrips = [...(user.my_trips || [])];
     newMyTrips.push(newTripId);
     setUser({ ...user, my_trips: newMyTrips });
@@ -206,6 +195,23 @@ function App() {
     }
   }, []);
 
+  const deleteTrip = (tripId) =>{
+    fetch(`https://city-route.herokuapp.com/api/trips/${tripId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((body) => {
+        //TODO: need to update my Trips like update user trip
+        var newMyTrips = [...(user.my_trips || [])];
+        newMyTrips.filter((trip) => trip !== tripId)
+        setUser({ ...user, my_trips: newMyTrips });
+      })
+  }
+
   return (
     <div className="App">
       <Header setlog={setlog} setUser={setUser} />
@@ -225,7 +231,6 @@ function App() {
         <Route path="/results" exact>
           <ResultsPage
             searchTripForm={searchTripForm}
-            // updateTrips={updateTrips}
           />
         </Route>
         {/* <Route path="/map/:city" exact>
@@ -236,39 +241,25 @@ function App() {
         </Route>
         <Route path="/map/:city" exact>
           <Map />
-        </Route> */}
-        {/* <Route path="/article/:usersId" exact> */}
-        {/* <Route path="/article/:usersId" exact>
-            <MyTripsPage user={user} userTrips={userTrips} />
-          </Route> */}
+        </Route>
         <Route path="/myTripsPage" exact>
           <MyTripsPage user={user} userTrips={userTrips} />
         </Route>
-        {/* <Route path="/login" exact>
-					<LoginPage
-						// setName={setName}
-						// setEmail={setEmail}
-						// setUrl={setUrl}
-						name={name}
-						email={email}
-						url={url}
-						setlog={setlog}
-						setUser={setUser}
-						addUser={addUser}
-						signIn={signIn}
-					/>
-				</Route> */}
         <Route path="/tourGuideMenu" exact>
           <TourGuidePage
             user={user}
             addTrip={addTrip}
             updateUserTrips={updateUserTrips}
             userTrips={userTrips}
+            deleteTrip={deleteTrip}
           />
         </Route>
-        {/* <Route path="/addTrip" exact>
-            <AddTrip />
-          </Route> */}
+        <Route path="/saleTrips" exact>
+          <SaleTrips 
+          searchTripForm={searchTripForm}
+          />
+        </Route>
+
       </Switch>
     </div>
   );
