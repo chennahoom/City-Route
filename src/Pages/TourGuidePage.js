@@ -25,6 +25,7 @@ function TourGuidePage(props) {
 	const [open, setOpen] = useState(false);
 	const [form, setForm] = useState({});
 	const [duplicate, setDuplicate] = useState({});
+	const [editTrip, setEditTrip] = useState(null);
 
 	const classes = useStyles();
 
@@ -73,8 +74,8 @@ function TourGuidePage(props) {
 
 	function duplicateTrip() {
 		console.log('duplicate', duplicate);
-    addTrip({ ...duplicate, ...form });
-    setOpen(false)
+		addTrip({ ...duplicate, ...form });
+		setOpen(false);
 	}
 
 	function onChange(e) {
@@ -82,12 +83,15 @@ function TourGuidePage(props) {
 		setForm({ ...form, [name]: value });
 	}
 
+	console.log('editTrip',editTrip);
+
 	return (
 		<div>
-			<AddTripForm user={props.user} addTrip={addTrip} isEditing={props.isEditing} />
+			<AddTripForm editTrip={editTrip} user={props.user} addTrip={addTrip} isEditing={props.isEditing} />
 			<TripsList
 				tourGuideTrips={props.user?.my_trips || []}
 				user={props.user}
+				setEditTrip={setEditTrip}
 				userTrips={props.userTrips}
 				deleteTrip={props.deleteTrip}
 				setListChanged={setListChanged}

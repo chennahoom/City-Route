@@ -10,6 +10,7 @@ function TripList(props) {
         <TourGuideTrip
           key={i}
           data={tripId}
+          setEditTrip={props.setEditTrip}
           listChanged={props.listChanged}
           deleteTrip={props.deleteTrip}
           onDuplicate={props.onDuplicate}

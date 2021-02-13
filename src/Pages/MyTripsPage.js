@@ -11,6 +11,7 @@ const useStyles = makeStyles({
 });
 
 function MyTripsPage(props) {
+	console.log('MyTripsPage',props);
 	const classes = useStyles();
 	return (
 		<Grid container justify="center" className={classes.gridContainer}>

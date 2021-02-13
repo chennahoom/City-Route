@@ -1,8 +1,7 @@
 import { useHistory, useParams, useLocation } from 'react-router-dom';
 import MapView from './MapView';
 import MapPage from '../Pages/MapPage';
-import { Link } from "react-router-dom";
-
+import { Link } from 'react-router-dom';
 
 import Modal from '@material-ui/core/Modal';
 import { useEffect, useState } from 'react';
@@ -43,9 +42,8 @@ function TripDetails(props) {
 	const { city } = useParams();
 	const location = useLocation();
 
-	const query = new URLSearchParams(location.search);
-
-	const tripId = query.get('id');
+	const { tripId } = props;
+	console.log('tripId',tripId);
 
 	useEffect(() => {
 		// run after render
@@ -53,13 +51,14 @@ function TripDetails(props) {
 			.then(res => res.json())
 			.then(body => {
 				setResults(body);
+				console.log('body', body);
 				tourGuideId(body.tour_guide_id);
 				console.log(body.tickets_bought);
 				let i = body.tickets_bought + 2;
 				console.log(i);
 				setTrip(tripId);
 			});
-	}, []);
+	}, [tripId]);
 
 	useEffect(() => {
 		// run after render
@@ -67,6 +66,7 @@ function TripDetails(props) {
 			.then(res => res.json())
 			.then(body => {
 				console.log(city, body);
+				console.log('props', props);
 				setStops(body);
 				console.log(body);
 			});
@@ -104,23 +104,22 @@ function TripDetails(props) {
 	const saleTrip = () => {
 		if (props.lowPriceTrips.length) {
 			setOpenInfoModal(true);
-		} 
-		else {
+		} else {
 			// history.push('/saleTrips');
-			setOpenInfoModal(false); 
+			setOpenInfoModal(false);
 			setOpen(true);
-		}	
-	}
+		}
+	};
 
 	const numOfTic = () => {
-		// setOpenInfoModal(false); 
+		// setOpenInfoModal(false);
 		// setOpen(true);
 		//MyTripsPage
 		const info = parseInt(results.ticketsBought) + parseInt(tickets);
 		// if (info > 10) {
 		updateSpace(info);
 		props.serverUpdateUserTrips(tripId);
-		// } 
+		// }
 		// else {
 		// 	handleClose();
 		// 	if (props.lowPriceTrips.length) {
@@ -131,7 +130,7 @@ function TripDetails(props) {
 		// }
 	};
 
-	const handleTick = (event) => {
+	const handleTick = event => {
 		event.preventDefault();
 		setTickets(event.target.value);
 	};
@@ -145,10 +144,12 @@ function TripDetails(props) {
 	};
 	console.log('tripDetaeils', results);
 
+	const filteredStops = stops.filter(stop => results?.stops?.includes(stop.id));
+
 	return (
 		<div className="card-map">
 			<div>
-				<MapPage trip={trip} stops={stops} />
+				<MapPage trip={trip} stops={filteredStops} />
 			</div>
 			<div className="card-body">
 				<h5 className="card-title" id="tour-city">
@@ -200,27 +201,35 @@ function TripDetails(props) {
 							{props.lowPriceTrips.map(trip => {
 								return (
 									<div key={trip.id}>
-										<span>{trip.trip_name_city} + {trip.id} + {trip.ticketsBought}</span>
-										<button onClick={() => {history.push(`/maps/${trip.trip_name_city}?id=${trip.id}`)}}>Get info</button>
-{/* 
+										<span>
+											{trip.trip_name_city} + {trip.id} + {trip.ticketsBought}
+										</span>
+										<button
+											onClick={() => {
+												setOpenInfoModal(false)
+												history.push(`/maps/${trip.trip_name_city}?id=${trip.id}`);
+											}}>
+											Get info
+										</button>
+										{/* 
 										<Link to={`/maps/${trip.trip_name_city}?id=${trip.id}`}>
 											<button className="join-trip" onClick={setOpenInfoModal(false)}>
 												Get info
 											</button>
 										</Link> */}
-
 									</div>
 								);
 							})}
 						</div>
 
-						<button onClick={() =>{
-							setOpenInfoModal(false);
-							setOpen(true);
-							// numOfTic();
-
-						}}>
-							Current trip</button>
+						<button
+							onClick={() => {
+								setOpenInfoModal(false);
+								setOpen(true);
+								// numOfTic();
+							}}>
+							Current trip
+						</button>
 
 						{/* <button
 							onClick={() => {
@@ -267,7 +276,6 @@ function TripDetails(props) {
 					</div>
 				</Fade>
 			</Modal>
-
 		</div>
 	);
 }

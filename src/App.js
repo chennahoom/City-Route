@@ -25,6 +25,7 @@ const clientId = '233069535985-vfone0gmelp0cfv62424j18a94av35i3.apps.googleuserc
 
 function App() {
 	const [user, setUser] = useState(null);
+	const [serverError, setServerError] = useState(null);
 	const [searchTripForm, setSearchTripForm] = useState({
 		city: '',
 		start: '',
@@ -49,35 +50,46 @@ function App() {
 	const signUp = newUser => {
 		console.log('im in signup');
 		console.log(newUser.type_of_user);
-		if (newUser.type_of_user === 'Traveler') {
-			history.push('/trips');
-		} else {
-			history.push('/tourGuideMenu');
-		}
+		// if (newUser.type_of_user === 'Traveler') {
+		// 	history.push('/trips');
+		// } else {
+		// 	history.push('/tourGuideMenu');
+		// }
 	};
 
-	const addUser = newUser => {
-		fetch(`https://city-route.herokuapp.com/api/users/`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Accept: 'application/json',
-			},
-			body: JSON.stringify(newUser),
-		})
-			.then(response => response.json())
-			.then(UserNew => {
-				localStorage.setItem('userId', UserNew.id);
-				setUser(newUser);
-				signUp(newUser);
-			})
-			.catch(err => console.error(err));
+	const addUser = async newUser => {
+		try {
+			console.log('newUser', newUser);
+			const response = await fetch(`https://city-route.herokuapp.com/api/users/`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Accept: 'application/json',
+				},
+				body: JSON.stringify(newUser),
+			});
+			const data = await response.json();
+			if (response.ok) {
+				localStorage.setItem('userId', data.id);
+				setUser(data);
+				signUp(data);
+				setServerError(null);
+				if (data.type_of_user === 'Traveler') {
+					history.push('/trips');
+				} else {
+					history.push('/tourGuideMenu');
+				}
+			} else {
+				setServerError(data.message);
+			}
+		} catch (err) {}
 	};
 
 	const onSuccess = res => {
 		// setName(res.profileObj.name);
 		// setEmail(res.profileObj.email);
 		// setUrl(res.profileObj.imageUrl);
+		console.log('onSuccess', res);
 		refreshTokenSetup(res);
 		setlog(true);
 		fetch(`https://city-route.herokuapp.com/api/users/email`, {
@@ -98,10 +110,19 @@ function App() {
 
 				console.log(user.type_of_user);
 
-				if (user.type_of_user === 'Traveler') {
-					history.push('/trips');
-				} else {
-					history.push('/tourGuideMenu');
+				const userId = localStorage.getItem('userId');
+				console.log('userId', userId);
+
+				localStorage.setItem('userId', user.id);
+
+				if (!userId) { // login
+					if (user.type_of_user === 'Traveler') {
+						history.push('/trips');
+					} else {
+						history.push('/tourGuideMenu');
+					}
+				}else{
+					// refresh only
 				}
 				console.log(user.type_of_user);
 				console.log(user);
@@ -174,6 +195,7 @@ function App() {
 	//Here is the USER!!!
 	console.log('user', user);
 
+	//maybe can be removed
 	useEffect(() => {
 		const id = localStorage.getItem('userId');
 		if (id) {
@@ -202,8 +224,6 @@ function App() {
 			});
 	};
 
-
-
 	return (
 		<div className="App">
 			<Header setlog={setlog} setUser={setUser} />
@@ -215,7 +235,7 @@ function App() {
 					<SearchTripPage updateForm={updateForm} />
 				</Route>
 				<Route path="/signUp" exact>
-					<SignUp addUser={addUser} signIn={signIn} />
+					<SignUp serverError={serverError} addUser={addUser} signIn={signIn} />
 				</Route>
 				<Route path="/results" exact>
 					<ResultsPage searchTripForm={searchTripForm} setLowPriceTrips={setLowPriceTrips} />
@@ -236,7 +256,6 @@ function App() {
 						updateUserTrips={updateUserTrips}
 						userTrips={userTrips}
 						deleteTrip={deleteTrip}
-
 					/>
 				</Route>
 				<Route path="/saleTrips" exact>

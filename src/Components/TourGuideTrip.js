@@ -31,7 +31,7 @@ function TourGuideTrip(props){
                 <li>tour date: {tripData?.tour_date}</li>
                 <li>tour time: {tripData?.tour_time}</li>
                 <button onClick={() => props.onDuplicate(tripData)}>Duplicate</button>
-                <button onClick={props.editTrip}>Edit</button>
+                <button onClick={() => props.setEditTrip(tripData)}>Edit</button>
                 <button onClick={handleDelete}>Delete</button>
             </ul>
         </div>
