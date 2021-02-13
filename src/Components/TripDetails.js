@@ -12,6 +12,22 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Timeline from '@material-ui/lab/Timeline';
+import TimelineItem from '@material-ui/lab/TimelineItem';
+import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
+import TimelineConnector from '@material-ui/lab/TimelineConnector';
+import TimelineContent from '@material-ui/lab/TimelineContent';
+import TimelineDot from '@material-ui/lab/TimelineDot';
+
+import clsx from 'clsx';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionActions from '@material-ui/core/AccordionActions';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Chip from '@material-ui/core/Chip';
+import Divider from '@material-ui/core/Divider';
 
 
 const useStyles = makeStyles(theme => ({
@@ -25,6 +41,15 @@ const useStyles = makeStyles(theme => ({
 		border: '2px solid #000',
 		boxShadow: theme.shadows[5],
 		padding: theme.spacing(2, 4, 3),
+	},
+	timeline: {
+		marginLeft: 15,
+		fontSize: 15,
+
+	},
+	heading: {
+		fontSize: 23,
+		marginLeft:14,
 	},
 }));
 
@@ -134,36 +159,13 @@ function TripDetails(props) {
 
 
 	return (
-		<div className="card-map">
-			<div>
-				<Map trip={trip} stops={filteredStops} />
-			</div>
-			<div className="card-body">
-				<h5 className="card-title" id="tour-city">
-					City: {results.trip_name_city}
-				</h5>
-				<h3 className="card-title" id="tour-guide">
-					Tour Guide: {tourGuide.full_name}
-				</h3>
-				<p className="card-text" id="trip-stops">
-					Stops: {stops.map(stop => stop.stop_name)}
-				</p>
-			</div>
-
-			<ul className="list-group list-group-flush">
-				<li className="list-group-item" id="tourDate">
-					Tour Date: {results.tour_date}
-				</li>
-				<li className="list-group-item" id="tourTime">
-					Tour Time: {results.tour_time}
-				</li>
-				<li className="list-group-item" id="startTime">
-					Start time: {results.start_time}
-				</li>
-				<li className="list-group-item" id="spacesLeft">
-					Tickets bought: {results.ticketsBought}
-				</li>
-			</ul>
+		<div>
+			<Map trip={trip} stops={filteredStops} />
+			<Typography variant="caption" className={classes.heading}>
+				Stops: {stops.map(stop => stop.stop_name + ` `)} <br/>
+				Tour Guide: {tourGuide.full_name} <br/>
+				Tickets bought: {results.ticketsBought} <br/>
+			</Typography>
 
 			<Button variant="contained" color="secondary" onClick={saleTrip}>
 				Join Trip
@@ -231,19 +233,15 @@ function TripDetails(props) {
 						<h2>How many spaces do you want to save?</h2>
 						<FormControl width='10px' variant="filled" className={classes.formControl}>
 							<InputLabel id="tick" >Num of Tickets:</InputLabel>
-							<Select
-							
-								labelId="tick"
-								id="demo-simple-select-filled"
-								value={tickets}
-								onChange={handleTick}
-							>
+							<Select labelId="tick" id="demo-simple-select-filled" value={tickets} onChange={handleTick}>
 								<MenuItem value="">
 									<em>None</em>
 								</MenuItem>
 								<MenuItem value="1">1</MenuItem>
 								<MenuItem value="2">2</MenuItem>
 								<MenuItem value="3">3</MenuItem>
+								<MenuItem value="4">4</MenuItem>
+								<MenuItem value="5">5</MenuItem>
 							</Select>
 						</FormControl>
 
