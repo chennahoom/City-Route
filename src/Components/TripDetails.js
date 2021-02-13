@@ -1,7 +1,5 @@
 import { useHistory, useParams, useLocation } from 'react-router-dom';
 import Map from './Map';
-import { Link } from 'react-router-dom';
-
 import Modal from '@material-ui/core/Modal';
 import { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,8 +7,12 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
-import Api from '../Api';
 
 const useStyles = makeStyles(theme => ({
 	modal: {
@@ -42,7 +44,7 @@ function TripDetails(props) {
 	const location = useLocation();
 
 	const { tripId } = props;
-	console.log('tripId',tripId);
+	console.log('tripId', tripId);
 
 	useEffect(() => {
 		// run after render
@@ -111,39 +113,23 @@ function TripDetails(props) {
 	};
 
 	const numOfTic = () => {
-		// setOpenInfoModal(false);
-		// setOpen(true);
-		//MyTripsPage
 		const info = parseInt(results.ticketsBought) + parseInt(tickets);
-		// if (info > 10) {
 		updateSpace(info);
 		props.serverUpdateUserTrips(tripId);
-		// }
-		// else {
-		// 	handleClose();
-		// 	if (props.lowPriceTrips.length) {
-		// 		setOpenInfoModal(true);
-		// 	} else {
-		// 		history.push('/saleTrips');
-		// 	}
-		// }
 	};
 
 	const handleTick = event => {
 		event.preventDefault();
 		setTickets(event.target.value);
+		console.log(tickets);
 	};
-
-	// const handleOpen = () => {
-	// 	setOpen(true);
-	// };
 
 	const handleClose = () => {
 		setOpen(false);
 	};
 	console.log('tripDetaeils', results);
-
 	const filteredStops = stops.filter(stop => results?.stops?.includes(stop.id));
+
 
 	return (
 		<div className="card-map">
@@ -210,12 +196,6 @@ function TripDetails(props) {
 											}}>
 											Get info
 										</button>
-										{/* 
-										<Link to={`/maps/${trip.trip_name_city}?id=${trip.id}`}>
-											<button className="join-trip" onClick={setOpenInfoModal(false)}>
-												Get info
-											</button>
-										</Link> */}
 									</div>
 								);
 							})}
@@ -229,17 +209,6 @@ function TripDetails(props) {
 							}}>
 							Current trip
 						</button>
-
-						{/* <button
-							onClick={() => {
-								setOpenInfoModal(false);
-								history.push('/saleTrips');
-							}}
-							type="button"
-							className="btn btn-primary"
-							id="save-tickets">
-							next
-						</button> */}
 					</div>
 				</Fade>
 			</Modal>
@@ -258,20 +227,27 @@ function TripDetails(props) {
 				<Fade in={open}>
 					<div className={classes.paper}>
 						<h2>How many spaces do you want to save?</h2>
-						<p>
-							<label for="spaces">Number of Tickets:</label>
-							<select id="spaces" onChange={handleTick}>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-							</select>
-						</p>
+						<FormControl width='10px' variant="filled" className={classes.formControl}>
+							<InputLabel id="tick" >Num of Tickets:</InputLabel>
+							<Select
+							
+								labelId="tick"
+								id="demo-simple-select-filled"
+								value={tickets}
+								onChange={handleTick}
+							>
+								<MenuItem value="">
+									<em>None</em>
+								</MenuItem>
+								<MenuItem value="1">1</MenuItem>
+								<MenuItem value="2">2</MenuItem>
+								<MenuItem value="3">3</MenuItem>
+							</Select>
+						</FormControl>
 
-						<button type="button" className="btn btn-primary" id="save-tickets" onClick={numOfTic}>
-							Save Changes
-						</button>
+						<Button variant="contained" color="secondary" onClick={numOfTic}>
+							Join Trip
+						</Button>
 					</div>
 				</Fade>
 			</Modal>

@@ -5,12 +5,18 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 275,
-    margin:15,
+    width:'100%',
+    // height:100,
+    // minWidth: 275,
+    // margin:15,
   },
   bullet: {
     display: 'inline-block',
@@ -23,6 +29,10 @@ const useStyles = makeStyles({
   pos: {
     marginBottom: 12,
   },
+  // heading: {
+  //   fontSize: theme.typography.pxToRem(15),
+  //   fontWeight: theme.typography.fontWeightRegular,
+  // },
 });
 
 function TripResults(props) {
@@ -30,30 +40,44 @@ function TripResults(props) {
   const bull = <span className={classes.bullet}>•</span>;
 
   return (
-    <Card className={classes.root}>
-      <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
+    <Accordion className={classes.root}>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+      >
+        <Typography style={{display:'inline-block'}} className={classes.title} color="textSecondary" gutterBottom>
           {props.trip.trip_name_city}
         </Typography>
-        <Typography variant="h5" component="h2">
+        <Typography variant="h5">
           {props.trip.tour_date}{bull}{props.trip.tour_time}{bull}{props.trip.start_time}
         </Typography>
-        {/* <Typography className={classes.pos} color="textSecondary">
-          adjective
-        </Typography>
-        <Typography variant="body2" component="p">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
-        </Typography> */}
-      </CardContent>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Typography>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
+          sit amet blandit leo lobortis eget.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-      <CardActions>
-        <Link to={`/maps/${props.trip.trip_name_city}?id=${props.trip.id}`}>
-          <Button size="small">Learn More</Button>
-        </Link>
-      </CardActions>
-    </Card>
+        </Typography>
+      </AccordionDetails>
+    </Accordion>
+
+    // <Card className={classes.root}>
+    //   <CardContent>
+    //     <Typography className={classes.title} color="textSecondary" gutterBottom>
+    //       {props.trip.trip_name_city}
+    //     </Typography>
+        // <Typography variant="h5" component="h2">
+        //   {props.trip.tour_date}{bull}{props.trip.tour_time}{bull}{props.trip.start_time}
+        // </Typography>
+    //   </CardContent>
+
+    //   <CardActions>
+    //     <Link to={`/maps/${props.trip.trip_name_city}?id=${props.trip.id}`}>
+    //       <Button size="small">Learn More</Button>
+    //     </Link>
+    //   </CardActions>
+    // </Card>
   );
 }
 

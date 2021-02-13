@@ -10,6 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import AppForm from '../View/AppForm';
+import { useForm } from "react-hook-form";
 
 const useStyles = makeStyles(theme => ({
 	form: {
@@ -35,23 +36,19 @@ function Register(props) {
 		phone: '',
 	};
 	const [user, setUser] = useState(initForm);
-	const history = useHistory();
-
 	const location = useLocation();
-
 	const query = new URLSearchParams(location.search);
-
 	let name = query.get('name');
 	let email = query.get('email');
 
-	const onSave = event => {
+	const onSave = (event) => {
 		event.preventDefault();
 		if (!user.full_name || !user.email || !user.type_of_user || !user.phone) return;
 		props.addUser(user);
-		setUser(initForm);
+		setUser(initForm);		
 	};
 
-	const handleInputChange = event => {
+	const handleInputChange = (event) => {
 		const { name, value } = event.target;
 		if (name === 'type_of_user') {
 			setCurrency(event.target.value);
@@ -73,7 +70,8 @@ function Register(props) {
 		},
 	];
 
-	const [currency, setCurrency] = useState('Choose');
+	const [currency, setCurrency] = useState('');
+
 
 	return (
 		<AppForm>
@@ -82,16 +80,16 @@ function Register(props) {
 					Sign Up
 				</Typography>
 				<Typography variant="body2" align="center">
-					<Link href="#" onClick={props.signIn} underline="always">
+					<Link href='#' onClick={props.signIn} underline="always">
 						Already have an account?
 					</Link>
-					<div className="error">{props.serverError}</div>
+					<h4 className="error">{props.serverError}</h4>
 				</Typography>
 
 				<FormControl onSubmit={onSave} className={classes.form}>
 					<Grid container spacing={2}>
-						<TextField fullWidth label="Full Name" name="full_name" defaultValue={name} required onChange={handleInputChange} />
-						<TextField fullWidth label="Email" name="email" defaultValue={email} type="email" required onChange={handleInputChange} />
+						<TextField fullWidth label="Full Name" name="full_name" defaultValue={user.name} defaultValue={user.name} required onChange={handleInputChange} />
+						<TextField fullWidth label="Email" name="email" defaultValue={user.email} type="email" required onChange={handleInputChange} />
 						<Grid item xs={12} sm={6}>
 							<TextField
 								id="select"
