@@ -63,7 +63,7 @@ function TripDetails(props) {
 
 	useEffect(() => {
 		// run after render
-		fetch(`https://city-route.herokuapp.com/api/stops/?city=${city}`)
+		fetch(`https://city-route.herokuapp.com/api/stops/?city=${props.city}`)
 			.then(res => res.json())
 			.then(body => {
 				console.log(city, body);
@@ -129,6 +129,8 @@ function TripDetails(props) {
 	};
 	console.log('tripDetaeils', results);
 	const filteredStops = stops.filter(stop => results?.stops?.includes(stop.id));
+	console.log(stops);
+	console.log(filteredStops);
 
 
 	return (

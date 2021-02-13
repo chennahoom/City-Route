@@ -10,30 +10,34 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import TripDetailsPage from '../Pages/TripDetailsPage';
+import Map from '../Components/Map'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
-    width:'100%',
-    // height:100,
-    // minWidth: 275,
-    // margin:15,
+    width: '100%',
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: '33.33%',
+    flexShrink: 0,
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
   },
   bullet: {
     display: 'inline-block',
     margin: '0 2px',
     transform: 'scale(0.8)',
   },
-  title: {
-    fontSize: 18,
-  },
   pos: {
     marginBottom: 12,
   },
-  // heading: {
-  //   fontSize: theme.typography.pxToRem(15),
-  //   fontWeight: theme.typography.fontWeightRegular,
-  // },
-});
+  acco: {
+    display:'inline',
+  }
+}));
 
 function TripResults(props) {
   const classes = useStyles();
@@ -46,18 +50,13 @@ function TripResults(props) {
         aria-controls="panel1a-content"
         id="panel1a-header"
       >
-        <Typography style={{display:'inline-block'}} className={classes.title} color="textSecondary" gutterBottom>
-          {props.trip.trip_name_city}
-        </Typography>
-        <Typography variant="h5">
-          {props.trip.tour_date}{bull}{props.trip.tour_time}{bull}{props.trip.start_time}
-        </Typography>
-      </AccordionSummary>
-      <AccordionDetails>
-        <Typography>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-          sit amet blandit leo lobortis eget.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        <Typography className={classes.heading}>{props.trip.trip_name_city}</Typography>
+        <Typography className={classes.secondaryHeading}>{props.trip.tour_date}{bull}{props.trip.tour_time}{bull}{props.trip.start_time}</Typography>
 
+      </AccordionSummary>
+      <AccordionDetails className={classes.acco}>
+        <Typography>
+          <TripDetailsPage serverUpdateUserTrips={props.serverUpdateUserTrips} user={props.user} lowPriceTrips={props.low} tripId={props.trip.id} city={props.trip.trip_name_city} />
         </Typography>
       </AccordionDetails>
     </Accordion>

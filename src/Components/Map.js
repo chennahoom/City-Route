@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import React from 'react';
-import { GoogleMap, useLoadScript, Marker, InfoWindow, Polyline } from '@react-google-maps/api';
+import { GoogleMap, useLoadScript, Marker, InfoWindow, Polyline, Autocomplete } from '@react-google-maps/api';
 import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 
 import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption } from '@reach/combobox';
@@ -11,8 +11,9 @@ import SearchMap from './SearchMap';
 
 const libraries = ['places'];
 const mapContainerStyle = {
-	width: '750px',
-	height: '500px',
+	// width: '800px',
+	height: '800px',
+	margin: '0 auto',
 };
 const options = {
 	//   styles: mapStyles,
