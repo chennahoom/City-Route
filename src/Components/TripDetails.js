@@ -1,6 +1,5 @@
 import { useHistory, useParams, useLocation } from 'react-router-dom';
-import MapView from './MapView';
-import MapPage from '../Pages/MapPage';
+import Map from './Map';
 import { Link } from 'react-router-dom';
 
 import Modal from '@material-ui/core/Modal';
@@ -149,7 +148,7 @@ function TripDetails(props) {
 	return (
 		<div className="card-map">
 			<div>
-				<MapPage trip={trip} stops={filteredStops} />
+				<Map trip={trip} stops={filteredStops} />
 			</div>
 			<div className="card-body">
 				<h5 className="card-title" id="tour-city">

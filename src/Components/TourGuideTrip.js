@@ -1,5 +1,5 @@
 import {useEffect, useState } from "react";
-
+import Map from "../Components/Map";
 
 function TourGuideTrip(props){
     const [tripData, setTripData] = useState(props.data);
@@ -21,8 +21,13 @@ function TourGuideTrip(props){
         props.deleteTrip(props.data);
     }
 
+    const stops = tripData.stops;
+
     return(
         <div>
+            <div>
+                <Map stops = {stops} />
+            </div>
             <ul>
                 {/* <li>trip id: {tripData.id}</li> */}
                 <li>tickets bought: {tripData?.ticketsBought}</li>

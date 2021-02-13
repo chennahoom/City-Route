@@ -6,9 +6,8 @@ import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocom
 
 import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption } from '@reach/combobox';
 import '@reach/combobox/styles.css';
-import SearchMap from '../Components/SearchMap';
+import SearchMap from './SearchMap';
 
-// import mapStyles from "../Components/utils/mapStyles";
 
 const libraries = ['places'];
 const mapContainerStyle = {
@@ -20,10 +19,7 @@ const options = {
 	disableDefaultUI: false,
 	zoomControl: true,
 };
-const center = {
-	lat: 52.51862,
-	lng: 13.37618,
-};
+
 
 // const mapData = {
 // 	Berlin: {
@@ -37,28 +33,7 @@ const center = {
 // const data = mapData[city]
 // data.center
 
-function MapPage(props) {
-	console.log(props.stops);
-	// const center = {
-	//   lat: props.stops[2].location_coords[0],
-	//   lng: props.stops[1].location_coords[0].longitude,
-	// };
-
-	// console.log(props.stops[1].location_coords[0].latitude);
-
-	// console.log(lat);
-
-	// const center = {
-	//   lat: {lat},
-	//   lng: {lng},
-	// };
-
-	// console.log(center);
-
-	// const center = {
-	//   lat ,
-	//   lng: props.stops[1].location_coords[0].longitude,
-	// };
+function Map(props) {
 
 	const { isLoaded, loadError } = useLoadScript({
 		googleMapsApiKey: 'AIzaSyCqp3XhCNtt2GaQgDAhRvrjfO-A8zVQPWc',
@@ -84,7 +59,6 @@ function MapPage(props) {
 
 	return (
 		<div>
-			{/* <Locate panTo={panTo} /> */}
 			<SearchMap panTo={panTo} />
 
 			<GoogleMap
@@ -94,19 +68,9 @@ function MapPage(props) {
 					lat: props.stops[0].location_coords[0]?.lat,
 					lng: props.stops[0].location_coords[0]?.lng,
 				}}
-				// center={center}
 				options={options}
-				// onClick={onMapClick}
 				onLoad={onMapLoad}>
-				{/* {markers.map((marker) => (
-          <Marker
-            key={marker.time.toISOString()}
-            position={{ lat: marker.lat, lng: marker.lng }}
-            onClick={() => {
-              setSelected(marker);
-            }}
-          />
-        ))} */}
+
 
 				{props.stops.map((stop, i) => (
 					<Marker
@@ -117,45 +81,10 @@ function MapPage(props) {
 						}}
 					/>
 				))}
-				{/* 
-        {selected ? (
-          <InfoWindow
-            position={{ lat: selected.lat, lng: selected.lng }}
-            onCloseClick={() => {
-              setSelected(null);
-            }}
-          >
-            <div>
-              <h5>Ticket needed?</h5>
-            </div>
-          </InfoWindow>
-        ) : null} */}
 			</GoogleMap>
 		</div>
-		// <div></div>
 	);
 }
 
-export default MapPage;
+export default Map;
 
-// function MapPage(props) {
-// const center = {
-//   lat: 52.51862,
-//   lng: 13.37618,
-// };
-
-// return (
-//   <div>
-//     <GoogleMap
-//     defaultZoom={10}
-//     defaultCenter={center}
-
-//     >
-
-//     </GoogleMap>
-//   </div>
-
-// )
-// }
-
-// export default MapPage;
