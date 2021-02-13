@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 
 function ResultsPage(props) {
 	const [results, setResults] = useState([]);
+	const [low, setLow] = useState([]);
+	// const lowPriceTrips='';
 
 	useEffect(() => {
 		// run after render
@@ -24,12 +26,15 @@ function ResultsPage(props) {
 				});
 
 				console.log('filteredTrips', filteredTrips);
+				// const lowPriceTrips = filteredTrips.filter(trip => trip.ticketsBought >= 10);
 				const lowPriceTrips = filteredTrips.filter(trip => trip.ticketsBought >= 10);
+				setLow(lowPriceTrips);
 
 				console.log('lowPriceTrips', lowPriceTrips);
 
 				setResults(filteredTrips);
 				props.setLowPriceTrips(lowPriceTrips);
+				console.log(lowPriceTrips);
 			});
 	}, []);
 
@@ -39,7 +44,7 @@ function ResultsPage(props) {
 				<h2 className="pageTitle">Where would you like to travel?</h2>
 				<section className="row row-cols-1 row-cols-md-3"></section>
 				{results.map((trip, i) => (
-					<TripResults trip={trip} key={i} />
+					<TripResults low={low} trip={trip} key={i} />
 				))}
 			</section>
 		</div>

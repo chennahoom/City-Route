@@ -111,7 +111,7 @@ function Register(props) {
 						<Grid item xs={12} sm={6}>
 							<TextField fullWidth label="Phone number" name="phone" type="tel" required onChange={handleInputChange} />
 						</Grid>
-						<Button fullWidth type="submit" onClick={onSave} className={classes.button} variant="contained">
+						<Button fullWidth type="reset" onClick={onSave} className={classes.button} variant="contained">
 							Sign Up
 						</Button>
 					</Grid>

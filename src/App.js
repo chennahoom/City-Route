@@ -90,7 +90,7 @@ function App() {
           history.push("/tourGuideMenu");
         }
       } else {
-        window.location.reload(false);
+        // window.location.reload(false);
         setServerError(data.message);
 
       }
@@ -256,7 +256,10 @@ function App() {
         <Route path="/results" exact>
           <ResultsPage
             searchTripForm={searchTripForm}
-            setLowPriceTrips={setLowPriceTrips}
+            setLowPriceTrips={setLowPriceTrips}            
+            user={user}
+            lowPriceTrips={lowPriceTrips}
+            serverUpdateUserTrips={serverUpdateUserTrips}
           />
         </Route>
         {/* <Route path="/map/:city" exact>
