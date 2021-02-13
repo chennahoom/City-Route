@@ -21,43 +21,20 @@ const options = {
 	zoomControl: true,
 };
 
-const mapData = {
-	Berlin: {
-	  center: {
-		lat: 52.51639,
-		lng: 13.37765,
-	  },
-	},
-	London: {
-	  center: {
-		lat: 51.50088279063649,
-		lng: -0.12446446928391436,
-	  },
-	},
-	Amsterdam: {
-	  center: {
-		lat: 52.3609,
-		lng: 4.88516,
-	  },
-	},
-	Paris: {
-	  center: {
-		lat: 48.86068,
-		lng: 2.33763,
-	  },
-	},
-	"Tel-Aviv": {
-	  center: {
-		lat: 32.06296,
-		lng: 34.76644,
-	  },
-	},
-  };
-//   const data = mapData[props.stops[0].stop_region];
 
+// const mapData = {
+// 	Berlin: {
+// 		center: {},
+// 	},
+// 	'Tel-Aviv': {
+// 		center: {},
+// 	},
+// };
+
+// const data = mapData[city]
+// data.center
 
 function Map(props) {
-
 
 	const { isLoaded, loadError } = useLoadScript({
 		googleMapsApiKey: 'AIzaSyCqp3XhCNtt2GaQgDAhRvrjfO-A8zVQPWc',
