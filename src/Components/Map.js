@@ -60,7 +60,7 @@ function Map(props) {
 
 	return (
 		<div>
-			<SearchMap panTo={panTo} />
+			{/* <SearchMap panTo={panTo} /> */}
 
 			<GoogleMap
 				mapContainerStyle={mapContainerStyle}
