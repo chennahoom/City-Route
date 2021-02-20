@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Map from "../Components/Map";
+import MapTG from "../Components/MapTourGuide";
 
 function AddTripForm(props) {
   const initForm = {
@@ -13,6 +13,9 @@ function AddTripForm(props) {
   const [trip, setTrip] = useState(props.editTrip || initForm);
   const [stops, setStops] = useState([]);
   const [selectedStops, setSelectedStops] = useState([]);
+  // const [marker, setMarker] = useEffect({});
+
+
 
   useEffect(() => {
     if (props.editTrip) {
@@ -48,7 +51,13 @@ function AddTripForm(props) {
   const onSave = (event) => {
     event.preventDefault();
     console.log(trip);
-    if (!trip.trip_name_city || !trip.tour_date || !trip.tour_time || !trip.start_time) return;
+    if (
+      !trip.trip_name_city ||
+      !trip.tour_date ||
+      !trip.tour_time ||
+      !trip.start_time
+    )
+      return;
     trip.stops = selectedStops;
 
     if (!editTrip) {
@@ -76,6 +85,11 @@ function AddTripForm(props) {
 
   const tour_time = editTrip?.tour_time;
   const tour_date = editTrip?.tour_date;
+  const mapContainerStyle = {
+    width: "300px",
+    height: "300px",
+    margin: "0 auto",
+  };
 
   return (
     <div>
@@ -141,9 +155,8 @@ function AddTripForm(props) {
         <button onClick={onSave}>Save</button>
         <button type="reset">Clear</button>
       </form>
-      <Map
-	  
-	  stops={stops} />
+      <MapTG 
+       stops={stops} />
     </div>
   );
 }
