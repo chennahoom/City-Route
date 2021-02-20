@@ -141,8 +141,8 @@ form {
   margin-top: 30px;
 } */
 .card-map {
-  position: absolute;
-  left: 800px;
+  /* position: absolute; */
+  /* left: 800px; */
 }
 .card-title#tour-guide {
   font-size: 25px;
