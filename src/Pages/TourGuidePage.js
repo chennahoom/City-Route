@@ -30,22 +30,6 @@ function TourGuidePage(props) {
 
   const classes = useStyles();
 
-  const updateTrip = (trip, id) => {
-    fetch(`https://city-route.herokuapp.com/api/users/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(trip),
-    })
-      .then((response) => response.json())
-      .then((newTrip) => {
-        props.updateUserTrips(id);
-      })
-      .catch((err) => console.error(err));
-  }
-
   const addTrip = (newTrip) => {
     console.log(newTrip);
     fetch(`https://city-route.herokuapp.com/api/trips/`, {
@@ -109,7 +93,6 @@ function TourGuidePage(props) {
         user={props.user}
         addTrip={addTrip}
         isEditing={props.isEditing}
-        updateTrip={updateTrip}
       />
       <TripsList
         tourGuideTrips={props.user?.my_trips || []}

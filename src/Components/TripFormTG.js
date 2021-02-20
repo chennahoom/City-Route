@@ -43,19 +43,23 @@ function AddTripForm(props) {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setTrip({ ...trip, [name]: value });
-    console.log(trip.id);
+    console.log(trip);
   };
   const onSave = (event) => {
     event.preventDefault();
-    console.log(trip);
-    if (!trip.trip_name_city || !trip.tour_date || !trip.tour_time || !trip.start_time) return;
+    if (
+      !trip.trip_name_city ||
+      !trip.tour_date ||
+      !trip.tour_time ||
+      !trip.start_time
+    )
+      return;
     trip.stops = selectedStops;
 
     if (!editTrip) {
       props.addTrip(trip);
     } else {
-      // udate trip
-      props.updateTrip(trip, trip.id);
+      // udate tripe
     }
   };
 
@@ -138,8 +142,7 @@ function AddTripForm(props) {
           );
         })}
 
-        <button onClick={onSave}>Save</button>
-        <button type="reset">Clear</button>
+        <button>Save</button>
       </form>
       <Map
 	  

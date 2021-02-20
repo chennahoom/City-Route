@@ -6,6 +6,7 @@ import ResultsPage from "./Pages/ResultsPage";
 import TripDetailsPage from "./Pages/TripDetailsPage";
 import MyTripsPage from "./Pages/MyTripsPage";
 import { useHistory } from "react-router-dom";
+import SaleTrips from "./Components/SaleTrips";
 import SignUp from "./Pages/SignUp";
 import TourGuidePage from "./Pages/TourGuidePage";
 import Map from "./Components/Map";
@@ -90,9 +91,7 @@ function App() {
           history.push("/tourGuideMenu");
         }
       } else {
-        // window.location.reload(false);
         setServerError(data.message);
-
       }
     } catch (err) {}
   };
@@ -116,7 +115,9 @@ function App() {
       .then((res) => res.json())
       .then((user) => {
         if (!user) {
-          return history.push('/signUp');
+          return history.push(
+            `/login?email=${res.profileObj.email}&name=${res.profileObj.name}`
+          );
         }
         setUser(user);
 
@@ -230,6 +231,7 @@ function App() {
     })
       .then((response) => response.json())
       .then((body) => {
+        //TODO: need to update my Trips like update user trip
         var newMyTrips = [...(user.my_trips || [])];
         newMyTrips = newMyTrips.filter((trip) => trip !== tripId);
         setUser({ ...user, my_trips: newMyTrips });
@@ -256,10 +258,7 @@ function App() {
         <Route path="/results" exact>
           <ResultsPage
             searchTripForm={searchTripForm}
-            setLowPriceTrips={setLowPriceTrips}            
-            user={user}
-            lowPriceTrips={lowPriceTrips}
-            serverUpdateUserTrips={serverUpdateUserTrips}
+            setLowPriceTrips={setLowPriceTrips}
           />
         </Route>
         {/* <Route path="/map/:city" exact>
@@ -279,6 +278,9 @@ function App() {
             userTrips={userTrips}
             deleteTrip={deleteTrip}
           />
+        </Route>
+        <Route path="/saleTrips" exact>
+          <SaleTrips searchTripForm={searchTripForm} />
         </Route>
       </Switch>
     </div>
