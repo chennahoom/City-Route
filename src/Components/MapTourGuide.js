@@ -17,10 +17,6 @@ const options = {
 	disableDefaultUI: false,
 	zoomControl: true,
 };
-const center = {
-  lat: 52.51862,
-  lng: 13.37618,
-};
 
 function Search({ panTo }) {
 	const {
