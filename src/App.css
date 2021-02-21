@@ -225,3 +225,16 @@ form {
   width: 30px;
   cursor: pointer;
 }
+
+
+/* -----NEw Ariel and Halel */
+
+.mapTrip{
+  background-color: red;
+}
+
+.results{
+  display: flex;
+  flex-direction: column;
+
+}

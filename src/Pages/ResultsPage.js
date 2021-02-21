@@ -2,7 +2,7 @@ import TripResults from '../Components/TripResults';
 import { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Berlin1 from '../static/Berlin1.jpg';
+import Berlin1 from '../static/amsterdam.jpg';
 import { makeStyles } from '@material-ui/core/styles';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -15,7 +15,7 @@ import Map from '../Components/Map';
 const useStyles = makeStyles((theme) => ({
 	root: {
 		heigh: '100vh',
-		
+
 	},
 	paper: {
 		margin: theme.spacing(8, 4),
@@ -24,15 +24,15 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: 'center',
 	},
 	image: {
-		// backgroundImage: `url(${Berlin1})`,
-		// backgroundRepeat: 'no-repeat',
+		backgroundImage: `url(${Berlin1})`,
+		backgroundRepeat: 'no-repeat',
 		// heigh:1200,
-		objectFit:'cover',
+		// objectFit:'cover',
 		// height: 1230,
 		// backgroundColor:
 		// 	theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-		// backgroundSize: 'cover',
-		// backgroundPosition: 'center',
+		backgroundSize: 'cover',
+		backgroundPosition: 'center',
 	},
 	cards: {
 		width: '80px',
@@ -71,20 +71,35 @@ function ResultsPage(props) {
 	}, []);
 
 	return (
-		<Grid container spacing={2} direction='row' className={classes.root}>
-			<Grid item xs={12} sm={5} md={5} className={classes.cards}>
-				{results.map((trip, i) => (
-					// <Grid item sm={4} md={4}>
-						<TripResults serverUpdateUserTrips={props.serverUpdateUserTrips} low={low} trip={trip} key={i} />
-					// </Grid>
-				))}
-			</Grid>
-			<Grid item xs={false} sm={7} md={7} className={classes.image}>
-				<Paper className={classes.Paper}>
-					<Map city={props.searchTripForm.city}/>
-				</Paper>
-			</Grid>
-		</Grid>
+		<div className="results">
+			{results.map((trip, i) => (
+				<TripResults serverUpdateUserTrips={props.serverUpdateUserTrips} low={low} trip={trip} key={i} />
+			))}
+			<Map className="mapTrip" city={props.searchTripForm.city}/>
+		</div>
+
+
+
+
+
+
+		// workingggg
+		// <Grid container spacing={2} direction='row' className={classes.root}>
+		// 	{/* <Map city={props.searchTripForm.city}/> */}
+
+		// 	<Grid item xs={12} sm={5} md={5} className={classes.cards}>
+		// 		{results.map((trip, i) => (
+		// 			// <Grid item sm={5} md={6}>
+		// 				<TripResults serverUpdateUserTrips={props.serverUpdateUserTrips} low={low} trip={trip} key={i} />
+		// 			// </Grid>
+		// 		))}
+		// 	</Grid>
+		// 	<Grid item xs={false} sm={7} md={7} className={classes.image}>
+		// 		<Paper className={classes.Paper}>
+		// 			{/* <Map city={props.searchTripForm.city}/> */}
+		// 		</Paper>
+		// 	</Grid>
+		// </Grid>
 
 		// {/* <section className="container"> */}
 		// 	{/* <h2 className="pageTitle">Where would you like to travel?</h2> */}
