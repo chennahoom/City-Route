@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Header from './Components/Header';
 import SearchTripPage from './Pages/SearchTripsPage';
 import ResultsPage from './Pages/ResultsPage';
-import TripDetailsPage from './Pages/TripDetailsPage';
+import TripDetails from './Pages/TripDetails';
 import MyTripsPage from './Pages/MyTripsPage';
 import { useHistory } from 'react-router-dom';
 import SignUp from './Pages/SignUp';
@@ -217,7 +217,7 @@ function App() {
 			<Header setlog={setlog} setUser={setUser} />
 			<Switch>
 				<Route path="/maps/:city" exact>
-					<TripDetailsPage user={user} lowPriceTrips={lowPriceTrips} serverUpdateUserTrips={serverUpdateUserTrips} />
+					<TripDetails user={user} lowPriceTrips={lowPriceTrips} serverUpdateUserTrips={serverUpdateUserTrips} />
 				</Route>
 				<Route path="/trips" exact>
 					<SearchTripPage updateForm={updateForm} />

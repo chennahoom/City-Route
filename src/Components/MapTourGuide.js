@@ -60,12 +60,27 @@ function Search({ panTo }) {
 	);
 }
 
-let centers = {
+const centers = {
 	'Tel-Aviv': {
 		lat: 32.109333,
 		lng: 34.855499,
 	},
-  // add more cities...
+	'Berlin': {
+		lat: 52.520008,
+		lng: 13.404954,
+	},
+	'London': {
+		lat: 51.507351,
+		lng: 34.855499,
+	},
+	'Paris': {
+		lat: 48.856613,
+		lng: 2.352222,
+	},
+	'Amsterdam': {
+		lat: 52.370216,
+		lng: 4.895168,
+	},
 };
 
 function MapTG(props) {

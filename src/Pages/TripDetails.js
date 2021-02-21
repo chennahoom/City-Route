@@ -1,5 +1,5 @@
 import { useHistory, useParams, useLocation } from 'react-router-dom';
-import Map from './Map';
+import Map from '../Components/Map';
 import Modal from '@material-ui/core/Modal';
 import { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
