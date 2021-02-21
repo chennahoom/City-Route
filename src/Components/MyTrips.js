@@ -9,19 +9,16 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {useEffect, useState } from "react";
 import Berlin from '../static/Berlin.jpg';
-// import Amsterdam from '../static/Amsterdam.jpg';
+import Amsterdam from '../static/amsterdam.jpg';
 import TelAviv from '../static/Tel-Aviv.jpg';
-import { useTheme } from "@material-ui/styles";
+import Paris from '../static/Paris.jpg';
+import London from '../static/London.jpg';
 import Grid from '@material-ui/core/Grid';
-
-
-
 
 const useStyles = makeStyles({
     root: {
     minWidth: 200,
     margin:15,
-      
     },
     media: {
         height: 200,    
@@ -29,7 +26,7 @@ const useStyles = makeStyles({
 });
 
 function MyTrips(props) {
-    const [tripData, setTripData] = useState(props.data);
+    const [tripData, setTripData] = useState('');
     const classes = useStyles();
     useEffect(() => {
         fetch(`https://city-route.herokuapp.com/api/trips/${props.data}`)
@@ -39,6 +36,16 @@ function MyTrips(props) {
             });
     }, []);
 
+    let images = {
+        'Tel-Aviv': { src:TelAviv },
+        'Berlin': { src:Berlin },
+        'Amsterdam': { src:Amsterdam },
+        'Paris': { src:Paris },
+        'London': { src:London },
+    };
+
+    let city = tripData?.trip_name_city;
+    let img = images[city]?.src;
 
     return (
         <Grid item xs={12} md={4} sm={6}>
@@ -47,7 +54,7 @@ function MyTrips(props) {
                     <CardMedia
                         className={classes.media}
                         src={Berlin}
-                        // image={Berlin}
+                        image={img}
                         title="Contemplative Reptile"
                     />
                     <CardContent>
@@ -55,8 +62,9 @@ function MyTrips(props) {
                             {tripData?.trip_name_city}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                            across all continents except Antarctica
+                            trip name: {tripData?.trip_name_city}
+                            {/* Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+                            across all continents except Antarctica */}
                         </Typography>
                     </CardContent>
                 </CardActionArea>

@@ -234,12 +234,6 @@ function App() {
 						serverUpdateUserTrips={serverUpdateUserTrips}
 					/>
 				</Route>
-				{/* <Route path="/map/:city" exact>
-					<TripDetailsPage user={user} serverUpdateUserTrips={serverUpdateUserTrips} />
-				</Route>
-				<Route path="/map/:city" exact>
-					<Map />
-				</Route> */}
 				<Route path="/myTripsPage" exact>
 					<MyTripsPage user={user} userTrips={userTrips} />
 				</Route>

@@ -33,9 +33,7 @@ const useStyles = makeStyles(theme => ({
     marginLeft:30,
     backgroundColor:'white',
   },
-  container:{
-    textAlign:'center',
-  },
+
   button: {
     marginLeft: 20,
 
@@ -86,7 +84,7 @@ function SearchTripForm(props) {
 
   return (
     <FormControl onSubmit={onSubmit} onChange={props.updateForm} className={classes.form}>
-      <Grid className={classes.container} container spacing={2}>
+      <Grid container spacing={2}>
           <TextField htmlFor="name_city" className={classes.inputs} id="select" value={currency} label='City' select name='city' onChange={handleCity}>
             {cities.map(option =>(
               <MenuItem key={option.value} value={option.value}>
