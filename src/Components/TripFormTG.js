@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import MapTG from '../Components/MapTourGuide';
 
+
+
 function AddTripForm(props) {
 	const initForm = {
 		trip_name_city: '',

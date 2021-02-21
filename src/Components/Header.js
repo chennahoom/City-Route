@@ -1,12 +1,30 @@
 import { Link } from "react-router-dom";
 import Logout from "./Logout";
+import { useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import {
+  AppBar,
+  Typography,
+  Tabs,
+  Tab,
+  Toolbar,
+  Button,
+} from "@material-ui/core";
+import React, { useState } from "react";
 
 function Header(props) {
+  const theme = useTheme();
 
+  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+
+
+  const [value, setValue] = useState(0);
+  const handleClickTab = (e, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <header>
-  
       <section className="navbar navbar-light bg-light">
         <a href="trips.html">
           <img
@@ -15,8 +33,7 @@ function Header(props) {
             src="https://i.postimg.cc/L4Y4Dm4L/Logo2.png"
           />
         </a>
-        <span className="headtext">
-          Where to next?  </span>
+        <span className="headtext">Where to next? </span>
         <section className="nav-item dropdown">
           <Link
             className="nav-link dropdown-toggle"
@@ -26,11 +43,7 @@ function Header(props) {
             aria-haspopup="true"
             aria-expanded="false"
           >
-            <img
-              className="profile"
-              alt="profile"
-              src=""
-            />
+            <img className="profile" alt="profile" src="" />
           </Link>
           <div
             className="dropdown-menu"
