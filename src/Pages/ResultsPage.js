@@ -8,6 +8,7 @@ function ResultsPage(props) {
 
 	useEffect(() => {
 		// run after render
+		console.log(props.searchTripForm.city);
 
 		fetch('https://city-route.herokuapp.com/api/trips')
 			.then(res => res.json())
@@ -30,11 +31,11 @@ function ResultsPage(props) {
 				const lowPriceTrips = filteredTrips.filter(trip => trip.ticketsBought >= 10);
 				setLow(lowPriceTrips);
 
-				console.log('lowPriceTrips', lowPriceTrips);
+				// console.log('lowPriceTrips', lowPriceTrips);
 
 				setResults(filteredTrips);
 				props.setLowPriceTrips(lowPriceTrips);
-				console.log(lowPriceTrips);
+				// console.log(lowPriceTrips);
 			});
 	}, []);
 

@@ -9,25 +9,10 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Timeline from '@material-ui/lab/Timeline';
-import TimelineItem from '@material-ui/lab/TimelineItem';
-import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
-import TimelineConnector from '@material-ui/lab/TimelineConnector';
-import TimelineContent from '@material-ui/lab/TimelineContent';
-import TimelineDot from '@material-ui/lab/TimelineDot';
-
-import clsx from 'clsx';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionActions from '@material-ui/core/AccordionActions';
 import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Chip from '@material-ui/core/Chip';
-import Divider from '@material-ui/core/Divider';
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -152,10 +137,10 @@ function TripDetails(props) {
 	const handleClose = () => {
 		setOpen(false);
 	};
-	console.log('tripDetaeils', results);
+	// console.log('tripDetaeils', results);
 	const filteredStops = stops.filter(stop => results?.stops?.includes(stop.id));
-	console.log(stops);
-	console.log(filteredStops);
+	// console.log(stops);
+	// console.log(filteredStops);
 
 
 	return (
