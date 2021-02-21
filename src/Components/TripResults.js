@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     // minWidth: 200,
     margin:15,
+    width: "45%",
   },
   media: {
     height: 200,    

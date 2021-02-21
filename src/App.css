@@ -49,6 +49,7 @@ body {
 
 #mainList header {
   box-shadow: 2px 2px 12px 0px #aaa;
+  
 }
 
 /* ----------------forms--------------- */
@@ -229,12 +230,20 @@ form {
 
 /* -----NEw Ariel and Halel */
 
-.mapTrip{
-  background-color: red;
-}
-
 .results{
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
+}
 
+#right{
+  width: 40%;
+  background-position: top right;
+}
+
+#left{
+  width: 60%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap:wrap;
+  /* overflow-y: scroll; */
 }

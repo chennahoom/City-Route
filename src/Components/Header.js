@@ -44,7 +44,7 @@ function Header(props) {
           </div>
         </section>
       </section>
-      <nav className="navbar navbar-expand-lg navbar-light">
+      {/* <nav className="navbar navbar-expand-lg navbar-light">
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav">
             <div className="nav-item dropdown">
@@ -78,7 +78,7 @@ function Header(props) {
             </a>
           </div>
         </div>
-      </nav>
+      </nav> */}
     </header>
   );
 }

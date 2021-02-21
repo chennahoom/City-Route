@@ -2,7 +2,7 @@ import TripResults from '../Components/TripResults';
 import { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Berlin1 from '../static/amsterdam.jpg';
+import Berlin1 from '../static/Amsterdam.jpg';
 import { makeStyles } from '@material-ui/core/styles';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -72,10 +72,14 @@ function ResultsPage(props) {
 
 	return (
 		<div className="results">
-			{results.map((trip, i) => (
-				<TripResults serverUpdateUserTrips={props.serverUpdateUserTrips} low={low} trip={trip} key={i} />
-			))}
-			<Map className="mapTrip" city={props.searchTripForm.city}/>
+			<section id="left">
+				{results.map((trip, i) => (
+					<TripResults serverUpdateUserTrips={props.serverUpdateUserTrips} low={low} trip={trip} key={i} />
+				))}
+			</section>
+			<section id="right">
+				<Map city={props.searchTripForm.city}/>
+			</section>
 		</div>
 
 
