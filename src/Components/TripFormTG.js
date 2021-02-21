@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import MapTG from '../Components/MapTourGuide';
+import Button from '@material-ui/core/Button';
+
 
 function AddTripForm(props) {
 	const initForm = {
@@ -78,15 +80,16 @@ function AddTripForm(props) {
 	const tour_time = editTrip?.tour_time;
 	const tour_date = editTrip?.tour_date;
 	const start_time = editTrip?.start_time;
-	const mapContainerStyle = {
-		width: '300px',
-		height: '300px',
-		margin: '0 auto',
-	};
+	// const mapContainerStyle = {
+	// 	width: '300px',
+	// 	height: '300px',
+	// 	margin: '0 auto',
+	// };
 
 	return (
 		<div>
-			<form ref={formRef} onSubmit={onSave}>
+			<section className="tripFormBackg"></section>
+			<form className="formTG" ref={formRef} onSubmit={onSave}>
 				<label>
 					City:
 					<select value={trip.trip_name_city} name="trip_name_city" onChange={handleInputChange}>
@@ -125,8 +128,9 @@ function AddTripForm(props) {
 						</div>
 					);
 				})}
+        <Button variant="contained" color='primary' onClick={onSave}>{props.editTrip ? 'Save' : 'Add'}</Button>
 
-				<button onClick={onSave}>{props.editTrip ? 'Save' : 'Add'}</button>
+				{/* <button onClick={onSave}>{props.editTrip ? 'Save' : 'Add'}</button> */}
 			</form>
 			<MapTG stops={stops} trip={trip} selectedStops={selectedStops} />
 		</div>

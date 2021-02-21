@@ -54,14 +54,14 @@ body {
 
 /* ----------------forms--------------- */
 
-form {
+/* form {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   margin: 50px auto;
   width: 300px;
 }
 
 /* register */
-.signin-form {
+/*.signin-form {
   background: #fff;
   border: 1px solid #eee;
   box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.05);
@@ -106,7 +106,7 @@ form {
 }
 .mb-4 {
   margin-top: 60px;
-}
+} */
 /* ----------------article--------------- */
 
 #pageTitle {
@@ -229,7 +229,7 @@ form {
 
 
 /* -----NEw Ariel and Halel */
-
+/* traveler -> results */
 .results{
   display: flex;
   justify-content: space-around;
@@ -238,6 +238,9 @@ form {
 #right{
   width: 40%;
   background-position: top right;
+  position: fixed;
+  top: 80px;
+  right: 0;
 }
 
 #left{
@@ -246,4 +249,40 @@ form {
   justify-content: space-around;
   flex-wrap:wrap;
   /* overflow-y: scroll; */
+}
+
+/* tour guide -> form */
+.tripFormBackg{
+  background-image: url('./static/dubai.jpg');
+  width: 100%;
+  height: 500px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.formTG{
+  background-color: white;
+  width:70%;
+  height:200px;
+  display: flex;
+  justify-content: space-between;
+  margin-top:-70px;
+  margin-left: 16%;
+  text-align: center;
+  border-radius:0.5em;
+}
+
+.formTG > button{
+  height: 30%;
+  width: 150px;
+  margin-top: 6%;
+
+}
+
+.formTG > label{
+  margin-top: 6%;
+}
+
+.nap-TG{
+
 }
