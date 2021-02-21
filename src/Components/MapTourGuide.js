@@ -138,7 +138,7 @@ function MapTG(props) {
 	console.log('selectedMarkers', selectedMarkers);
 
 	return (
-		<div>
+		<div className="nap-TG">
 			{/* <Locate panTo={panTo} /> */}
 			<SearchMap panTo={panTo} />
 
