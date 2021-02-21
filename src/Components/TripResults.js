@@ -97,7 +97,7 @@ function TripResults(props) {
     'Amsterdam': [ {src: amsterdam},{src :amsterdam1},{src :amsterdam2},{src :amsterdam3},{src :amsterdam4},{src :amsterdam5},],
   }
 
-  const rand = Math.floor(Math.random() * 5);
+  const rand = Math.floor(Math.random() * 6);
   let img = '';
   if(props.trip?.trip_name_city === 'Paris'){ img = myImages.Paris[rand].src; }
   else if(props.trip?.trip_name_city === 'Berlin'){ img = myImages.Berlin[rand].src;} 
