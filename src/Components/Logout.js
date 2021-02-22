@@ -2,7 +2,6 @@ import React from "react";
 import { useGoogleLogout } from "react-google-login";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import ListItemText from "@material-ui/core/ListItemText";
 
 
@@ -40,9 +39,7 @@ function Logout(props) {
   });
 
   return (
-    // <button onClick={signOut} id="logoutbutton" className="button">
-    //   Sign Out
-    // </button>
+
     <div className={classes.root}>
       <ListItemText onClick={signOut} variant="contained" color="primary" href="#contained-buttons">
         Sign Out

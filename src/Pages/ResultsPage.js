@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   image: {
     backgroundImage: `url(${Berlin1})`,
     backgroundRepeat: "no-repeat",
-    // heigh:1200,
+    // height:1200,
     // objectFit:'cover',
     // height: 1230,
     // backgroundColor:
