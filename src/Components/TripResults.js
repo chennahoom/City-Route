@@ -28,7 +28,7 @@ import London4 from "../static/London4.jpg";
 import London5 from "../static/London5.jpg";
 import London6 from "../static/London6.jpg";
 import London7 from "../static/London7.jpg";
-import amsterdam from "../static/amsterdam.jpg";
+import amsterdam from "../static/Amsterdam.jpg";
 import amsterdam1 from "../static/amsterdam1.jpg";
 import amsterdam2 from "../static/amsterdam2.jpg";
 import amsterdam3 from "../static/amsterdam3.jpg";

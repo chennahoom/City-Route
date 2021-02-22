@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import React from "react";
-import { GoogleMap, useLoadScript } from "@react-google-maps/api";
+import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 
 import "@reach/combobox/styles.css";
 
