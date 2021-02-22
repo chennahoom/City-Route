@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import Map from '../Components/Map';
+import { useEffect, useState } from "react";
+import Map from "../Components/Map";
 import { Link } from "react-router-dom";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
@@ -30,7 +30,7 @@ import London4 from "../static/London4.jpg";
 import London5 from "../static/London5.jpg";
 import London6 from "../static/London6.jpg";
 import London7 from "../static/London7.jpg";
-import amsterdam from "../static/amsterdam.jpg";
+import amsterdam from "../static/Amsterdam.jpg";
 import amsterdam1 from "../static/amsterdam1.jpg";
 import amsterdam2 from "../static/amsterdam2.jpg";
 import amsterdam3 from "../static/amsterdam3.jpg";
@@ -43,103 +43,164 @@ import telaviv4 from "../static/telaviv4.jpg";
 import telaviv5 from "../static/telaviv5.jpg";
 import telaviv6 from "../static/Tel-Aviv.jpg";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    // minWidth: 200,
+    marginTop: "150px",
+    width: "25%",
+    display: "flex",
+    flexWrap: "wrap",
+    flexDirection: "row",
+  },
+  media: {
+    height: 200,
+  },
+  paper: {
+    height: 140,
+    width: 100,
+  },
+  control: {
+    padding: theme.spacing(2),
+  },
+  card: {
+    marginTop: 15,
+  },
+  tripList: {
+    display: "flex",
+    flexWrap: "wrap",
+	alignContent: "space-around",
+    background: "red",
+  },
+}));
+
 function TourGuideTrip(props) {
-	const [tripData, setTripData] = useState(props.data);
+  const classes = useStyles();
 
-	console.log('props.editTrip', props.editTrip);
-	useEffect(() => {
-	console.log('props.useEffect', props.editTrip);
-		fetch(`https://city-route.herokuapp.com/api/trips/${props.data}`)
-			.then(res => res.json())
-			.then(body => {
-				if (body) {
-					setTripData(body);
-				}
-				console.log(body);
-				console.log(props.data);
-			});
-	}, [props.editTrip]);
+  const [tripData, setTripData] = useState(props.data);
 
-	const handleDelete = () => {
-		console.log(props.data);
-		props.deleteTrip(props.data);
-	};
+  console.log("props.editTrip", props.editTrip);
+  useEffect(() => {
+    console.log("props.useEffect", props.editTrip);
+    fetch(`https://city-route.herokuapp.com/api/trips/${props.data}`)
+      .then((res) => res.json())
+      .then((body) => {
+        if (body) {
+          setTripData(body);
+        }
+        console.log(body);
+        console.log(props.data);
+      });
+  }, [props.editTrip]);
 
-	let myImages = {
-		Paris: [
-		  { src: Paris1 },
-		  { src: Paris2 },
-		  { src: Paris3 },
-		  { src: Paris4 },
-		  { src: Paris5 },
-		  { src: Paris6 },
-		],
-		Berlin: [
-		  { src: Berlin1 },
-		  { src: Berlin2 },
-		  { src: Berlin3 },
-		  { src: Berlin4 },
-		  { src: Berlin5 },
-		  { src: Berlin6 },
-		],
-		London: [
-		  { src: London1 },
-		  { src: London },
-		  { src: London3 },
-		  { src: London2 },
-		  { src: London4 },
-		  { src: London5 },
-		],
-		TelAviv: [
-		  { src: telaviv2 },
-		  { src: telaviv5 },
-		  { src: telaviv3 },
-		  { src: telaviv4 },
-		  { src: telaviv1 },
-		  { src: telaviv6 },
-		],
-		Amsterdam: [
-		  { src: amsterdam },
-		  { src: amsterdam1 },
-		  { src: amsterdam2 },
-		  { src: amsterdam3 },
-		  { src: amsterdam4 },
-		  { src: amsterdam5 },
-		],
-	  };
+  const handleDelete = () => {
+    console.log(props.data);
+    props.deleteTrip(props.data);
+  };
 
-	const rand = Math.floor(Math.random() * 6);
-	let img = "";
-	if (props.trip?.trip_name_city === "Paris") {
-	img = myImages.Paris[rand].src;
-	} else if (props.trip?.trip_name_city === "Berlin") {
-	img = myImages.Berlin[rand].src;
-	} else if (props.trip?.trip_name_city === "London") {
-	img = myImages.London[rand].src;
-	} else if (props.trip?.trip_name_city === "Tel-Aviv") {
-	img = myImages.TelAviv[rand].src;
-	} else if (props.trip?.trip_name_city === "Amsterdam") {
-	img = myImages.Amsterdam[rand].src;
-	}
+  let myImages = {
+    Paris: [
+      { src: Paris1 },
+      { src: Paris2 },
+      { src: Paris3 },
+      { src: Paris4 },
+      { src: Paris5 },
+      { src: Paris6 },
+    ],
+    Berlin: [
+      { src: Berlin1 },
+      { src: Berlin2 },
+      { src: Berlin3 },
+      { src: Berlin4 },
+      { src: Berlin5 },
+      { src: Berlin6 },
+    ],
+    London: [
+      { src: London1 },
+      { src: London },
+      { src: London3 },
+      { src: London2 },
+      { src: London4 },
+      { src: London5 },
+    ],
+    TelAviv: [
+      { src: telaviv2 },
+      { src: telaviv5 },
+      { src: telaviv3 },
+      { src: telaviv4 },
+      { src: telaviv1 },
+      { src: telaviv6 },
+    ],
+    Amsterdam: [
+      { src: amsterdam },
+      { src: amsterdam1 },
+      { src: amsterdam2 },
+      { src: amsterdam3 },
+      { src: amsterdam4 },
+      { src: amsterdam5 },
+    ],
+  };
 
-	return (
-		<div>
-			<div>
-				<div></div>{' '}
-			</div>
-			<ul>
-				{/* <li>trip id: {tripData.id}</li> */}
-				<li>tickets bought: {tripData?.ticketsBought}</li>
-				<li>start time: {tripData?.start_time}</li>
-				<li>trip name city: {tripData?.trip_name_city}</li>
-				<li>tour date: {tripData?.tour_date}</li>
-				<li>tour time: {tripData?.tour_time}</li>
-				<button onClick={() => props.onDuplicate(tripData)}>Duplicate</button>
-				<button onClick={() => props.setEditTrip(tripData)}>Edit</button>
-				<button onClick={handleDelete}>Delete</button>
-			</ul>
-		</div>
-	);
+  const rand = Math.floor(Math.random() * 6);
+  let img = "";
+  if (tripData?.trip_name_city === "Paris") {
+    img = myImages.Paris[rand].src;
+  } else if (tripData?.trip_name_city === "Berlin") {
+    img = myImages.Berlin[rand].src;
+  } else if (tripData?.trip_name_city === "London") {
+    img = myImages.London[rand].src;
+  } else if (tripData?.trip_name_city === "Tel-Aviv") {
+    img = myImages.TelAviv[rand].src;
+  } else if (tripData?.trip_name_city === "Amsterdam") {
+    img = myImages.Amsterdam[rand].src;
+  }
+
+  return (
+    <div className={classes.tripList}>
+      <Card className={classes.root}>
+        <CardActionArea>
+          <CardMedia
+            className={classes.media}
+            // src={Berlin}
+            image={img}
+            title="City"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              Trip Name: {tripData?.trip_name_city}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Tour Date: {tripData?.tour_date}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Start Time: {tripData?.start_time}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Tour Duration: {tripData?.tour_time}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          <Button
+            onClick={() => props.onDuplicate(tripData)}
+            size="small"
+            color="primary"
+          >
+            Duplicate Trip
+          </Button>
+          <Button
+            onClick={() => props.setEditTrip(tripData)}
+            size="small"
+            color="primary"
+          >
+            Edit Trip
+          </Button>
+          <Button onClick={handleDelete} size="small" color="primary">
+            Delete Trip
+          </Button>
+        </CardActions>
+      </Card>
+    </div>
+  );
 }
 
 export default TourGuideTrip;
