@@ -54,26 +54,24 @@ const StyledMenuItem = withStyles((theme) => ({
 
 const useStyles = makeStyles((theme) => ({
   appbar: {
-    backgroundColor: "transparent",
+    backgroundColor: "white",
     boxShadow: "none",
     background: "none",
-    height: "50px",
+    height: "60px",
   },
   appbarWrapper: {
-    width: "80%",
-    margin: "0 auto",
   },
   appbarTitle: {
     flexGrow: "1",
-    color: "white",
+    color: "black",
     underline: "none",
   },
   icon: {
-    color: "#fff",
+    color: "black",
     fontSize: "2rem",
   },
   colorText: {
-    color: "white",
+    color: "black",
   },
 }));
 function Header(props) {
@@ -146,10 +144,9 @@ function Header(props) {
               <ListItemIcon>
                 <ExitToAppOutlinedIcon fontSize="small" />
               </ListItemIcon>
-              <ListItemText primary="Sign Out" />
+              <Logout setUser={props.setUser} setlog={props.setlog} />
             </StyledMenuItem>
           </StyledMenu>
-          <Logout setUser={props.setUser} setlog={props.setlog} />
         </Toolbar>
       </AppBar>
     </div>

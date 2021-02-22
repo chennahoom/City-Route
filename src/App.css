@@ -49,7 +49,7 @@ body {
 
 #mainList header {
   box-shadow: 2px 2px 12px 0px #aaa;
-  
+
 } */
 
 /* ----------------forms--------------- */
@@ -235,15 +235,24 @@ body {
 /* -----NEw Ariel and Halel */
 /* traveler -> results */
 .results{
-  display: flex;
+  /* display: flex; */
   justify-content: space-around;
+
+}
+
+.results > h3 {
+margin-top: 65px;
+margin-left:70px;
+
+
 }
 
 #right{
   width: 40%;
+  height: 100vh;
   background-position: top right;
   position: fixed;
-  top: 80px;
+  top: 79px;
   right: 0;
 }
 
