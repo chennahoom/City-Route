@@ -3,6 +3,8 @@ import MapTG from '../Components/MapTourGuide';
 import Button from '@material-ui/core/Button';
 
 
+
+
 function AddTripForm(props) {
 	const initForm = {
 		trip_name_city: '',

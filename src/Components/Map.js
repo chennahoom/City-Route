@@ -11,9 +11,7 @@ import SearchMap from './SearchMap';
 
 const libraries = ['places'];
 const mapContainerStyle = {
-	// width: '800px',
-	height: '800px',
-	margin: '0 auto',
+	height: '100vh',
 };
 const options = {
 	//   styles: mapStyles,

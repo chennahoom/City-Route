@@ -1,7 +1,8 @@
+import { Grid, Container } from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles';
+
 import SearchTripForm from "../Components/SearchTripForm";
 import Trip from "../Components/Trip";
-import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
 // import Amsterdam from '../static/';
 import Amsterdam from '../static/amsterdam4.jpg';
 
@@ -31,6 +32,8 @@ let trips = [
   { name: "Berlin", image: "https://i.postimg.cc/d3td1fFv/image.jpg" },
   { name: "London", image: "https://i.postimg.cc/85GL85n7/image.jpg" },
 ];
+
+
 
 function SearchTripsPage(props) {
   const classes = useStyles();
