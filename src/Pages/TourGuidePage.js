@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import AddTripForm from '../Components/TripFormTG';
 import Map from '../Components/Map';
 import TripsList from '../Components/TripsList';
-import { useHistory } from 'react-router-dom';
-
+import { Link as Scroll } from "react-scroll";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { AppBar, IconButton, Toolbar, Collapse } from "@material-ui/core";
 import Modal from '@material-ui/core/Modal';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -101,7 +102,9 @@ function TourGuidePage(props) {
 	return (
 		<div>
 			<AddTripForm editTrip={editTrip} user={props.user} addTrip={addTrip} isEditing={props.isEditing} updateTrip={updateTrip} />
+			<div id="trip-list">
 			<TripsList
+				id="trip-list"
 				tourGuideTrips={props.user?.my_trips || []}
 				user={props.user}
 				editTrip={editTrip}
@@ -114,7 +117,7 @@ function TourGuidePage(props) {
 					setDuplicate(trip);
 					setOpen(true);
 				}}
-			/>
+			/></div>
 			<Modal
 				aria-labelledby="transition-modal-title"
 				aria-describedby="transition-modal-description"
@@ -133,7 +136,7 @@ function TourGuidePage(props) {
 						<label htmlFor="">date</label>
 						<input name="tour_date" type="text" onChange={onChange} />
 						<label htmlFor="">time</label>
-						<input type="text" name="start_time" onChange={onChange} />
+						<input type="text" name="tour_time" onChange={onChange} />
 						<br />
 
 						<button onClick={duplicateTrip} type="button" className="btn btn-primary">

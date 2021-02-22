@@ -136,7 +136,7 @@ function Map(props) {
         options={options}
         onLoad={onMapLoad}
       >
-        {/* {props.showStops?( */}
+        {/* {props.showStops?(
         {stopsCity.Paris.map((stop, i) => (
           <Marker
             key={i}
@@ -145,7 +145,7 @@ function Map(props) {
               lng: stop.lng,
             }}
           />
-        ))}
+        ))} */}
       </GoogleMap>
     </div>
   );
