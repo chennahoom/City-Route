@@ -70,8 +70,8 @@ const centers = {
 		lng: 13.404954,
 	},
 	'London': {
-		lat: 51.507351,
-		lng: 34.855499,
+		lat: 51.50088279063649,
+		lng: -0.12446446928391436,
 	},
 	'Paris': {
 		lat: 48.856613,
@@ -138,7 +138,7 @@ function MapTG(props) {
 	console.log('selectedMarkers', selectedMarkers);
 
 	return (
-		<div>
+		<div className="nap-TG">
 			{/* <Locate panTo={panTo} /> */}
 			<SearchMap panTo={panTo} />
 

@@ -2,7 +2,7 @@ import TripResults from '../Components/TripResults';
 import { useEffect, useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Berlin1 from '../static/Amsterdam.jpg';
+import Berlin1 from '../static/amsterdam.jpg';
 import { makeStyles } from '@material-ui/core/styles';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';

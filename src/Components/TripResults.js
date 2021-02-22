@@ -5,15 +5,7 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import TripDetails from '../Pages/TripDetails';
-import Map from '../Components/Map';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import Paris6 from '../static/Paris6.jpg';
@@ -27,6 +19,27 @@ import Berlin2 from '../static/Berlin2.jpg';
 import Berlin3 from '../static/Berlin3.jpg';
 import Berlin4 from '../static/Berlin4.jpg';
 import Berlin5 from '../static/Berlin5.jpg';
+import Berlin6 from '../static/Berlin6.jpg';
+import London from '../static/London.jpg';
+import London1 from '../static/London1.jpg';
+import London2 from '../static/London2.jpg';
+import London3 from '../static/London3.jpg';
+import London4 from '../static/London4.jpg';
+import London5 from '../static/London5.jpg';
+import London6 from '../static/London6.jpg';
+import London7 from '../static/London7.jpg';
+import amsterdam from '../static/amsterdam.jpg';
+import amsterdam1 from '../static/amsterdam1.jpg';
+import amsterdam2 from '../static/amsterdam2.jpg';
+import amsterdam3 from '../static/amsterdam3.jpg';
+import amsterdam4 from '../static/amsterdam4.jpg';
+import amsterdam5 from '../static/amsterdam5.jpg';
+import telaviv1 from '../static/telaviv1.jpg';
+import telaviv2 from '../static/telaviv2.jpg';
+import telaviv3 from '../static/telaviv3.jpg';
+import telaviv4 from '../static/telaviv4.jpg';
+import telaviv5 from '../static/telaviv5.jpg';
+import telaviv6 from '../static/Tel-Aviv.jpg';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -76,16 +89,21 @@ function TripResults(props) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
-
   let myImages = {
-    'Paris': [ {src: Paris1},{src :Paris2},{src :Paris3},{src :Paris4},{src :Paris5},],
-    'Berlin': [ {src: Berlin1},{src :Berlin2},{src :Berlin3},{src :Berlin4},{src :Berlin5},],
+    'Paris': [ {src: Paris1},{src :Paris2},{src :Paris3},{src :Paris4},{src :Paris5},{src :Paris6}],
+    'Berlin': [ {src: Berlin1},{src :Berlin2},{src :Berlin3},{src :Berlin4},{src :Berlin5}, {src :Berlin6},],
+    'London': [ {src: London1},{src :London},{src :London3},{src :London2},{src :London4},{src :London5},],
+    'TelAviv': [ {src: telaviv2},{src :telaviv5},{src :telaviv3},{src :telaviv4},{src :telaviv1},{src :telaviv6},],
+    'Amsterdam': [ {src: amsterdam},{src :amsterdam1},{src :amsterdam2},{src :amsterdam3},{src :amsterdam4},{src :amsterdam5},],
   }
 
-  const rand = Math.floor(Math.random() * 5);
+  const rand = Math.floor(Math.random() * 6);
   let img = '';
   if(props.trip?.trip_name_city === 'Paris'){ img = myImages.Paris[rand].src; }
   else if(props.trip?.trip_name_city === 'Berlin'){ img = myImages.Berlin[rand].src;} 
+  else if(props.trip?.trip_name_city === 'London'){ img = myImages.London[rand].src;} 
+  else if(props.trip?.trip_name_city === 'Tel-Aviv'){ img = myImages.TelAviv[rand].src;} 
+  else if(props.trip?.trip_name_city === 'Amsterdam'){ img = myImages.Amsterdam[rand].src;} 
 
   return (
         <Card className={classes.root}>
