@@ -66,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
   appbarTitle: {
     flexGrow: "1",
     color: "white",
+    underline: "none",
   },
   icon: {
     color: "#fff",
