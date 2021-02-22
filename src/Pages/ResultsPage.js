@@ -1,14 +1,8 @@
 import TripResults from "../Components/TripResults";
 import { useEffect, useState } from "react";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import Berlin1 from "../static/Amsterdam.jpg";
+import Berlin1 from "../static/amsterdam.jpg";
 import { makeStyles } from "@material-ui/core/styles";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Card from "@material-ui/core/Card";
 import Map from "../Components/Map";
 
 const useStyles = makeStyles((theme) => ({
@@ -39,10 +33,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ResultsPage(props) {
+
+
   const classes = useStyles();
 
   const [results, setResults] = useState([]);
   const [low, setLow] = useState([]);
+  const [stops, setStops] = useState([]);
+  const [showStops, setShowStops] = useState(false);
 
   useEffect(() => {
     fetch("https://city-route.herokuapp.com/api/trips")
@@ -73,6 +71,18 @@ function ResultsPage(props) {
       });
   }, []);
 
+  // useEffect(() => {
+  //   if(stops){
+  //     stops.map((stop, i) => {
+  //       fetch(`https://city-route.herokuapp.com/api/stops/${stop}`)
+  //       .then((res) => res.json())
+  //       .then((body) => {
+  //         console.log("searchTripForm", body);
+  //       }
+  //     });
+    
+  // }, stops);
+
   return (
     <div className="results">
       <Typography variant="h3">
@@ -82,15 +92,26 @@ function ResultsPage(props) {
       <section id="left">
         {results.map((trip, i) => (
           <TripResults
+            setShowStops={setShowStops}
             serverUpdateUserTrips={props.serverUpdateUserTrips}
             low={low}
             trip={trip}
             key={i}
+            setStops={setStops}
           />
         ))}
       </section>
       <section id="right">
-        <Map city={props.searchTripForm.city} />
+        {showStops?(
+            <div>
+              {/* {stops.map((stop, i) => ( */}
+                <Map city={props.searchTripForm.city} showStops={showStops} />
+              {/* ))} */}
+            </div>
+          // <Map city={props.searchTripForm.city} stops={stops}/>
+        ):(
+          <Map city={props.searchTripForm.city} showStops={showStops}/>
+        )}
       </section>
     </div>
 

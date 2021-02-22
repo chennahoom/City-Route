@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {useEffect, useState } from "react";
 import Berlin from '../static/Berlin1.jpg';
-import Amsterdam from '../static/Amsterdam.jpg';
+import Amsterdam from '../static/amsterdam.jpg';
 import TelAviv from '../static/Tel-Aviv.jpg';
 import Paris from '../static/Paris6.jpg';
 import London from '../static/London.jpg';
