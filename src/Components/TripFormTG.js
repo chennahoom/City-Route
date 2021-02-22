@@ -328,10 +328,8 @@ const useStyles = makeStyles((theme) => ({
   goDown:{
     justifyContent:'center',
     alignItems:'center',
+    
   },
-  gridMap:{
-    backgroundColor:'white',
-  }
 }));
 
 function AddTripForm(props) {
