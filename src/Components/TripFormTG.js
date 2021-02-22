@@ -17,7 +17,6 @@ function AddTripForm(props) {
 	const [trip, setTrip] = useState(props.editTrip || initForm);
 	const [stops, setStops] = useState([]);
 	const [selectedStops, setSelectedStops] = useState([]);
-	// const [marker, setMarker] = useEffect({});
 
 	useEffect(() => {
 		if (props.editTrip) {

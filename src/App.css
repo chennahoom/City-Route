@@ -24,7 +24,7 @@ body {
 }
 
 /* ----------------header--------------- */
-.nav-logo {
+/* .nav-logo {
   height: 75px;
   width: 90px;
 }
@@ -49,7 +49,8 @@ body {
 
 #mainList header {
   box-shadow: 2px 2px 12px 0px #aaa;
-}
+  
+} */
 
 /* ----------------forms--------------- */
 
@@ -183,6 +184,10 @@ form {
   position: relative;
 }
 
+#logoutbutton{
+  background-color: green;
+  width: 30px;
+}
 .buttonText {
   color: #4285f4;
   font-weight: bolder;
@@ -224,4 +229,25 @@ form {
 .locate img {
   width: 30px;
   cursor: pointer;
+}
+
+
+/* -----NEw Ariel and Halel */
+
+.results{
+  display: flex;
+  justify-content: space-around;
+}
+
+#right{
+  width: 40%;
+  background-position: top right;
+}
+
+#left{
+  width: 60%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap:wrap;
+  /* overflow-y: scroll; */
 }

@@ -10,65 +10,169 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import TripDetailsPage from '../Pages/TripDetailsPage';
-import Map from '../Components/Map'
+import TripDetails from '../Pages/TripDetails';
+import Map from '../Components/Map';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardMedia from '@material-ui/core/CardMedia';
+import Paris6 from '../static/Paris6.jpg';
+import Paris1 from '../static/Paris1.jpg';
+import Paris2 from '../static/Paris2.jpg';
+import Paris4 from '../static/Paris4.jpg';
+import Paris5 from '../static/Paris5.jpg';
+import Paris3 from '../static/Paris3.jpg';
+import Berlin1 from '../static/Berlin1.jpg';
+import Berlin2 from '../static/Berlin2.jpg';
+import Berlin3 from '../static/Berlin3.jpg';
+import Berlin4 from '../static/Berlin4.jpg';
+import Berlin5 from '../static/Berlin5.jpg';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    // minWidth: 200,
+    margin:15,
+    width: "45%",
   },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    flexBasis: '33.33%',
-    flexShrink: 0,
+  media: {
+    height: 200,    
   },
-  secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
+  paper: {
+    height: 140,
+    width: 100,
   },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+  control: {
+    padding: theme.spacing(2),
   },
-  pos: {
-    marginBottom: 12,
-  },
-  acco: {
-    display:'inline',
+  card:{
+    marginTop:15,
   }
+
+  // heading: {
+  //   fontSize: theme.typography.pxToRem(15),
+  //   flexBasis: '33.33%',
+  //   flexShrink: 0,
+  // },
+  // secondaryHeading: {
+  //   fontSize: theme.typography.pxToRem(15),
+  //   color: theme.palette.text.secondary,
+  // },
+  // bullet: {
+  //   display: 'inline-block',
+  //   margin: '0 2px',
+  //   transform: 'scale(0.8)',
+  // },
+  // pos: {
+  //   marginBottom: 12,
+  // },
+  // acco: {
+  //   display:'inline',
+  
 }));
 
 function TripResults(props) {
+  const [spacing, setSpacing] = React.useState(2);
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
-  return (
-    <Accordion className={classes.root}>
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
-      >
-        <Typography className={classes.heading}>{props.trip.trip_name_city}</Typography>
-        <Typography className={classes.secondaryHeading}>{props.trip.tour_date}{bull}{props.trip.tour_time}{bull}{props.trip.start_time}</Typography>
 
-      </AccordionSummary>
-      <AccordionDetails className={classes.acco}>
+  let myImages = {
+    'Paris': [ {src: Paris1},{src :Paris2},{src :Paris3},{src :Paris4},{src :Paris5},],
+    'Berlin': [ {src: Berlin1},{src :Berlin2},{src :Berlin3},{src :Berlin4},{src :Berlin5},],
+  }
+
+  const rand = Math.floor(Math.random() * 5);
+  let img = '';
+  if(props.trip?.trip_name_city === 'Paris'){ img = myImages.Paris[rand].src; }
+  else if(props.trip?.trip_name_city === 'Berlin'){ img = myImages.Berlin[rand].src;} 
+
+  return (
+        <Card className={classes.root}>
+          <CardActionArea>
+              <CardMedia
+                  className={classes.media}
+                  // src={Berlin}
+                  image={img}
+                  title="Contemplative Reptile"
+              />
+              <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                      {props.trip.trip_name_city}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" component="p">
+                      trip name: {props.trip.trip_name_city}
+                  </Typography>
+              </CardContent>
+          </CardActionArea>
+          <CardActions>
+              <Button size="small" color="primary">
+                  Share
+              </Button>
+              <Button size="small" color="primary">
+                  Learn More
+              </Button>
+          </CardActions>
+        </Card>
+      //  </Grid>
+      /* <Grid item xs>
+        <Paper>
         <Typography>
-          <TripDetailsPage serverUpdateUserTrips={props.serverUpdateUserTrips} user={props.user} lowPriceTrips={props.low} tripId={props.trip.id} city={props.trip.trip_name_city} />
+          <TripDetails serverUpdateUserTrips={props.serverUpdateUserTrips} user={props.user} lowPriceTrips={props.low} tripId={props.trip.id} city={props.trip.trip_name_city} />
         </Typography>
-      </AccordionDetails>
-    </Accordion>
+        </Paper>
+      </Grid> */
+
+    // <Grid container>
+    //   <Grid item xs={6}>
+    //     <Card className={classes.root}>
+    //       <CardContent>
+    //         <Typography className={classes.title} color="textSecondary" gutterBottom>
+    //           {props.trip.trip_name_city}
+    //         </Typography>
+    //         <Typography variant="h5" component="h2">
+    //           {props.trip.tour_date}{bull}{props.trip.tour_time}{bull}{props.trip.start_time}
+    //         </Typography>
+    //       </CardContent>
+
+    //       <CardActions>
+    //         <Link to={`/maps/${props.trip.trip_name_city}?id=${props.trip.id}`}>
+    //           <Button size="small">Learn More</Button>
+    //         </Link>
+    //       </CardActions>
+    //     </Card>
+    //   </Grid>
+
+
+    //   <Grid item xs={3}>
+    //     Here the map
+    //     </Grid>
+    // </Grid>
+    // <Accordion className={classes.root}>
+    //   <AccordionSummary
+    //     expandIcon={<ExpandMoreIcon />}
+    //     aria-controls="panel1a-content"
+    //     id="panel1a-header"
+    //   >
+    //     <Typography className={classes.heading}>{props.trip.trip_name_city}</Typography>
+    //     <Typography className={classes.secondaryHeading}>{props.trip.tour_date}{bull}{props.trip.tour_time}{bull}{props.trip.start_time}</Typography>
+
+    //   </AccordionSummary>
+    //   <AccordionDetails className={classes.acco}>
+        // <Typography>
+        //   <TripDetails serverUpdateUserTrips={props.serverUpdateUserTrips} user={props.user} lowPriceTrips={props.low} tripId={props.trip.id} city={props.trip.trip_name_city} />
+        // </Typography>
+    //   </AccordionDetails>
+    // </Accordion>
 
     // <Card className={classes.root}>
     //   <CardContent>
     //     <Typography className={classes.title} color="textSecondary" gutterBottom>
     //       {props.trip.trip_name_city}
     //     </Typography>
-        // <Typography variant="h5" component="h2">
-        //   {props.trip.tour_date}{bull}{props.trip.tour_time}{bull}{props.trip.start_time}
-        // </Typography>
+    //     <Typography variant="h5" component="h2">
+    //       {props.trip.tour_date}{bull}{props.trip.tour_time}{bull}{props.trip.start_time}
+    //     </Typography>
     //   </CardContent>
 
     //   <CardActions>

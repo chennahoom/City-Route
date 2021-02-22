@@ -10,17 +10,27 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import AppForm from "../View/AppForm";
-
+import { useEffect } from "react";
+import { AppBar, IconButton, Toolbar, Collapse } from "@material-ui/core";
+import SortIcon from "@material-ui/icons/Sort";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { Link as Scroll } from "react-scroll";
 const useStyles = makeStyles((theme) => ({
   root: {
-    minHeight: '100vh',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    [theme.breakpoints.down('md')]: {
-      flexDirection: 'column',
+    minHeight: "100vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "column",
     },
   },
+    homepage: {
+      minHeight: "100vh",
+      backgroundImage: `url(${process.env.PUBLIC_URL + "/assets/bg10.jpg"})`,
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "cover",
+    },
   form: {
     marginTop: theme.spacing(6),
     padding: 20,
@@ -33,10 +43,51 @@ const useStyles = makeStyles((theme) => ({
   feedback: {
     marginTop: theme.spacing(2),
   },
-  }));
+  details: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+    fontFamily: "Nunito",
+  },
+  appbar: {
+    background: "none",
+  },
+  appbarWrapper: {
+    width: "80%",
+    margin: "0 auto",
+  },
+  appbarTitle: {
+    flexGrow: "1",
+  },
+  icon: {
+    color: "#fff",
+    fontSize: "2rem",
+  },
+  colorText: {
+    color: "000",
+  },
+  container: {
+    textAlign: "center",
+  },
+  title: {
+    color: "#000",
+    fontSize: "4.5rem",
+  },
+  goDown: {
+    color: "#000",
+    fontSize: "4rem",
+  },
+}));
 
 function Register(props) {
   const classes = useStyles();
+
+  const [checked, setChecked] = useState(false);
+  useEffect(() => {
+    setChecked(true);
+  }, []);
+
   const initForm = {
     full_name: "",
     email: "",
@@ -82,80 +133,116 @@ function Register(props) {
   const [currency, setCurrency] = useState("");
 
   return (
-    <div className={classes.root} id="signup">
-    <AppForm>
-      <React.Fragment>
-        <Typography variant="h3" gutterBottom marked="center" align="center">
-          Sign Up
-        </Typography>
-        <Typography variant="body2" align="center">
-          <Link href="#" onClick={props.signIn} underline="always">
-            Already have an account?
-          </Link>
-          <h4 className="error">{props.serverError}</h4>
-        </Typography>
-
-        <FormControl onSubmit={onSave} className={classes.form}>
-          <Grid container spacing={2}>
-            <TextField
-              fullWidth
-              label="Full Name"
-              name="full_name"
-              defaultValue={user.name}
-              required
-              onChange={handleInputChange}
-            />
-            <TextField
-              fullWidth
-              label="Email"
-              name="email"
-              defaultValue={user.email}
-              type="email"
-              required
-              onChange={handleInputChange}
-            />
-            <Grid item xs={12} sm={6}>
-              <TextField
-                id="select"
-                label="Type of user"
-                value={currency}
-                name="type_of_user"
-                required
-                fullWidth
-                select
-                onChange={handleInputChange}
-              >
-                {typeOfUser.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <TextField
-                fullWidth
-                label="Phone number"
-                name="phone"
-                type="tel"
-                required
-                onChange={handleInputChange}
-              />
-            </Grid>
-            <Button
-              fullWidth
-              type="reset"
-              onClick={onSave}
-              className={classes.button}
-              variant="contained"
+    <div className={classes.homepage}>
+      <div className={classes.details} id="header">
+        {/* <AppBar className={classes.appbar} elevation={0}>
+          <Toolbar className={classes.appbarWrapper}>
+            <h1 className={classes.appbarTitle}>
+              City-<span className={classes.colorText}>Route.</span>
+            </h1>
+            <IconButton>
+              <SortIcon className={classes.icon} />
+            </IconButton>
+          </Toolbar>
+        </AppBar> */}
+        <Collapse
+          in={checked}
+          {...(checked ? { timeout: 2000 } : {})}
+          collapsedHeight={50}
+        >
+          <div className={classes.container}>
+            <h1 className={classes.title}>
+              Welcome to <br />
+              City<span className={classes.colorText}>Route.</span>
+            </h1>
+            <Scroll to="signup" smooth={true}>
+              <IconButton>
+                <ExpandMoreIcon className={classes.goDown} />
+              </IconButton>
+            </Scroll>
+          </div>
+        </Collapse>
+      </div>
+      <div className={classes.root} id="signup">
+        <AppForm>
+          <React.Fragment>
+            <Typography
+              variant="h3"
+              gutterBottom
+              marked="center"
+              align="center"
             >
               Sign Up
-            </Button>
-          </Grid>
-        </FormControl>
-      </React.Fragment>
-    </AppForm>
+            </Typography>
+            <Typography variant="body2" align="center">
+              <Link href="#" onClick={props.signIn} underline="always">
+                Already have an account?
+              </Link>
+              <h4 className="error">{props.serverError}</h4>
+            </Typography>
+
+            <FormControl onSubmit={onSave} className={classes.form}>
+              <Grid container spacing={2}>
+                <TextField
+                  fullWidth
+                  label="Full Name"
+                  name="full_name"
+                  defaultValue={user.name}
+                  required
+                  onChange={handleInputChange}
+                />
+                <TextField
+                  fullWidth
+                  label="Email"
+                  name="email"
+                  defaultValue={user.email}
+                  type="email"
+                  required
+                  onChange={handleInputChange}
+                />
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    id="select"
+                    label="Type of user"
+                    value={currency}
+                    name="type_of_user"
+                    required
+                    fullWidth
+                    select
+                    onChange={handleInputChange}
+                  >
+                    {typeOfUser.map((option) => (
+                      <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                </Grid>
+
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    fullWidth
+                    label="Phone number"
+                    name="phone"
+                    type="tel"
+                    required
+                    onChange={handleInputChange}
+                  />
+                </Grid>
+                <Button
+                  fullWidth
+                  type="reset"
+                  onClick={onSave}
+                  className={classes.button}
+                  variant="contained"
+                >
+                  Sign Up
+                </Button>
+              </Grid>
+            </FormControl>
+          </React.Fragment>
+        </AppForm>
+      </div>
     </div>
   );
 }
