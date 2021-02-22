@@ -1,6 +1,6 @@
 import TripResults from "../Components/TripResults";
 import { useEffect, useState } from "react";
-import Berlin1 from "../static/amsterdam.jpg";
+import Berlin1 from "../static/Amsterdam.jpg";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Map from "../Components/Map";
