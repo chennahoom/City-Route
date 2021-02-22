@@ -85,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function TripResults(props) {
-  const [spacing, setSpacing] = React.useState(2);
+  // const [spacing, setSpacing] = React.useState(2);
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
