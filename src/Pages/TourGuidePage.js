@@ -99,6 +99,55 @@ function TourGuidePage(props) {
 	}
 
 
+	// return (
+	// 	<div>
+	// 		<AddTripForm editTrip={editTrip} user={props.user} addTrip={addTrip} isEditing={props.isEditing} updateTrip={updateTrip} />
+	// 		<div id="trip-list">
+	// 		<TripsList
+	// 			id="trip-list"
+	// 			tourGuideTrips={props.user?.my_trips || []}
+	// 			user={props.user}
+	// 			editTrip={editTrip}
+	// 			setEditTrip={setEditTrip}
+	// 			userTrips={props.userTrips}
+	// 			deleteTrip={props.deleteTrip}
+	// 			setListChanged={setListChanged}
+	// 			listChanged={listChanged}
+	// 			onDuplicate={trip => {
+	// 				setDuplicate(trip);
+	// 				setOpen(true);
+	// 			}}
+	// 		/></div>
+	// 		<Modal
+	// 			aria-labelledby="transition-modal-title"
+	// 			aria-describedby="transition-modal-description"
+	// 			className={classes.modal}
+	// 			open={open}
+	// 			onClose={() => setOpen(false)}
+	// 			closeAfterTransition
+	// 			BackdropProps={{
+	// 				timeout: 500,
+	// 			}}>
+	// 			<div>
+	// 				<div className={classes.paper}>
+	// 					<h2>How many spaces do you want to save?</h2>
+	// 					<div>form</div>
+
+	// 					<label htmlFor="">date</label>
+	// 					<input name="tour_date" type="text" onChange={onChange} />
+	// 					<label htmlFor="">time</label>
+	// 					<input type="text" name="tour_time" onChange={onChange} />
+	// 					<br />
+
+	// 					<button onClick={duplicateTrip} type="button" className="btn btn-primary">
+	// 						next
+	// 					</button>
+	// 				</div>
+	// 			</div>
+	// 		</Modal>
+	// 	</div>
+	// );
+
 	return (
 		<div>
 			<AddTripForm editTrip={editTrip} user={props.user} addTrip={addTrip} isEditing={props.isEditing} updateTrip={updateTrip} />
