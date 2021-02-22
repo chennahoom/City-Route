@@ -28,7 +28,7 @@ import London4 from "../static/London4.jpg";
 import London5 from "../static/London5.jpg";
 import London6 from "../static/London6.jpg";
 import London7 from "../static/London7.jpg";
-import amsterdam from "../static/Amsterdam.jpg";
+import amsterdam from "../static/amsterdam.jpg";
 import amsterdam1 from "../static/amsterdam1.jpg";
 import amsterdam2 from "../static/amsterdam2.jpg";
 import amsterdam3 from "../static/amsterdam3.jpg";
@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function TripResults(props) {
-  const [spacing, setSpacing] = React.useState(2);
+  // const [spacing, setSpacing] = React.useState(2);
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
 
@@ -144,6 +144,12 @@ function TripResults(props) {
     img = myImages.Amsterdam[rand].src;
   }
 
+  const handleStops = () =>{
+    console.log(props.trip.stops);
+    props.setShowStops(true);
+    props.setStops(props.trip.stops);
+  }
+
   return (
     <Card className={classes.root}>
       <CardActionArea>
@@ -155,7 +161,7 @@ function TripResults(props) {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {props.trip.trip_name_city}
+            {props.trip.tour_date}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
             trip name: {props.trip.trip_name_city}
@@ -163,8 +169,8 @@ function TripResults(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Share
+        <Button onClick={handleStops} size="small" color="primary">
+          Stops
         </Button>
         <Button size="small" color="primary">
           Learn More
