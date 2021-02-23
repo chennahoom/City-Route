@@ -129,13 +129,13 @@ function AddTripForm(props) {
 
   const onSave = (event) => {
     event.preventDefault();
-    if (
-      !trip.trip_name_city ||
-      !trip.tour_date ||
-      !trip.tour_time ||
-      !trip.start_time
-    )
-      return;
+    // if (
+    //   !trip.trip_name_city ||
+    //   !trip.tour_date ||
+    //   !trip.tour_time ||
+    //   !trip.start_time
+    // )
+    //   return;
     trip.stops = selectedStops;
 
     if (!editTrip) {
