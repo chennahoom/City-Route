@@ -6,18 +6,13 @@ import { AppBar, IconButton, Toolbar } from "@material-ui/core";
 import SortIcon from "@material-ui/icons/Sort";
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import DraftsIcon from "@material-ui/icons/Drafts";
-import SendIcon from "@material-ui/icons/Send";
 import WorkOutlineIcon from "@material-ui/icons/WorkOutline";
 import AssignmentIndOutlinedIcon from "@material-ui/icons/AssignmentIndOutlined";
 import ExitToAppOutlinedIcon from "@material-ui/icons/ExitToAppOutlined";
-
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import { useState } from "react";
@@ -92,9 +87,7 @@ function Header(props) {
     setAnchorEl(event.currentTarget);
   };
 
-  // const handleOpenMenu = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
+
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -115,7 +108,6 @@ function Header(props) {
             variant="contained"
             color="primary"
             onClick={handleClick}
-            // onMouseOver={handleOpenMenu}
           >
             <SortIcon className={classes.icon} />
           </IconButton>
@@ -130,14 +122,14 @@ function Header(props) {
               <ListItemIcon>
                 <WorkOutlineIcon fontSize="small" />
               </ListItemIcon>
-              <ListItemText primary="My Trips" />
+              <ListItemText primary="Search for a Trip" />
             </StyledMenuItem>
 
             <StyledMenuItem component={Link} to="/myTripsPage">
               <ListItemIcon>
                 <AssignmentIndOutlinedIcon fontSize="small" />
               </ListItemIcon>
-              <ListItemText primary="My Account" />
+              <ListItemText primary="My Trips" />
             </StyledMenuItem>
 
             <StyledMenuItem component={Link} to="/signup">

@@ -1,11 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-import Modal from "@material-ui/core/Modal";
 import TripDetails from "../Pages/TripDetails";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-import { useHistory, useParams, useLocation } from "react-router-dom";
+
+import { useHistory } from "react-router-dom";
 
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItem from "@material-ui/core/ListItem";
@@ -17,6 +15,9 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import CloseIcon from "@material-ui/icons/Close";
 import Slide from "@material-ui/core/Slide";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -62,6 +63,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import { useParams } from "react-router-dom";
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -154,6 +156,27 @@ function TripResults(props) {
     setOpenInfo(false);
   };
 
+  
+
+  const [openJoin, setOpenJoin] = useState(false);
+
+  const handleClickOpenJoin = () => {
+    setOpenJoin(true);
+  };
+  const handleCloseJoin = () => {
+    setOpenJoin(false);
+  };
+
+
+  const [openJoinEx, setOpenJoinEx] = useState(false);
+
+  const handleClickOpenJoinEx = () => {
+    setOpenJoinEx(true);
+  };
+  const handleCloseJoinEx = () => {
+    setOpenJoinEx(false);
+  };
+
   const [tourGuide, setTourGuide] = useState([]);
 
   const bull = <span className={classes.bullet}>•</span>;
@@ -231,14 +254,81 @@ function TripResults(props) {
     props.setStops(props.trip.stops);
   };
 
+  const [results, setResults] = useState([]);
+  const [tickets, setTickets] = useState({});
+  const [stops, setStops] = useState([]);
+  const [trip, setTrip] = useState("");
+  const [open, setOpen] = useState(false);
+  const [openInfoModal, setOpenInfoModal] = useState(false);
+
+  const { city } = useParams();
+
+  const { tripId } = props;
+  console.log("tripId", tripId);
+
+  useEffect(() => {
+    fetch(`https://city-route.herokuapp.com/api/trips/${props.trip.id}`)
+      .then((res) => res.json())
+      .then((body) => {
+        setResults(body);
+        console.log("body", body);
+        tourGuideId(body.tour_guide_id);
+        console.log(body.tickets_bought);
+        let i = body.tickets_bought + 2;
+        console.log(i);
+        setTrip(props.trip.id);
+      });
+  }, [props.trip.id]);
+
+
+
+  const tourGuideId = (id) => {
+    fetch(`https://city-route.herokuapp.com/api/users/${id}`)
+      .then((res) => res.json())
+      .then((body) => {
+        setTourGuide(body);
+      });
+  };
+
+  const updateSpace = (info) => {
+    console.log(info);
+    fetch(`https://city-route.herokuapp.com/api/trips/${props.trip.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        ticketsBought: info,
+      }),
+    })
+      .then((response) => response.json())
+      .then((info) => {
+        console.log(props.trip.id);
+        console.log(info.ticketsBought);
+        setTrip(info);
+      });
+  };
+
   const saleTrip = () => {
-    if (props.low.length) {
-      setOpenInfo(true);
+    if (props.lowPriceTrips.length) {
+      setOpenInfoModal(true);
     } else {
-      // history.push('/saleTrips');
-      setOpenInfo(false);
-      // setOpenInfo(true);
+      setOpenInfoModal(false);
+      setOpen(true);
     }
+  };
+
+  const numOfTic = () => {
+    const info = parseInt(results.ticketsBought) + parseInt(tickets);
+    updateSpace(info);
+    props.serverUpdateUserTrips(props.trip.id);
+  };
+
+  const handleTick = (event) => {
+    event.preventDefault();
+    setTickets(event.target.value);
+    console.log(tickets);
   };
 
   return (
@@ -272,32 +362,6 @@ function TripResults(props) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          {/* <Button size="small" color="primary" onClick={handleOpen}>
-              View Trip Map
-            </Button>
-
-            <Modal
-              aria-labelledby="transition-modal-title"
-              aria-describedby="transition-modal-description"
-              className={classes.modals}
-              open={open}
-              onClose={handleClose}
-              closeAfterTransition
-              BackdropProps={{
-                timeout: 500,
-              }}
-            >
-              <div>
-                <TripDetails
-                  serverUpdateUserTrips={props.serverUpdateUserTrips}
-                  user={props.user}
-                  lowPriceTrips={props.low}
-                  tripId={props.trip.id}
-                  city={props.trip.trip_name_city}
-                />
-              </div>
-            </Modal> */}
-
           <Button size="small" color="primary" onClick={handleClickOpenMap}>
             View Map
           </Button>
@@ -325,11 +389,14 @@ function TripResults(props) {
             </DialogActions>
           </Dialog>
 
+
+        
+
           <div>
             <Button size="small" color="primary" onClick={handleClickOpen}>
               Join Trip
             </Button>
-
+ 
             <Dialog
               fullScreen
               open={openInfo}
@@ -348,11 +415,58 @@ function TripResults(props) {
                   </IconButton>
                   <Typography variant="h6" className={classes.title}>
                     Here are discounted trips to view before you buy a full
-                    priced ticket. If not, you can exit. 
+                    priced ticket. If not, you can exit.
                   </Typography>
-                  <Button autoFocus color="inherit" onClick={handleClickClose}>
-                    save
+                  <Button autoFocus color="inherit" onClick={handleClickOpenJoinEx}>
+                    Exit and Join Selected Trip
                   </Button>
+                  <Dialog
+                          open={openJoinEx}
+                          onClose={handleCloseJoinEx}
+                          aria-labelledby="alert-dialog-title"
+                          aria-describedby="alert-dialog-description"
+                        >
+                          <DialogTitle id="alert-dialog-title">
+                            {"How many tickets would you like to buy?"}
+                          </DialogTitle>
+                          <DialogContent>
+                            <DialogContentText id="alert-dialog-description">
+                              <InputLabel id="tick">Num of Tickets:</InputLabel>
+                              <Select
+                                labelId="tick"
+                                id="demo-simple-select-filled"
+                                value={tickets}
+                                onChange={handleTick}
+                              >
+                                <MenuItem value="">
+                                  <em>None</em>
+                                </MenuItem>
+                                <MenuItem value="1">1</MenuItem>
+                                <MenuItem value="2">2</MenuItem>
+                                <MenuItem value="3">3</MenuItem>
+                                <MenuItem value="4">4</MenuItem>
+                                <MenuItem value="5">5</MenuItem>
+                              </Select>
+                            </DialogContentText>
+                          </DialogContent>
+                          <DialogActions>
+                            <Button onClick={handleCloseJoin} color="primary">
+                              Exit
+                            </Button>
+                            <Button
+                              onClick={() => {
+                                handleCloseJoinEx();
+                                numOfTic();
+                                history.push("/myTripsPage");
+                              }}
+                              color="primary"
+                              autoFocus
+                            >
+                              Join
+                            </Button>
+                          </DialogActions>
+                        </Dialog>
+
                 </Toolbar>
               </AppBar>
               <div className={classes.trips}>
@@ -371,69 +485,63 @@ function TripResults(props) {
                             {trip.start_time}
                           </Typography>
                         </CardContent>
-                        <Button>Join This Trip</Button>
+                        <Button onClick={handleClickOpenJoin}>
+                          Join This Trip
+                        </Button>
+                        <Dialog
+                          open={openJoin}
+                          onClose={handleCloseJoin}
+                          aria-labelledby="alert-dialog-title"
+                          aria-describedby="alert-dialog-description"
+                        >
+                          <DialogTitle id="alert-dialog-title">
+                            {"How many tickets would you like to buy?"}
+                          </DialogTitle>
+                          <DialogContent>
+                            <DialogContentText id="alert-dialog-description">
+                              <InputLabel id="tick">Num of Tickets:</InputLabel>
+                              <Select
+                                labelId="tick"
+                                id="demo-simple-select-filled"
+                                value={tickets}
+                                onChange={handleTick}
+                              >
+                                <MenuItem value="">
+                                  <em>None</em>
+                                </MenuItem>
+                                <MenuItem value="1">1</MenuItem>
+                                <MenuItem value="2">2</MenuItem>
+                                <MenuItem value="3">3</MenuItem>
+                                <MenuItem value="4">4</MenuItem>
+                                <MenuItem value="5">5</MenuItem>
+                              </Select>
+                            </DialogContentText>
+                          </DialogContent>
+                          <DialogActions>
+                            <Button onClick={handleCloseJoin} color="primary">
+                              Exit
+                            </Button>
+                            <Button
+                              onClick={() => {
+                                handleCloseJoin();
+                                numOfTic();
+                                history.push("/myTripsPage");
+                              }}
+                              color="primary"
+                              autoFocus
+                            >
+                              Join
+                            </Button>
+                          </DialogActions>
+                        </Dialog>
                       </Card>
                     </div>
                   );
                 })}
               </div>
-              <List>
-                <ListItem button>
-                  <ListItemText primary="Phone ringtone" secondary="Titania" />
-                </ListItem>
-                <Divider />
-                <ListItem button>
-                  <ListItemText
-                    primary="Default notification ringtone"
-                    secondary="Tethys"
-                  />
-                </ListItem>
-              </List>
+              
             </Dialog>
           </div>
-
-          {/* <Dialog
-            open={openInfo}
-            onClose={handleClickClose}
-            aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
-          >
-            <DialogTitle id="alert-dialog-title">
-              {"Before you join, we found discounted trips."}
-            </DialogTitle>?
-            <DialogContent>
-              <DialogContentText id="alert-dialog-description">
-              <div>
-              {props.low.map((trip) => {
-                return (
-                  <div key={trip.id}>
-                    <span>
-                      {trip.trip_name_city} + {trip.id} + {trip.ticketsBought}
-                    </span>
-                    <Button
-                      // onClick={() => {
-                      //   setOpenInfoModal(false);
-                      //   history.push(
-                      //     `/maps/${trip.trip_name_city}?id=${trip.id}`
-                      //   );
-                      // }}
-                    >
-                      Get info
-                    </Button>
-                  </div>
-                );
-              })}</div>
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClickClose} color="primary">
-                Disagree
-              </Button>
-              <Button onClick={handleClickClose} color="primary" autoFocus>
-                Agree
-              </Button>
-            </DialogActions>
-          </Dialog> */}
         </CardActions>
       </Card>
     </div>
