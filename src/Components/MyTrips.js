@@ -48,9 +48,6 @@ function MyTrips(props) {
 
   return (
     <Grid item xs={12} md={4} sm={6}>
-      <Typography className={classes.title} variant="h3">
-        My Trips
-      </Typography>
       <Card className={classes.root}>
         <CardActionArea>
           <CardMedia

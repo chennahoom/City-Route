@@ -139,7 +139,19 @@ body {
   cursor: pointer;
 }
 
+<<<<<<< HEAD
 .results {
+=======
+#pageTitle{
+  color: blue;
+}
+
+
+/* -----NEw Ariel and Halel */
+/* traveler -> results */
+.results{
+  /* display: flex; */
+>>>>>>> ce6827c5808ac29423b6e349038d8e22f2e1c913
   justify-content: space-around;
   width: 100%;
 }
