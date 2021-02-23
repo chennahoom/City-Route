@@ -164,13 +164,7 @@ function TourGuideTrip(props) {
           >
             Duplicate Trip
           </Button>
-          <Button
-            onClick={() => props.setEditTrip(tripData)}
-            size="small"
-            color="primary"
-          >
-            Edit Trip
-          </Button>
+
           <Button onClick={handleDelete} size="small" color="primary">
             Delete Trip
           </Button>
