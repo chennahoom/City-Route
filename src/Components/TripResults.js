@@ -1,17 +1,28 @@
 import React from "react";
 import { useState, useEffect } from "react";
+
 import Modal from "@material-ui/core/Modal";
 import TripDetails from "../Pages/TripDetails";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import { useHistory, useParams, useLocation } from "react-router-dom";
 
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItem from "@material-ui/core/ListItem";
+import List from "@material-ui/core/List";
+import Divider from "@material-ui/core/Divider";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import CloseIcon from "@material-ui/icons/Close";
+import Slide from "@material-ui/core/Slide";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardMedia from "@material-ui/core/CardMedia";
 import Paris6 from "../static/Paris6.jpg";
@@ -46,19 +57,46 @@ import telaviv3 from "../static/telaviv3.jpg";
 import telaviv4 from "../static/telaviv4.jpg";
 import telaviv5 from "../static/telaviv5.jpg";
 import telaviv6 from "../static/Tel-Aviv.jpg";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+
+function rand() {
+  return Math.round(Math.random() * 20) - 10;
+}
+
+function getModalStyle() {
+  const top = 50 + rand();
+  const left = 50 + rand();
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // minWidth: 200,
     margin: 15,
-    // width: "45%",
+  },
+  dialog: {
+    width: "900px",
   },
   media: {
     height: 200,
   },
   paper: {
-    // height: 140,
-    // width: 100,
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+  modals: {
+    position: "absolute",
+    width: 400,
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
@@ -75,25 +113,46 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
-  trips:{
+  trips: {
     width: "35%",
     display: "inline-block",
     marginLeft: "3%",
     // width:'100%',
-  }
+  },
+  appBar: {
+    position: "relative",
+  },
+  title: {
+    marginLeft: theme.spacing(2),
+    flex: 1,
+  },
 }));
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 function TripResults(props) {
   const classes = useStyles();
   const history = useHistory();
 
-  const [open, setOpen] = useState(false);
-  const [openInfoModal, setOpenInfoModal] = useState(false);
+  const [openInfoMap, setOpenInfoMap] = useState(false);
 
-  const [openMapModal, setOpenMapModal] = useState(false);
+  const handleClickOpenMap = () => {
+    setOpenInfoMap(true);
+  };
+  const handleClickCloseMap = () => {
+    setOpenInfoMap(false);
+  };
 
-  const [openTik, setOpenTik] = useState(false);
-  const [openTikModal, setOpenTikModal] = useState(false);
+  const [openInfo, setOpenInfo] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpenInfo(true);
+  };
+  const handleClickClose = () => {
+    setOpenInfo(false);
+  };
 
   const [tourGuide, setTourGuide] = useState([]);
 
@@ -174,131 +233,209 @@ function TripResults(props) {
 
   const saleTrip = () => {
     if (props.low.length) {
-      setOpenInfoModal(true);
+      setOpenInfo(true);
     } else {
       // history.push('/saleTrips');
-      setOpenInfoModal(false);
-      setOpen(true);
+      setOpenInfo(false);
+      // setOpenInfo(true);
     }
   };
 
-  console.log(props.low);
   return (
     <div className={classes.trips}>
-    <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia className={classes.media} image={img} title="City Gallery" />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {props.trip.tour_date}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Trip Name: {props.trip.trip_name_city}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Trip Tour Guide: {tourGuide.full_name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Trip Start Time: {props.trip.start_time}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Trip Duration: {props.trip.tour_time}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Tickets Bought: {props.trip.ticketsBought}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button
-          size="small"
-          color="primary"
-          onClick={() => setOpenMapModal(true)}
-        >
-          View Trip Map
-        </Button>
-        <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          className={classes.modal}
-          open={openMapModal}
-          onClose={() => setOpenMapModal(false)}
-          closeAfterTransition
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <div>
-            <TripDetails
-              serverUpdateUserTrips={props.serverUpdateUserTrips}
-              user={props.user}
-              lowPriceTrips={props.low}
-              tripId={props.trip.id}
-              city={props.trip.trip_name_city}
-            />
-          </div>
-        </Modal>
-        <Button
-          size="small"
-          color="primary"
-          onClick={() => {
-            // setOpenInfoModal(true);
-            saleTrip();
-          }}
-        >
-          Join Trip
-        </Button>
-        <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          className={classes.modal}
-          open={openInfoModal}
-          onClose={() => setOpenInfoModal(false)}
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 500,
-          }}
-        >
-          <Fade in={openTikModal}>
-            <div className={classes.paper}>
-              <h2>How many spaces do you want to save?</h2>
+      <Card className={classes.root}>
+        <CardActionArea>
+          <CardMedia
+            className={classes.media}
+            image={img}
+            title="City Gallery"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {props.trip.tour_date}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Trip Name: {props.trip.trip_name_city}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Trip Tour Guide: {tourGuide.full_name}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Trip Start Time: {props.trip.start_time}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Trip Duration: {props.trip.tour_time}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              Tickets Bought: {props.trip.ticketsBought}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          {/* <Button size="small" color="primary" onClick={handleOpen}>
+              View Trip Map
+            </Button>
+
+            <Modal
+              aria-labelledby="transition-modal-title"
+              aria-describedby="transition-modal-description"
+              className={classes.modals}
+              open={open}
+              onClose={handleClose}
+              closeAfterTransition
+              BackdropProps={{
+                timeout: 500,
+              }}
+            >
               <div>
+                <TripDetails
+                  serverUpdateUserTrips={props.serverUpdateUserTrips}
+                  user={props.user}
+                  lowPriceTrips={props.low}
+                  tripId={props.trip.id}
+                  city={props.trip.trip_name_city}
+                />
+              </div>
+            </Modal> */}
+
+          <Button size="small" color="primary" onClick={handleClickOpenMap}>
+            View Map
+          </Button>
+          <Dialog
+            open={openInfoMap}
+            onClose={handleClickCloseMap}
+            style={{ width: "900px" }}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">{"Map of Tour"}</DialogTitle>
+            <DialogContent>
+              <TripDetails
+                serverUpdateUserTrips={props.serverUpdateUserTrips}
+                user={props.user}
+                lowPriceTrips={props.low}
+                tripId={props.trip.id}
+                city={props.trip.trip_name_city}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClickCloseMap} color="primary" autoFocus>
+                Close
+              </Button>
+            </DialogActions>
+          </Dialog>
+
+          <div>
+            <Button size="small" color="primary" onClick={handleClickOpen}>
+              Join Trip
+            </Button>
+
+            <Dialog
+              fullScreen
+              open={openInfo}
+              onClose={handleClickClose}
+              TransitionComponent={Transition}
+            >
+              <AppBar className={classes.appBar}>
+                <Toolbar>
+                  <IconButton
+                    edge="start"
+                    color="inherit"
+                    onClick={handleClickClose}
+                    aria-label="close"
+                  >
+                    <CloseIcon />
+                  </IconButton>
+                  <Typography variant="h6" className={classes.title}>
+                    Here are discounted trips to view before you buy a full
+                    priced ticket. If not, you can exit. 
+                  </Typography>
+                  <Button autoFocus color="inherit" onClick={handleClickClose}>
+                    save
+                  </Button>
+                </Toolbar>
+              </AppBar>
+              <div className={classes.trips}>
                 {props.low.map((trip) => {
                   return (
                     <div key={trip.id}>
-                      <span>
-                        {trip.trip_name_city} + {trip.id} + {trip.ticketsBought}
-                      </span>
-                      <button
-                        onClick={() => {
-                          setOpenTikModal(false);
-                          history.push(
-                            `/maps/${trip.trip_name_city}?id=${trip.id}`
-                          );
-                        }}
-                      >
-                        Get info
-                      </button>
+                      <Card className={classes.root}>
+                        <CardContent>
+                          <Typography gutterBottom variant="h5" component="h2">
+                            {trip.trip_name_city}
+                          </Typography>
+                          <Typography gutterBottom variant="h5" component="h2">
+                            {trip.tour_date}
+                          </Typography>
+                          <Typography gutterBottom variant="h5" component="h2">
+                            {trip.start_time}
+                          </Typography>
+                        </CardContent>
+                        <Button>Join This Trip</Button>
+                      </Card>
                     </div>
                   );
                 })}
               </div>
+              <List>
+                <ListItem button>
+                  <ListItemText primary="Phone ringtone" secondary="Titania" />
+                </ListItem>
+                <Divider />
+                <ListItem button>
+                  <ListItemText
+                    primary="Default notification ringtone"
+                    secondary="Tethys"
+                  />
+                </ListItem>
+              </List>
+            </Dialog>
+          </div>
 
-              <button
-                onClick={() => {
-                  setOpenInfoModal(false);
-                  setOpenTikModal(true);
-                  // numOfTic();
-                }}
-              >
-                Current trip
-              </button>
-            </div>
-          </Fade>
-        </Modal>
-      </CardActions>
-    </Card>
+          {/* <Dialog
+            open={openInfo}
+            onClose={handleClickClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">
+              {"Before you join, we found discounted trips."}
+            </DialogTitle>?
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+              <div>
+              {props.low.map((trip) => {
+                return (
+                  <div key={trip.id}>
+                    <span>
+                      {trip.trip_name_city} + {trip.id} + {trip.ticketsBought}
+                    </span>
+                    <Button
+                      // onClick={() => {
+                      //   setOpenInfoModal(false);
+                      //   history.push(
+                      //     `/maps/${trip.trip_name_city}?id=${trip.id}`
+                      //   );
+                      // }}
+                    >
+                      Get info
+                    </Button>
+                  </div>
+                );
+              })}</div>
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClickClose} color="primary">
+                Disagree
+              </Button>
+              <Button onClick={handleClickClose} color="primary" autoFocus>
+                Agree
+              </Button>
+            </DialogActions>
+          </Dialog> */}
+        </CardActions>
+      </Card>
     </div>
   );
 }
