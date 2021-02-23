@@ -23,7 +23,7 @@ function Logout(props) {
   const onLogoutSuccess = (res) => {
     localStorage.removeItem("userId");
     props.setlog(false);
-    history.push("/signUp");
+    history.push("/");
     props.setUser(null);
     console.log("signedout");
   };
