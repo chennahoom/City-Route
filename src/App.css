@@ -139,11 +139,7 @@ body {
   cursor: pointer;
 }
 
-#pageTitle{
-  color: blue;
-}
-
-.results{
+.results {
   justify-content: space-around;
   width: 100%;
 }
