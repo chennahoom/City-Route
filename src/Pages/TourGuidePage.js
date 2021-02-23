@@ -48,7 +48,7 @@ function TourGuidePage(props) {
 	};
 
 	const addTrip = newTrip => {
-		console.log(newTrip);
+		console.log("new trip:" , newTrip);
 		fetch(`https://city-route.herokuapp.com/api/trips/`, {
 			method: 'POST',
 			headers: {
@@ -64,6 +64,8 @@ function TourGuidePage(props) {
 			})
 			.catch(err => console.error(err));
 	};
+
+	console.log("form:" , form);
 
 	const serverUpdateUserTrips = newTripId => {
 		var newMyTrips = [];
@@ -97,6 +99,8 @@ function TourGuidePage(props) {
 		const { name, value } = e.target;
 		setForm({ ...form, [name]: value });
 	}
+
+	console.log(form);
 
 
 	// return (
@@ -179,13 +183,13 @@ function TourGuidePage(props) {
 				}}>
 				<div>
 					<div className={classes.paper}>
-						<h2>How many spaces do you want to save?</h2>
-						<div>form</div>
+						<h2>Duplicate a Trip</h2>
+						
 
-						<label htmlFor="">date</label>
+						<label htmlFor="">Date:</label>
 						<input name="tour_date" type="text" onChange={onChange} />
-						<label htmlFor="">time</label>
-						<input type="text" name="tour_time" onChange={onChange} />
+						<label htmlFor="">Start Time:</label>
+						<input type="text" name="start_time" onChange={onChange} />
 						<br />
 
 						<button onClick={duplicateTrip} type="button" className="btn btn-primary">
