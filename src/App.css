@@ -109,7 +109,9 @@ body {
   margin-top: 60px;
 } */
 /* ----------------article--------------- */
-
+.MuiDialog-paperWidthSm{
+  max-width: 900px;
+}
 #pageTitle {
   position: absolute;
   display: block;

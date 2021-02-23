@@ -134,7 +134,7 @@ function TripDetails(props) {
     <div>
       <Map trip={trip} city={props.city} stops={filteredStops} />
 
-      <Modal
+      {/* <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modal}
@@ -156,7 +156,7 @@ function TripDetails(props) {
                     <span>
                       {trip.trip_name_city} + {trip.id} + {trip.ticketsBought}
                     </span>
-                    <button
+                    <Button
                       onClick={() => {
                         setOpenInfoModal(false);
                         history.push(
@@ -165,7 +165,7 @@ function TripDetails(props) {
                       }}
                     >
                       Get info
-                    </button>
+                    </Button>
                   </div>
                 );
               })}
@@ -226,8 +226,8 @@ function TripDetails(props) {
             </Button>
           </div>
         </Fade>
-      </Modal>
-    </div>
+      </Modal>*/}
+    </div> 
   );
 }
 
