@@ -170,3 +170,10 @@ body {
   font-size: 19px;
   margin-top: 15px;
 }
+
+.list-results{
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}

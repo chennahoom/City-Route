@@ -88,9 +88,9 @@ const useStyles = makeStyles((theme) => ({
   trips: {
     display: 'flex',
     flexWrap: 'wrap',
-    alignItems: "center",
-    justifyContent: "center",  
+    justifyContent: "center", 
   },
+
   dialog: {
     width: "900px",
   },
@@ -389,7 +389,6 @@ function TripResults(props) {
               </Button>
             </DialogActions>
           </Dialog>
-
 
         
 

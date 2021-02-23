@@ -70,7 +70,7 @@ function ResultsPage(props) {
 
       <section id="left">
         {results.length > 0?(
-          <div>
+          <div className="list-results">
             {results.map((trip, i) => (
               <TripResults
                 setShowStops={setShowStops}
