@@ -43,22 +43,7 @@ function GoogleLogIn(props) {
         }
 
       });
-
   };
-  const findUserByEmail = (email) => {
-    let j = 0;
-    for (let i = 0; i < results.length; i++) {
-      if (email === results[i].email) {
-        history.push("/trips");
-        j++;
-      }
-    }
-
-    if (j === 0) {
-      history.push("/register");
-    }
-  };
-
   const onFailure = (res) => {
     alert(`Failed to login, res:`, res);
   };
@@ -69,8 +54,6 @@ function GoogleLogIn(props) {
     clientId,
     isSignedIn: true,
     accessType: "offline",
-    // responseType: 'code',
-    // prompt: 'consent',
   });
 
   return (
