@@ -287,16 +287,16 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
     backgroundColor: "white",
   },
-  image: {
-    backgroundImage: "url(https://source.unsplash.com/random)",
-    backgroundRepeat: "no-repeat",
-    backgroundColor:
-      theme.palette.type === "light"
-        ? theme.palette.grey[50]
-        : theme.palette.grey[900],
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  },
+  // image: {
+  //   backgroundImage: "url(https://source.unsplash.com/random)",
+  //   backgroundRepeat: "no-repeat",
+  //   backgroundColor:
+  //     theme.palette.type === "light"
+  //       ? theme.palette.grey[50]
+  //       : theme.palette.grey[900],
+  //   backgroundSize: "cover",
+  //   backgroundPosition: "center",
+  // },
   paper: {
     margin: theme.spacing(8, 4),
     display: "flex",
@@ -315,11 +315,13 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
     // width: '100px',
   },
+
   label: {
     marginBottom: -7,
     marginTop: 14,
     fontSize: 19,
   },
+
   gridForm: {
     boxShadow: "none",
     height: "60%",
@@ -480,14 +482,26 @@ function AddTripForm(props) {
             Add New Trip
           </Typography>
           <form className={classes.form} ref={formRef} onSubmit={onSave}>
-            <label className={classes.label}>City</label>
+          <label className="labels">
+					City:
+					<select className="inputs" value={trip.trip_name_city} name="trip_name_city" onChange={handleInputChange}>
+						<option value="">Choose</option>
+						<option selected value="Tel-Aviv">Tel-Aviv</option>
+						<option value="Berlin">Berlin</option>
+						<option value="London">London</option>
+						<option value="Amsterdam">Amsterdam</option>
+						<option value="Paris">Paris</option>
+					</select>
+					<br />
+				</label>
+            {/* <label className={classes.label}>City</label>
             <TextField
               onChange={handleInputChange}
               fullWidth
               className={classes.inputs}
               id="select"
               value={trip.trip_name_city}
-              label="City"
+              // label="City"
               select
               name="trip_name_city"
             >
@@ -496,12 +510,13 @@ function AddTripForm(props) {
                   {option.label}
                 </MenuItem>
               ))}
-            </TextField>
+            </TextField> */}
             <br />
 
-            <label>
-              Tour-Date:
+            <label className="labels">
+              Tour-Date
               <input
+                className="inputs"
                 defaultValue={tour_date}
                 type="text"
                 placeholder="01/06/2021"
@@ -510,9 +525,15 @@ function AddTripForm(props) {
               />
               <br />
             </label>
-            <label>
-              Tour-Time:
+            <br />
+
+            <label className="labels">
+              Tour-Time
+            <br />
+
               <input
+                placeholder="1-2 "
+                className="inputs"
                 defaultValue={tour_time}
                 type="text"
                 name="tour_time"
@@ -520,9 +541,14 @@ function AddTripForm(props) {
               />
               <br />
             </label>
-            <label>
-              Start-Time:
+            <br />
+            <label className="labels">
+              Start-Time
+            <br />
+
               <input
+                placeholder="10:00AM"
+                className="inputs"
                 type="text"
                 defaultValue={start_time}
                 name="start_time"
@@ -572,7 +598,8 @@ function AddTripForm(props) {
             /> */}
 
             <label className={classes.label}>
-              Stops
+              {/* Stops
+              <br /> */}
               {stops.map((stop) => {
                 return (
                   <div key={stop.id}>

@@ -93,7 +93,7 @@ function MapTG(props) {
 	console.log('center', center);
 
 	if (!center) {
-		center = { lat: 33.109333, lng: 33.855499 };
+		center = { lat: 52.370216, lng: 4.895168 };
 	}
 
 	const selectedMarkers = selectedStops.map(selectedId => {

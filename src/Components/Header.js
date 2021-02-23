@@ -133,7 +133,7 @@ function Header(props) {
               <ListItemText primary="My Trips" />
             </StyledMenuItem>
 
-            <StyledMenuItem component={Link} to="/homepage">
+            <StyledMenuItem component={Link} to="/myTripsPage">
               <ListItemIcon>
                 <AssignmentIndOutlinedIcon fontSize="small" />
               </ListItemIcon>
