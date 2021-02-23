@@ -65,7 +65,6 @@ function TourGuidePage(props) {
 			.catch(err => console.error(err));
 	};
 
-	console.log("form:" , form);
 
 	const serverUpdateUserTrips = newTripId => {
 		var newMyTrips = [];
