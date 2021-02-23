@@ -1,9 +1,10 @@
-import TripResults from "../Components/TripResults";
 import { useEffect, useState } from "react";
-import Berlin1 from "../static/Amsterdam.jpg";
+
+import TripResults from "../Components/TripResults";
+import Amsterdam from "../static/Amsterdam.jpg";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Map from "../Components/Map";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   image: {
-    backgroundImage: `url(${Berlin1})`,
+    backgroundImage: `url(${Amsterdam})`,
     backgroundRepeat: "no-repeat",
     // height:1200,
     // objectFit:'cover',
@@ -33,8 +34,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ResultsPage(props) {
-
-
   const classes = useStyles();
 
   const [results, setResults] = useState([]);
@@ -69,19 +68,9 @@ function ResultsPage(props) {
         setResults(filteredTrips);
         props.setLowPriceTrips(lowPriceTrips);
       });
-  }, []);
+  },[]);
 
-  // useEffect(() => {
-  //   if(stops){
-  //     stops.map((stop, i) => {
-  //       fetch(`https://city-route.herokuapp.com/api/stops/${stop}`)
-  //       .then((res) => res.json())
-  //       .then((body) => {
-  //         console.log("searchTripForm", body);
-  //       }
-  //     });
-    
-  // }, stops);
+  console.log(low);
 
   return (
     <div className="results">
@@ -101,45 +90,7 @@ function ResultsPage(props) {
           />
         ))}
       </section>
-      <section id="right">
-        {showStops?(
-            <div>
-              {/* {stops.map((stop, i) => ( */}
-                <Map city={props.searchTripForm.city} showStops={showStops} />
-              {/* ))} */}
-            </div>
-          // <Map city={props.searchTripForm.city} stops={stops}/>
-        ):(
-          <Map city={props.searchTripForm.city} showStops={showStops}/>
-        )}
-      </section>
     </div>
-
-    // workingggg
-    // <Grid container spacing={2} direction='row' className={classes.root}>
-    // 	{/* <Map city={props.searchTripForm.city}/> */}
-
-    // 	<Grid item xs={12} sm={5} md={5} className={classes.cards}>
-    // 		{results.map((trip, i) => (
-    // 			// <Grid item sm={5} md={6}>
-    // 				<TripResults serverUpdateUserTrips={props.serverUpdateUserTrips} low={low} trip={trip} key={i} />
-    // 			// </Grid>
-    // 		))}
-    // 	</Grid>
-    // 	<Grid item xs={false} sm={7} md={7} className={classes.image}>
-    // 		<Paper className={classes.Paper}>
-    // 			{/* <Map city={props.searchTripForm.city}/> */}
-    // 		</Paper>
-    // 	</Grid>
-    // </Grid>
-
-    // {/* <section className="container"> */}
-    // 	{/* <h2 className="pageTitle">Where would you like to travel?</h2> */}
-    // 	{/* <section className="row row-cols-1 row-cols-md-3"></section> */}
-    // 	{results.map((trip, i) => (
-    // 		<TripResults serverUpdateUserTrips={props.serverUpdateUserTrips} low={low} trip={trip} key={i} />
-    // 	))}
-    // {/* </section> */}
   );
 }
 

@@ -1,9 +1,8 @@
-import { useHistory, useParams, useLocation } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import { React, useEffect, useState } from "react";
 import Map from "../Components/Map";
 import Modal from "@material-ui/core/Modal";
-import { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import React from "react";
 import Button from "@material-ui/core/Button";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
@@ -11,7 +10,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -38,7 +36,6 @@ const useStyles = makeStyles((theme) => ({
 function TripDetails(props) {
   const history = useHistory();
   const classes = useStyles();
-  // const [open, setOpen] = React.useState(false);
   const [results, setResults] = useState([]);
   const [tourGuide, setTourGuide] = useState([]);
   const [tickets, setTickets] = useState({});
@@ -48,13 +45,11 @@ function TripDetails(props) {
   const [openInfoModal, setOpenInfoModal] = useState(false);
 
   const { city } = useParams();
-  const location = useLocation();
 
   const { tripId } = props;
   console.log("tripId", tripId);
 
   useEffect(() => {
-    // run after render
     fetch(`https://city-route.herokuapp.com/api/trips/${tripId}`)
       .then((res) => res.json())
       .then((body) => {
@@ -69,7 +64,6 @@ function TripDetails(props) {
   }, [tripId]);
 
   useEffect(() => {
-    // run after render
     fetch(`https://city-route.herokuapp.com/api/stops/?city=${props.city}`)
       .then((res) => res.json())
       .then((body) => {
@@ -105,7 +99,6 @@ function TripDetails(props) {
         console.log(tripId);
         console.log(info.ticketsBought);
         setTrip(info);
-        // props.updateTrips(info);
       });
   };
 
@@ -113,7 +106,6 @@ function TripDetails(props) {
     if (props.lowPriceTrips.length) {
       setOpenInfoModal(true);
     } else {
-      // history.push('/saleTrips');
       setOpenInfoModal(false);
       setOpen(true);
     }
@@ -134,27 +126,14 @@ function TripDetails(props) {
   const handleClose = () => {
     setOpen(false);
   };
-  // console.log('tripDetaeils', results);
   const filteredStops = stops.filter((stop) =>
     results?.stops?.includes(stop.id)
   );
-  // console.log(stops);
-  // console.log(filteredStops);
 
   return (
     <div>
-      <Map trip={trip} stops={filteredStops} />
-      <Typography variant="caption" className={classes.heading}>
-        Stops: {stops.map((stop) => stop.stop_name + ` `)} <br />
-        Tour Guide: {tourGuide.full_name} <br />
-        Tickets bought: {results.ticketsBought} <br />
-      </Typography>
+      <Map trip={trip} city={props.city} stops={filteredStops} />
 
-      <Button variant="contained" color="secondary" onClick={saleTrip}>
-        Join Trip
-      </Button>
-
-      {/* info modal */}
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -196,7 +175,6 @@ function TripDetails(props) {
               onClick={() => {
                 setOpenInfoModal(false);
                 setOpen(true);
-                // numOfTic();
               }}
             >
               Current trip

@@ -489,7 +489,7 @@ function AddTripForm(props) {
                 required
                 fullWidth
                 id="tour_date"
-                label="dd/mm/yyyy"
+                // label="dd/mm/yyyy"
                 name="tour_date"
                 value={tour_date}
               />
@@ -501,8 +501,8 @@ function AddTripForm(props) {
               required
               fullWidth
               name="tour_time"
-              label="1-2"
-              defaultValue={tour_time}
+              // label="1-2"
+              value={tour_time}
               id="tour_time"
             />
             <label className={classes.label}>Start Time</label>
@@ -513,7 +513,7 @@ function AddTripForm(props) {
               required
               fullWidth
               name="start_time"
-              label="10AM"
+              // label="10AM"
               id="start_time"
               value={start_time}
             />

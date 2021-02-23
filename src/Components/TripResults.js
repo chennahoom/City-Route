@@ -1,4 +1,11 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import Modal from "@material-ui/core/Modal";
+import TripDetails from "../Pages/TripDetails";
+import Backdrop from "@material-ui/core/Backdrop";
+import Fade from "@material-ui/core/Fade";
+import { useHistory, useParams, useLocation } from "react-router-dom";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -50,8 +57,12 @@ const useStyles = makeStyles((theme) => ({
     height: 200,
   },
   paper: {
-    height: 140,
-    width: 100,
+    // height: 140,
+    // width: 100,
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
   },
   control: {
     padding: theme.spacing(2),
@@ -59,12 +70,38 @@ const useStyles = makeStyles((theme) => ({
   card: {
     marginTop: 15,
   },
-
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 }));
 
 function TripResults(props) {
   const classes = useStyles();
+  const history = useHistory();
+
+  const [open, setOpen] = useState(false);
+  const [openInfoModal, setOpenInfoModal] = useState(false);
+
+  const [openMapModal, setOpenMapModal] = useState(false);
+
+  const [openTik, setOpenTik] = useState(false);
+  const [openTikModal, setOpenTikModal] = useState(false);
+
+  const [tourGuide, setTourGuide] = useState([]);
+
   const bull = <span className={classes.bullet}>•</span>;
+
+  useEffect(() => {
+    fetch(
+      `https://city-route.herokuapp.com/api/users/${props.trip.tour_guide_id}`
+    )
+      .then((res) => res.json())
+      .then((body) => {
+        setTourGuide(body);
+      });
+  }, [props.trip]);
 
   let myImages = {
     Paris: [
@@ -123,143 +160,139 @@ function TripResults(props) {
     img = myImages.Amsterdam[rand].src;
   }
 
-  const handleStops = () =>{
+  const handleStops = () => {
     console.log(props.trip.stops);
     props.setShowStops(true);
     props.setStops(props.trip.stops);
-  }
+  };
 
+  const saleTrip = () => {
+    if (props.low.length) {
+      setOpenInfoModal(true);
+    } else {
+      // history.push('/saleTrips');
+      setOpenInfoModal(false);
+      setOpen(true);
+    }
+  };
+
+  console.log(props.low);
   return (
     <Card className={classes.root}>
       <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          // src={Berlin}
-          image={img}
-          title="Contemplative Reptile"
-        />
+        <CardMedia className={classes.media} image={img} title="City Gallery" />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {props.trip.tour_date}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            trip name: {props.trip.trip_name_city}
+            Trip Name: {props.trip.trip_name_city}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Trip Tour Guide: {tourGuide.full_name}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Trip Start Time: {props.trip.start_time}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Trip Duration: {props.trip.tour_time}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Tickets Bought: {props.trip.ticketsBought}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button onClick={handleStops} size="small" color="primary">
-          Stops
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => setOpenMapModal(true)}
+        >
+          View Trip Map
         </Button>
-        <Button size="small" color="primary">
-          Learn More
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          className={classes.modal}
+          open={openMapModal}
+          onClose={() => setOpenMapModal(false)}
+          closeAfterTransition
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <div>
+            <TripDetails
+              serverUpdateUserTrips={props.serverUpdateUserTrips}
+              user={props.user}
+              lowPriceTrips={props.low}
+              tripId={props.trip.id}
+              city={props.trip.trip_name_city}
+            />
+          </div>
+        </Modal>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => {
+            // setOpenInfoModal(true);
+            saleTrip();
+          }}
+        >
+          Join Trip
         </Button>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          className={classes.modal}
+          open={openInfoModal}
+          onClose={() => setOpenInfoModal(false)}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={openTikModal}>
+            <div className={classes.paper}>
+              <h2>How many spaces do you want to save?</h2>
+              <div>
+                {props.low.map((trip) => {
+                  return (
+                    <div key={trip.id}>
+                      <span>
+                        {trip.trip_name_city} + {trip.id} + {trip.ticketsBought}
+                      </span>
+                      <button
+                        onClick={() => {
+                          setOpenTikModal(false);
+                          history.push(
+                            `/maps/${trip.trip_name_city}?id=${trip.id}`
+                          );
+                        }}
+                      >
+                        Get info
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <button
+                onClick={() => {
+                  setOpenInfoModal(false);
+                  setOpenTikModal(true);
+                  // numOfTic();
+                }}
+              >
+                Current trip
+              </button>
+            </div>
+          </Fade>
+        </Modal>
       </CardActions>
     </Card>
-    //  </Grid>
-    /* <Grid item xs>
-        <Paper>
-        <Typography>
-          <TripDetails serverUpdateUserTrips={props.serverUpdateUserTrips} user={props.user} lowPriceTrips={props.low} tripId={props.trip.id} city={props.trip.trip_name_city} />
-        </Typography>
-        </Paper>
-      </Grid> */
-
-    // <Grid container>
-    //   <Grid item xs={6}>
-    //     <Card className={classes.root}>
-    //       <CardContent>
-    //         <Typography className={classes.title} color="textSecondary" gutterBottom>
-    //           {props.trip.trip_name_city}
-    //         </Typography>
-    //         <Typography variant="h5" component="h2">
-    //           {props.trip.tour_date}{bull}{props.trip.tour_time}{bull}{props.trip.start_time}
-    //         </Typography>
-    //       </CardContent>
-
-    //       <CardActions>
-    //         <Link to={`/maps/${props.trip.trip_name_city}?id=${props.trip.id}`}>
-    //           <Button size="small">Learn More</Button>
-    //         </Link>
-    //       </CardActions>
-    //     </Card>
-    //   </Grid>
-
-    //   <Grid item xs={3}>
-    //     Here the map
-    //     </Grid>
-    // </Grid>
-    // <Accordion className={classes.root}>
-    //   <AccordionSummary
-    //     expandIcon={<ExpandMoreIcon />}
-    //     aria-controls="panel1a-content"
-    //     id="panel1a-header"
-    //   >
-    //     <Typography className={classes.heading}>{props.trip.trip_name_city}</Typography>
-    //     <Typography className={classes.secondaryHeading}>{props.trip.tour_date}{bull}{props.trip.tour_time}{bull}{props.trip.start_time}</Typography>
-
-    //   </AccordionSummary>
-    //   <AccordionDetails className={classes.acco}>
-    // <Typography>
-    //   <TripDetails serverUpdateUserTrips={props.serverUpdateUserTrips} user={props.user} lowPriceTrips={props.low} tripId={props.trip.id} city={props.trip.trip_name_city} />
-    // </Typography>
-    //   </AccordionDetails>
-    // </Accordion>
-
-    // <Card className={classes.root}>
-    //   <CardContent>
-    //     <Typography className={classes.title} color="textSecondary" gutterBottom>
-    //       {props.trip.trip_name_city}
-    //     </Typography>
-    //     <Typography variant="h5" component="h2">
-    //       {props.trip.tour_date}{bull}{props.trip.tour_time}{bull}{props.trip.start_time}
-    //     </Typography>
-    //   </CardContent>
-
-    //   <CardActions>
-    //     <Link to={`/maps/${props.trip.trip_name_city}?id=${props.trip.id}`}>
-    //       <Button size="small">Learn More</Button>
-    //     </Link>
-    //   </CardActions>
-    // </Card>
   );
 }
 
 export default TripResults;
-
-// function TripResults(props) {
-
-//   return (
-//     <section className="row row-cols-1 row-cols-md-3" id="All-trips">
-//       <section className="col mb-4">
-//         <div className="card bg-light text-dark">
-//           <div className="card-body">
-//             <h5 className="card-title">{props.trip.tour_date}</h5>
-//             <p className="card-text">{props.trip.stops} </p>
-//             <p className="card-text">
-//               tour ID: {props.trip.id}
-//               <br />
-//               tour guide: {props.trip.tour_guide_id}
-//               <br />
-//               trip name city: {props.trip.trip_name_city}
-//               <br />
-//               tour time: {props.trip.tour_time}
-//               <br />
-//               start time: {props.trip.start_time}
-//               <br />
-//               spaces left: {props.trip.ticketsBought}
-//               <br />
-//             </p>
-//             <Link to={`/maps/${props.trip.trip_name_city}?id=${props.trip.id}`}>
-//               <button className="join-trip" id={props.trip.id}>
-//                 Join Trip
-//               </button>
-//             </Link>
-//           </div>
-//         </div>
-//       </section>
-//     </section>
-//   );
-// }
-
-// export default TripResults;

@@ -1,13 +1,14 @@
 import { useState } from "react";
 
 import React from "react";
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
 import "@reach/combobox/styles.css";
 
 const libraries = ["places"];
 const mapContainerStyle = {
-  height: "100vh",
+  height: "600px",
+  width: "800px",
 };
 const options = {
   //   styles: mapStyles,
@@ -37,9 +38,6 @@ const centers = {
     lng: 4.895168,
   },
 };
-
-// const data = mapData[city]
-// data.center
 
 const stopsCity = {
   Amsterdam: [
@@ -122,12 +120,10 @@ function Map(props) {
   if (loadError) return "Error";
   if (!isLoaded) return "Loading...";
 
-  // if (!props.stops.length) return 'loading...';
 
   console.log(city_name);
   return (
     <div>
-      {/* <SearchMap panTo={panTo} /> */}
 
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
@@ -136,16 +132,15 @@ function Map(props) {
         options={options}
         onLoad={onMapLoad}
       >
-        {/* {props.showStops?(
-        {stopsCity.Paris.map((stop, i) => (
+        {props.stops.map((stop, i) => (
           <Marker
-            key={i}
+            key={stop.stop_name}
             position={{
-              lat: stop.lat,
-              lng: stop.lng,
+              lat: stop.location_coords[0]?.lat,
+              lng: stop.location_coords[0]?.lng,
             }}
           />
-        ))} */}
+        ))}
       </GoogleMap>
     </div>
   );
