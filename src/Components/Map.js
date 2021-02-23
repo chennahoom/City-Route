@@ -1,14 +1,19 @@
 import { useState } from "react";
 
 import React from "react";
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  useLoadScript,
+  Marker,
+  InfoWindow,
+} from "@react-google-maps/api";
 
 import "@reach/combobox/styles.css";
 
 const libraries = ["places"];
 const mapContainerStyle = {
-  height: "600px",
-  width: "800px",
+  height: "500px",
+  width: "500px",
 };
 const options = {
   disableDefaultUI: false,
@@ -17,8 +22,8 @@ const options = {
 
 const centers = {
   "Tel-Aviv": {
-    lat: 32.109333,
-    lng: 34.855499,
+    lat: 32.07129,
+    lng: 34.78713,
   },
   Berlin: {
     lat: 52.520008,
@@ -91,6 +96,7 @@ function Map(props) {
   });
 
   const [markers, setMarkers] = useState([]);
+  const [selected, setSelected] = React.useState(null);
 
   const mapRef = React.useRef();
   const onMapLoad = React.useCallback((map) => {
@@ -121,12 +127,30 @@ function Map(props) {
               lat: stop.location_coords[0]?.lat,
               lng: stop.location_coords[0]?.lng,
             }}
+            onClick={() => {
+              setSelected(stop);
+            }}
           />
         ))}
+
+        {selected ? (
+          <InfoWindow
+            position={{
+              lat: selected.location_coords[0]?.lat,
+              lng: selected.location_coords[0]?.lng,
+            }}
+            onCloseClick={() => {
+              setSelected(null);
+            }}
+          >
+            <div>
+              <h6>{selected.stop_name}</h6>
+            </div>
+          </InfoWindow>
+        ) : null}
       </GoogleMap>
     </div>
   );
 }
 
 export default Map;
-
