@@ -9,8 +9,8 @@ import SearchMap from '../Components/SearchMap';
 
 const libraries = ['places'];
 const mapContainerStyle = {
-	width: '700px',
-	height: '500px',
+	width: '850px',
+	height: '700px',
 };
 const options = {
 	//   styles: mapStyles,

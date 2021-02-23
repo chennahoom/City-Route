@@ -44,32 +44,18 @@ import telaviv5 from "../static/telaviv5.jpg";
 import telaviv6 from "../static/Tel-Aviv.jpg";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    // minWidth: 200,
-    marginTop: "150px",
-    width: "25%",
-    display: "flex",
-    flexWrap: "wrap",
-    flexDirection: "row",
-  },
   media: {
     height: 200,
   },
-  paper: {
-    height: 140,
-    width: 100,
-  },
-  control: {
-    padding: theme.spacing(2),
-  },
-  card: {
-    marginTop: 15,
-  },
+
   tripList: {
-    display: "flex",
-    flexWrap: "wrap",
-	alignContent: "space-around",
-    background: "red",
+    width: "28%",
+    display: "inline-block",
+    marginLeft: "3%",
+  },
+
+  root: {
+    marginTop: "200px",
   },
 }));
 
