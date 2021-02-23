@@ -530,11 +530,7 @@ function AddTripForm(props) {
                     />}
                     label={stop.stop_name}
                   />
-                  {/* <input
-                  type="checkbox"
-                  checked={selectedStops.includes(stop.id)}
-                  onChange={() => toggledStop(stop.id)}
-                /> */}
+                  
                 </div>
               );
             })}
@@ -560,8 +556,6 @@ function AddTripForm(props) {
       </Grid>
 
 
-      {/* Here is MAP */}
-      {/* <Grid item xs={false} sm={4} md={7} className={classes.image} /> */}
       <Grid className={classes.gridMap} item xs={false} sm={4} md={7}>
         <MapTG stops={stops} trip={trip} selectedStops={selectedStops} />
       </Grid>
