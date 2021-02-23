@@ -70,7 +70,7 @@ function TourGuideTrip(props) {
           setTripData(body);
         }
       });
-  }, [props.editTrip]);
+  }, [props.data]);
 
   const handleDelete = () => {
     props.deleteTrip(props.data);
