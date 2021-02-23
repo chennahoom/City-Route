@@ -1,11 +1,9 @@
 import { useState } from "react";
 import AddTripForm from "../Components/TripFormTG";
 import TripsList from "../Components/TripsList";
-import { Link as Scroll } from "react-scroll";
 import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -141,10 +139,7 @@ function TourGuidePage(props) {
             <input type="text" name="start_time" onChange={onChange} />
             <br />
 
-            <Button
-              onClick={duplicateTrip}
-			  variant="contained"
-			  color="primary"            >
+            <Button onClick={duplicateTrip} variant="contained" color="primary">
               Duplicate
             </Button>
           </div>

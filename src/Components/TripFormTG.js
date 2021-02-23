@@ -142,10 +142,9 @@ function AddTripForm(props) {
     if (!editTrip) {
       props.addTrip(trip);
     } else {
-      // udate trip
       props.updateTrip(trip, trip.id);
     }
-    formRef.current.reset(); // reset form
+    formRef.current.reset();
     setSelectedStops([]);
     setTrip(initForm);
     setStops([]);

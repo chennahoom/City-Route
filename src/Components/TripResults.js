@@ -1,14 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
-
 import TripDetails from "../Pages/TripDetails";
-
 import { useHistory } from "react-router-dom";
-
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItem from "@material-ui/core/ListItem";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -18,7 +11,6 @@ import Slide from "@material-ui/core/Slide";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
-
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -44,8 +36,6 @@ import London2 from "../static/London2.jpg";
 import London3 from "../static/London3.jpg";
 import London4 from "../static/London4.jpg";
 import London5 from "../static/London5.jpg";
-import London6 from "../static/London6.jpg";
-import London7 from "../static/London7.jpg";
 import amsterdam from "../static/Amsterdam.jpg";
 import amsterdam1 from "../static/amsterdam1.jpg";
 import amsterdam2 from "../static/amsterdam2.jpg";
@@ -229,21 +219,9 @@ function TripResults(props) {
     img = myImages.Amsterdam[rand].src;
   }
 
-  const handleStops = () => {
-    props.setShowStops(true);
-    props.setStops(props.trip.stops);
-  };
-
   const [results, setResults] = useState([]);
   const [tickets, setTickets] = useState({});
-  const [stops, setStops] = useState([]);
   const [trip, setTrip] = useState("");
-  const [open, setOpen] = useState(false);
-  const [openInfoModal, setOpenInfoModal] = useState(false);
-
-  const { city } = useParams();
-
-  const { tripId } = props;
 
   useEffect(() => {
     fetch(`https://city-route.herokuapp.com/api/trips/${props.trip.id}`)
@@ -281,15 +259,6 @@ function TripResults(props) {
       });
   };
 
-  const saleTrip = () => {
-    if (props.lowPriceTrips.length) {
-      setOpenInfoModal(true);
-    } else {
-      setOpenInfoModal(false);
-      setOpen(true);
-    }
-  };
-
   const numOfTic = () => {
     const info = parseInt(results.ticketsBought) + parseInt(tickets);
     updateSpace(info);
@@ -300,7 +269,6 @@ function TripResults(props) {
     event.preventDefault();
     setTickets(event.target.value);
   };
-
 
   return (
     <div className={classes.trips}>

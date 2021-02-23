@@ -1,35 +1,10 @@
 import { useEffect, useState } from "react";
-
 import TripResults from "../Components/TripResults";
-import Amsterdam from "../static/Amsterdam.jpg";
-
-import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    heigh: "100vh",
-  },
-  paper: {
-    margin: theme.spacing(8, 4),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  image: {
-    backgroundImage: `url(${Amsterdam})`,
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  },
-  cards: {
-    width: "80px",
-    marginTop: theme.spacing(1),
-  },
-}));
+
 
 function ResultsPage(props) {
-  const classes = useStyles();
 
   const [results, setResults] = useState([]);
   const [low, setLow] = useState([]);
@@ -69,7 +44,7 @@ function ResultsPage(props) {
       </Typography>
 
       <section id="left">
-        {results.length > 0?(
+        {results.length > 0 ? (
           <div className="list-results">
             {results.map((trip, i) => (
               <TripResults
@@ -82,12 +57,11 @@ function ResultsPage(props) {
               />
             ))}
           </div>
-        ):(
+        ) : (
           <div>
-              <h3>No trips found!</h3> 
+            <h3>No trips found!</h3>
           </div>
         )}
-
       </section>
     </div>
   );

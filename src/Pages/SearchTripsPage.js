@@ -1,6 +1,5 @@
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
 import SearchTripForm from "../Components/SearchTripForm";
 import Amsterdam from "../static/amsterdam4.jpg";
 

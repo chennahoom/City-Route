@@ -12,7 +12,6 @@ import { Switch, Route } from "react-router-dom";
 import { useGoogleLogin } from "react-google-login";
 import { refreshTokenSetup } from "./Components/utils/refreshToken";
 
-const libraries = ["places"];
 
 const clientId =
   "233069535985-vfone0gmelp0cfv62424j18a94av35i3.apps.googleusercontent.com";

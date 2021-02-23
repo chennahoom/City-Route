@@ -1,6 +1,5 @@
 import { useState } from "react";
 import React from "react";
-import { useLocation } from "react-router-dom";
 import FormControl from "@material-ui/core/FormControl";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -11,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import AppForm from "../View/AppForm";
 import { useEffect } from "react";
-import {  IconButton, Collapse } from "@material-ui/core";
+import { IconButton, Collapse } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Link as Scroll } from "react-scroll";
 const useStyles = makeStyles((theme) => ({
@@ -24,12 +23,12 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: "column",
     },
   },
-    homepage: {
-      minHeight: "100vh",
-      backgroundImage: `url(${process.env.PUBLIC_URL + "/assets/bg10.jpg"})`,
-      backgroundRepeat: "no-repeat",
-      backgroundSize: "cover",
-    },
+  homepage: {
+    minHeight: "100vh",
+    backgroundImage: `url(${process.env.PUBLIC_URL + "/assets/bg10.jpg"})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+  },
   form: {
     marginTop: theme.spacing(6),
     padding: 20,
@@ -94,9 +93,6 @@ function Register(props) {
     phone: "",
   };
   const [user, setUser] = useState(initForm);
-  const location = useLocation();
-  const query = new URLSearchParams(location.search);
-
 
   const onSave = (event) => {
     event.preventDefault();
