@@ -110,15 +110,6 @@ const useStyles = makeStyles((theme) => ({
   card: {
     marginTop: 15,
   },
-  trips2: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  card2: {
-    marginLeft: "3%",
-    marginTop: "5%",
-    width: "30%",
-  },
   modal: {
     // display: "flex",
     alignItems: "center",
@@ -126,12 +117,10 @@ const useStyles = makeStyles((theme) => ({
   },
   trips: {
     width: "35%",
-    display: 'inline-block',
+    display: "inline-block",
     marginLeft: "3%",
     // width:'100%',
   },
-
-
   appBar: {
     position: "relative",
   },
@@ -359,7 +348,7 @@ function TripResults(props) {
               Trip Name: {props.trip.trip_name_city}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              Trip Tour Guide: {tourGuide.full_name}
+              Trip Tour Guide: {tourGuide?.full_name}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
               Trip Start Time: {props.trip.start_time}
@@ -379,12 +368,11 @@ function TripResults(props) {
           <Dialog
             open={openInfoMap}
             onClose={handleClickCloseMap}
-            style={{ width: "900px" ,}}
+            style={{ width: "900px" }}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
           >
             <DialogTitle id="alert-dialog-title">{"Map of Tour"}</DialogTitle>
-
             <DialogContent>
               <TripDetails
                 serverUpdateUserTrips={props.serverUpdateUserTrips}
@@ -394,7 +382,6 @@ function TripResults(props) {
                 city={props.trip.trip_name_city}
               />
             </DialogContent>
-
             <DialogActions>
               <Button onClick={handleClickCloseMap} color="primary" autoFocus>
                 Close
@@ -482,11 +469,11 @@ function TripResults(props) {
 
                 </Toolbar>
               </AppBar>
-              <div className={classes.trips2}>
+              <div className={classes.trips}>
                 {props.low.map((trip) => {
                   return (
-                    <div key={trip.id} className={classes.card2}>
-                      <Card>
+                    <div key={trip.id}>
+                      <Card className={classes.root}>
                         <CardContent>
                           <Typography gutterBottom variant="h5" component="h2">
                             {trip.trip_name_city}

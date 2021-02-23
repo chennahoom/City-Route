@@ -1,20 +1,16 @@
-import './App.css';
-import { useState, useEffect } from 'react';
-import Header from './Components/Header';
-import SearchTripPage from './Pages/SearchTripsPage';
-import ResultsPage from './Pages/ResultsPage';
-import TripDetails from './Pages/TripDetails';
-import MyTripsPage from './Pages/MyTripsPage';
-import { useHistory } from 'react-router-dom';
-import SignUp from './Pages/SignUp';
-import TourGuidePage from './Pages/TourGuidePage';
-import Map from './Components/Map';
-import { Switch, Route } from 'react-router-dom';
-import GoogleLogin, { useGoogleLogin } from 'react-google-login';
-import { refreshTokenSetup } from './Components/utils/refreshToken';
-
-import TripDetailsPage from "./Pages/TripDetailsPage";
-import HomePage from "./Pages/HomePage";
+import "./App.css";
+import { useState, useEffect } from "react";
+import Header from "./Components/Header";
+import SearchTripPage from "./Pages/SearchTripsPage";
+import ResultsPage from "./Pages/ResultsPage";
+import TripDetails from "./Pages/TripDetails";
+import MyTripsPage from "./Pages/MyTripsPage";
+import { useHistory } from "react-router-dom";
+import SignUp from "./Pages/SignUp";
+import TourGuidePage from "./Pages/TourGuidePage";
+import { Switch, Route } from "react-router-dom";
+import { useGoogleLogin } from "react-google-login";
+import { refreshTokenSetup } from "./Components/utils/refreshToken";
 
 const libraries = ["places"];
 
@@ -33,12 +29,12 @@ function App() {
   const [lowPriceTrips, setLowPriceTrips] = useState([]);
   const [isLogin, setLogin] = useState(false);
 
-	function updateForm(event) {
-		const { value, name } = event.target;
-		setSearchTripForm({ ...searchTripForm, [name]: value });
-	}
+  function updateForm(event) {
+    const { value, name } = event.target;
+    setSearchTripForm({ ...searchTripForm, [name]: value });
+  }
 
-	const history = useHistory();
+  const history = useHistory();
 
   const setlog = (res) => {
     setLogin(res);
@@ -68,17 +64,12 @@ function App() {
           history.push("/tourGuideMenu");
         }
       } else {
-        // window.location.reload(false);
         setServerError(data.message);
       }
     } catch (err) {}
   };
 
   const onSuccess = (res) => {
-    // setName(res.profileObj.name);
-    // setEmail(res.profileObj.email);
-    // setUrl(res.profileObj.imageUrl);
-    console.log("onSuccess", res);
     refreshTokenSetup(res);
     setlog(true);
     fetch(`https://city-route.herokuapp.com/api/users/email`, {
@@ -97,31 +88,23 @@ function App() {
         }
         setUser(user);
 
-        console.log(user.type_of_user);
-
         const userId = localStorage.getItem("userId");
-        console.log("userId", userId);
 
         localStorage.setItem("userId", user.id);
 
-				if (!userId) {
-					// login
-					if (user.type_of_user === 'Traveler') {
-						history.push('/trips');
-					} else {
-						history.push('/tourGuideMenu');
-					}
-				} else {
-					// refresh only
-				}
-				console.log(user.type_of_user);
-				console.log(user);
-			});
-
-	};
+        if (!userId) {
+          if (user.type_of_user === "Traveler") {
+            history.push("/trips");
+          } else {
+            history.push("/tourGuideMenu");
+          }
+        } else {
+        }
+      });
+  };
 
   const onFailure = (res) => {
-    alert(`Failed to login 😢, res:`, res);
+    alert(`Failed to login, res:`, res);
   };
 
   const { signIn } = useGoogleLogin({
@@ -130,8 +113,6 @@ function App() {
     clientId,
     isSignedIn: true,
     accessType: "offline",
-    // responseType: 'code',
-    // prompt: 'consent',
   });
 
   const addTrip = (newTrip) => {
@@ -145,14 +126,11 @@ function App() {
     })
       .then((response) => response.json())
       .then((newTrip) => {
-        console.log(newTrip);
-        console.log(newTrip.id);
         updateUserTrips(newTrip.id);
       })
       .catch((err) => console.error(err));
   };
 
-  //  add
   const updateUserTrips = (newTripId) => {
     let newMyTrips = [...(user.my_trips || [])];
     newMyTrips.push(newTripId);
@@ -174,17 +152,12 @@ function App() {
     })
       .then((response) => response.json())
       .then((newTrip) => {
-        console.log(newTrip);
         updateUserTrips(newTripId);
         history.push("/myTripsPage");
       })
       .catch((err) => console.error(err));
   };
 
-  //Here is the USER!!!
-  console.log("user", user);
-
-  //maybe can be removed
   useEffect(() => {
     const id = localStorage.getItem("userId");
     if (id) {
@@ -215,44 +188,47 @@ function App() {
       });
   };
 
-	return (
-		<div className="App">
-			<Header setlog={setlog} setUser={setUser} />
-			<Switch>
-      <Route path="/" exact>
-					<SignUp serverError={serverError} addUser={addUser} signIn={signIn} />
-				</Route>
-				<Route path="/maps/:city" exact>
-					<TripDetails user={user} lowPriceTrips={lowPriceTrips} serverUpdateUserTrips={serverUpdateUserTrips} />
-				</Route>
-				<Route path="/trips" exact>
-					<SearchTripPage updateForm={updateForm} />
-				</Route>
-
-				<Route path="/results" exact>
-					<ResultsPage
-						searchTripForm={searchTripForm}
-						setLowPriceTrips={setLowPriceTrips}
-						user={user}
-						lowPriceTrips={lowPriceTrips}
-						serverUpdateUserTrips={serverUpdateUserTrips}
-					/>
-				</Route>
-				<Route path="/myTripsPage" exact>
-					<MyTripsPage user={user} userTrips={userTrips} />
-				</Route>
-				<Route path="/tourGuideMenu" exact>
-					<TourGuidePage
-						user={user}
-						addTrip={addTrip}
-						updateUserTrips={updateUserTrips}
-						userTrips={userTrips}
-						deleteTrip={deleteTrip}
-					/>
-				</Route>
-			</Switch>
-		</div>
-	);
+  return (
+    <div className="App">
+      <Header setlog={setlog} setUser={setUser} />
+      <Switch>
+        <Route path="/" exact>
+          <SignUp serverError={serverError} addUser={addUser} signIn={signIn} />
+        </Route>
+        <Route path="/maps/:city" exact>
+          <TripDetails
+            user={user}
+            lowPriceTrips={lowPriceTrips}
+            serverUpdateUserTrips={serverUpdateUserTrips}
+          />
+        </Route>
+        <Route path="/trips" exact>
+          <SearchTripPage updateForm={updateForm} />
+        </Route>
+        <Route path="/results" exact>
+          <ResultsPage
+            searchTripForm={searchTripForm}
+            setLowPriceTrips={setLowPriceTrips}
+            user={user}
+            lowPriceTrips={lowPriceTrips}
+            serverUpdateUserTrips={serverUpdateUserTrips}
+          />
+        </Route>
+        <Route path="/myTripsPage" exact>
+          <MyTripsPage user={user} userTrips={userTrips} />
+        </Route>
+        <Route path="/tourGuideMenu" exact>
+          <TourGuidePage
+            user={user}
+            addTrip={addTrip}
+            updateUserTrips={updateUserTrips}
+            userTrips={userTrips}
+            deleteTrip={deleteTrip}
+          />
+        </Route>
+      </Switch>
+    </div>
+  );
 }
 
 export default App;

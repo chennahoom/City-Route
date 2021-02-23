@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import Map from "../Components/Map";
-import { Link } from "react-router-dom";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -64,28 +62,18 @@ function TourGuideTrip(props) {
 
   const [tripData, setTripData] = useState(props.data);
 
-  console.log("props.editTrip", props.editTrip);
-
   useEffect(() => {
-    console.log("props.useEffect", props.editTrip);
     fetch(`https://city-route.herokuapp.com/api/trips/${props.data}`)
       .then((res) => res.json())
       .then((body) => {
         if (body) {
           setTripData(body);
         }
-        console.log(body);
-        console.log(props.data);
       });
   }, [props.editTrip]);
 
-  
-
   const handleDelete = () => {
-    console.log(props.data);
-
     props.deleteTrip(props.data);
-
   };
 
   let myImages = {

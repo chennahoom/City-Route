@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  GoogleMap,
-  useLoadScript,
-  Marker,
-  InfoWindow,
-} from "@react-google-maps/api";
+
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -47,10 +42,7 @@ import {
               const { lat, lng } = await getLatLng(results[0]);
               panTo({ lat, lng });
 
-              console.log(results);
-              console.log({lat,lng})
             } catch (error) {
-              console.log("error");
             }
           }}
         >

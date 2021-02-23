@@ -1,13 +1,12 @@
 import React from "react";
 import { useGoogleLogout } from "react-google-login";
 import { useHistory } from "react-router-dom";
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 import ListItemText from "@material-ui/core/ListItemText";
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    '& > *': {
+    "& > *": {
       margin: theme.spacing(1),
     },
   },
@@ -25,7 +24,6 @@ function Logout(props) {
     props.setlog(false);
     history.push("/");
     props.setUser(null);
-    console.log("signedout");
   };
 
   const onFailure = () => {
@@ -39,9 +37,13 @@ function Logout(props) {
   });
 
   return (
-
     <div className={classes.root}>
-      <ListItemText onClick={signOut} variant="contained" color="primary" href="#contained-buttons">
+      <ListItemText
+        onClick={signOut}
+        variant="contained"
+        color="primary"
+        href="#contained-buttons"
+      >
         Sign Out
       </ListItemText>
     </div>

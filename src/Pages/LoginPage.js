@@ -1,4 +1,3 @@
-import { useHistory } from "react-router-dom";
 import Register from "./SignUp";
 
 function LoginPage(props) {

@@ -15,101 +15,19 @@ div {
 
 html {
   height: 100%;
+  font-family: "Nunito";
+
+
 }
 
 body {
-  font-family: "Open sans", sans-serif;
+  font-family: "Nunito";
   height: 100%;
   width: 100%;
-  background-color:'white',
+  background-color: "white";
 }
 
-/* ----------------header--------------- */
-/* .nav-logo {
-  height: 75px;
-  width: 90px;
-}
-
-.profile {
-  display: block;
-  height: 50px;
-  width: 50px;
-  border-radius: 100%;
-  border: 2px solid #aaa;
-}
-
-.headtext {
-  color: black;
-  font-size: 37px;
-  font-weight: bold;
-}
-
-#mainTripsContainer header .navbar {
-  background-color: #e3f2fd;
-}
-
-#mainList header {
-  box-shadow: 2px 2px 12px 0px #aaa;
-
-} */
-
-/* ----------------forms--------------- */
-
-/* form {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  margin: 50px auto;
-  width: 300px;
-}
-
-/* register */
-/*.signin-form {
-  background: #fff;
-  border: 1px solid #eee;
-  box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.05);
-  border-radius: 5px;
-  width: 600px;
-  margin: 50px auto;
-  padding: 30px;
-  box-sizing: border-box;
-}
-
-.signin-title {
-  text-align: center;
-  margin: 5px;
-}
-
-.login-logo {
-  display: block;
-  margin: 10px auto;
-  height: 100px;
-  width: 100px;
-  background-size: 100px;
-}
-
-.form-control,
-#submit {
-  margin-left: 20px;
-}
-
-#from-choose {
-  display: flex;
-}
-
-.form-inline {
-  flex: auto;
-  margin-left: 25%;
-}
-
-.options {
-  color: rgb(255, 255, 255);
-  font-size: 50px;
-  font-weight: bold;
-}
-.mb-4 {
-  margin-top: 60px;
-} */
-/* ----------------article--------------- */
-.MuiDialog-paperWidthSm{
+.MuiDialog-paperWidthSm {
   max-width: 900px;
 }
 #pageTitle {
@@ -117,7 +35,7 @@ body {
   display: block;
   margin-top: 20px;
   margin-left: 10px;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Nunito";
   color: #454f63;
   font-size: 26px;
 }
@@ -132,22 +50,11 @@ body {
   justify-content: space-around;
 }
 
-/* ----------------map--------------- */
-
 .leaflet-container {
   width: 600px;
   height: 400px;
 }
 
-/* #mapid {
-  height: 400px;
-  width: 600px;
-  margin-top: 30px;
-} */
-.card-map {
-  /* position: absolute; */
-  /* left: 800px; */
-}
 .card-title#tour-guide {
   font-size: 25px;
 }
@@ -170,7 +77,6 @@ body {
   margin-top: 50px;
 }
 
-/* Hooks button */
 .button {
   cursor: pointer;
   display: block;
@@ -182,12 +88,11 @@ body {
   border-radius: 24px;
   border-color: transparent;
   background-color: white;
-  /* box-shadow: 0px 16px 60px rgba(78, 79, 114, 0.1); */
   box-shadow: 0px 16px 60px rgba(78, 79, 114, 0.08);
   position: relative;
 }
 
-#logoutbutton{
+#logoutbutton {
   background-color: green;
   width: 30px;
 }
@@ -234,71 +139,22 @@ body {
   cursor: pointer;
 }
 
-
-/* -----NEw Ariel and Halel */
-/* traveler -> results */
-.results{
-  /* display: flex; */
+.results {
   justify-content: space-around;
   width: 100%;
-
 }
 
 .results > h3 {
-margin-top: 65px;
-margin-left:70px;
-
-
+  margin-top: 65px;
+  margin-left: 70px;
 }
 
-/* #right{
-  width: 100%;
-  height: 100vh;
-  background-position: top right;
-  position: fixed;
-  top: 79px;
-  right: 0;
-} */
-
-#left{
+#left {
   width: 100%;
   display: flex;
   justify-content: space-around;
-  flex-wrap:wrap;
-  /* overflow-y: scroll; */
+  flex-wrap: wrap;
 }
-
-/* tour guide -> form */
-/* .tripFormBackg{
-  background-image: url('./static/dubai.jpg');
-  width: 100%;
-  height: 500px;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.formTG{
-  background-color: white;
-  width:70%;
-  height:200px;
-  display: flex;
-  justify-content: space-between;
-  margin-left: 16%;
-  text-align: center;
-  border-radius:0.5em;
-}
-
-.formTG > button{
-  height: 30%;
-  width: 150px;
-  margin-top: 6%;
-
-}
-
-.formTG > label{
-  margin-top: 6%;
-  width: 100%;
-} */
 
 .inputs {
   width: 100%;
@@ -313,6 +169,4 @@ margin-left:70px;
   width: 100%;
   font-size: 19px;
   margin-top: 15px;
-
 }
-

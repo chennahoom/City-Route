@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import TourGuideTrip from './TourGuideTrip';
 import React from 'react';
 

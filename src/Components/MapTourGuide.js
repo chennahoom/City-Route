@@ -1,11 +1,7 @@
-import { useState, useEffect } from 'react';
 
 import React from 'react';
-import { GoogleMap, useLoadScript, Marker, InfoWindow, Polyline } from '@react-google-maps/api';
-import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
-import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption } from '@reach/combobox';
+import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 import '@reach/combobox/styles.css';
-import SearchMap from '../Components/SearchMap';
 
 const libraries = ['places'];
 const mapContainerStyle = {
@@ -13,52 +9,10 @@ const mapContainerStyle = {
 	height: '700px',
 };
 const options = {
-	//   styles: mapStyles,
 	disableDefaultUI: false,
 	zoomControl: true,
 };
 
-// function Search({ panTo }) {
-// 	const {
-// 		ready,
-// 		value,
-// 		suggestions: { status, data },
-// 		setValue,
-// 		clearSuggestions,
-// 	} = usePlacesAutocomplete({
-// 		requestOptions: {
-// 			location: { lat: () => 43.6532, lng: () => -79.3832 },
-// 			radius: 100 * 1000,
-// 		},
-// 	});
-
-// 	const handleInput = e => {
-// 		setValue(e.target.value);
-// 	};
-// 	return (
-// 		<div className="search">
-// 			<Combobox
-// 				onSelect={async address => {
-// 					setValue(address, false);
-// 					clearSuggestions();
-// 					try {
-// 						const results = await getGeocode({ address });
-// 						const { lat, lng } = await getLatLng(results[0]);
-// 						panTo({ lat, lng });
-// 					} catch (error) {
-// 						console.log('error');
-// 					}
-// 				}}>
-// 				<ComboboxInput value={value} onChange={handleInput} disabled={!ready} placeholder="Search your location" />
-// 				<ComboboxPopover>
-// 					<ComboboxList>
-// 						{status === 'OK' && data.map(({ id, description }) => <ComboboxOption key={id} value={description} />)}
-// 					</ComboboxList>
-// 				</ComboboxPopover>
-// 			</Combobox>
-// 		</div>
-// 	);
-// }
 
 const centers = {
 	'Tel-Aviv': {
@@ -84,20 +38,18 @@ const centers = {
 };
 
 function MapTG(props) {
-	console.log('MapTG', props);
 	const { stops = [], selectedStops = [], trip } = props;
 
 	const city = trip.trip_name_city;
 
 	let center = centers[city];
-	console.log('center', center);
 
 	if (!center) {
 		center = { lat: 52.370216, lng: 4.895168 };
 	}
 
 	const selectedMarkers = selectedStops.map(selectedId => {
-		const stop = stops.find(stop => stop.id == selectedId);
+		const stop = stops.find(stop => stop.id === selectedId);
 		return {
 			lat: stop?.location_coords[0].lat,
 			lng: stop?.location_coords[0].lng,
@@ -135,12 +87,9 @@ function MapTG(props) {
 	if (loadError) return 'Error';
 	if (!isLoaded) return 'Loading...';
 
-	console.log('selectedMarkers', selectedMarkers);
 
 	return (
 		<div className="nap-TG">
-			{/* <Locate panTo={panTo} /> */}
-			{/* <SearchMap panTo={panTo} /> */}
 
 			<GoogleMap
 				mapContainerStyle={mapContainerStyle}

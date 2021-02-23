@@ -11,8 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import AppForm from "../View/AppForm";
 import { useEffect } from "react";
-import { AppBar, IconButton, Toolbar, Collapse } from "@material-ui/core";
-import SortIcon from "@material-ui/icons/Sort";
+import {  IconButton, Collapse } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Link as Scroll } from "react-scroll";
 const useStyles = makeStyles((theme) => ({
@@ -97,8 +96,7 @@ function Register(props) {
   const [user, setUser] = useState(initForm);
   const location = useLocation();
   const query = new URLSearchParams(location.search);
-  let name = query.get("name");
-  let email = query.get("email");
+
 
   const onSave = (event) => {
     event.preventDefault();
@@ -116,7 +114,6 @@ function Register(props) {
     } else {
       setUser({ ...user, [name]: value });
     }
-    console.log(user);
   };
 
   const typeOfUser = [

@@ -132,7 +132,7 @@ function Header(props) {
               <ListItemText primary="My Trips" />
             </StyledMenuItem>
 
-            <StyledMenuItem component={Link} to="/signup">
+            <StyledMenuItem component={Link} to="/">
               <ListItemIcon>
                 <ExitToAppOutlinedIcon fontSize="small" />
               </ListItemIcon>

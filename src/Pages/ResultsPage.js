@@ -19,11 +19,6 @@ const useStyles = makeStyles((theme) => ({
   image: {
     backgroundImage: `url(${Amsterdam})`,
     backgroundRepeat: "no-repeat",
-    // height:1200,
-    // objectFit:'cover',
-    // height: 1230,
-    // backgroundColor:
-    // 	theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
     backgroundSize: "cover",
     backgroundPosition: "center",
   },
@@ -45,8 +40,6 @@ function ResultsPage(props) {
     fetch("https://city-route.herokuapp.com/api/trips")
       .then((res) => res.json())
       .then((body) => {
-        console.log("searchTripForm", props.searchTripForm);
-
         let filteredTrips = body.filter((item) => {
           const tripDate = stringToDate(item.tour_date);
           const startDate = stringToDate(props.searchTripForm.start);
@@ -60,7 +53,6 @@ function ResultsPage(props) {
           return validDate && validCity;
         });
 
-        console.log("filteredTrips", filteredTrips);
         const lowPriceTrips = filteredTrips.filter(
           (trip) => trip.ticketsBought >= 10
         );
@@ -68,9 +60,7 @@ function ResultsPage(props) {
         setResults(filteredTrips);
         props.setLowPriceTrips(lowPriceTrips);
       });
-  },[]);
-
-  console.log(low);
+  }, []);
 
   return (
     <div className="results">
@@ -79,16 +69,25 @@ function ResultsPage(props) {
       </Typography>
 
       <section id="left">
-        {results.map((trip, i) => (
-          <TripResults
-            setShowStops={setShowStops}
-            serverUpdateUserTrips={props.serverUpdateUserTrips}
-            low={low}
-            trip={trip}
-            key={i}
-            setStops={setStops}
-          />
-        ))}
+        {results.length > 0?(
+          <div>
+            {results.map((trip, i) => (
+              <TripResults
+                setShowStops={setShowStops}
+                serverUpdateUserTrips={props.serverUpdateUserTrips}
+                low={low}
+                trip={trip}
+                key={i}
+                setStops={setStops}
+              />
+            ))}
+          </div>
+        ):(
+          <div>
+              <h3>No trips found!</h3> 
+          </div>
+        )}
+
       </section>
     </div>
   );
