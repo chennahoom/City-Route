@@ -83,6 +83,13 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: 15,
+    width: "400px",
+  },
+  trips: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: "center",
+    justifyContent: "center",  
   },
   dialog: {
     width: "900px",
@@ -114,12 +121,6 @@ const useStyles = makeStyles((theme) => ({
     // display: "flex",
     alignItems: "center",
     justifyContent: "center",
-  },
-  trips: {
-    width: "35%",
-    display: "inline-block",
-    marginLeft: "3%",
-    // width:'100%',
   },
   appBar: {
     position: "relative",
