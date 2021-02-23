@@ -273,11 +273,13 @@ function AddTripForm(props) {
               })}
             </label>
             <Button
+            
               onClick={onSave}
               type="submit"
               fullWidth
               variant="contained"
               color="primary"
+              
               className={classes.submit}
             >
               {props.editTrip ? "Save" : "Add"}
