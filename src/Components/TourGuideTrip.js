@@ -65,6 +65,7 @@ function TourGuideTrip(props) {
   const [tripData, setTripData] = useState(props.data);
 
   console.log("props.editTrip", props.editTrip);
+
   useEffect(() => {
     console.log("props.useEffect", props.editTrip);
     fetch(`https://city-route.herokuapp.com/api/trips/${props.data}`)
@@ -78,9 +79,13 @@ function TourGuideTrip(props) {
       });
   }, [props.editTrip]);
 
+  
+
   const handleDelete = () => {
     console.log(props.data);
+
     props.deleteTrip(props.data);
+
   };
 
   let myImages = {

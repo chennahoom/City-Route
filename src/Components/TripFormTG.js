@@ -41,7 +41,7 @@
 // }));
 
 // function AddTripForm(props) {
-//   const classes = useStyles();  
+//   const classes = useStyles();
 
 // const initForm = {
 //   trip_name_city: "",
@@ -164,8 +164,6 @@
 
 // const [currency, setCurrency] = useState('');
 
-
-
 //   return (
 //     <FormControl ref={formRef} onSubmit={onSave} className={classes.form}>
 //     <Grid container spacing={2}>
@@ -176,7 +174,7 @@
 //       {option.label}
 //     </MenuItem>
 //   ))}
-// </TextField> 
+// </TextField>
 //       <TextField className={classes.inputs} name='tour_date' label="Tour Date" label='dd/mm/yyyy' onChange={handleInputChange}></TextField>
 //       <TextField className={classes.inputs} name='tour_time' label='Tour Time'></TextField>
 //       <TextField className={classes.inputs} name='start_time' label='Start Time'></TextField>
@@ -265,48 +263,50 @@
 // }
 // export default AddTripForm;
 
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import MenuItem from '@material-ui/core/MenuItem';
+import React from "react";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import MenuItem from "@material-ui/core/MenuItem";
 import { useState, useEffect, useRef } from "react";
-import { FormControl } from '@material-ui/core';
+import { FormControl } from "@material-ui/core";
 import MapTG from "../Components/MapTourGuide";
 import { Link as Scroll } from "react-scroll";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { AppBar, IconButton, Toolbar, Collapse } from "@material-ui/core";
-import { red } from '@material-ui/core/colors';
+import { red } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh',
-    backgroundColor: 'white',
+    height: "100vh",
+    backgroundColor: "white",
   },
   image: {
-    backgroundImage: 'url(https://source.unsplash.com/random)',
-    backgroundRepeat: 'no-repeat',
+    backgroundImage: "url(https://source.unsplash.com/random)",
+    backgroundRepeat: "no-repeat",
     backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+      theme.palette.type === "light"
+        ? theme.palette.grey[50]
+        : theme.palette.grey[900],
+    backgroundSize: "cover",
+    backgroundPosition: "center",
   },
   paper: {
     margin: theme.spacing(8, 4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    boxShadow: 'none',
-    height: '150%',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    boxShadow: "none",
+    height: "150%",
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
     // display: 'flex',
     // flexDirection: 'row',
@@ -314,7 +314,6 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
     // width: '100px',
-
   },
   label: {
     marginBottom: -7,
@@ -322,13 +321,12 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 19,
   },
   gridForm: {
-    boxShadow: 'none',
-    height: '60%',
+    boxShadow: "none",
+    height: "60%",
   },
   goDown: {
-    justifyContent: 'center',
-    alignItems: 'center',
-
+    justifyContent: "center",
+    alignItems: "center",
   },
 }));
 
@@ -337,35 +335,35 @@ function AddTripForm(props) {
 
   const cities = [
     {
-      value: 'Berlin',
-      label: 'Berlin',
+      value: "Berlin",
+      label: "Berlin",
     },
     {
-      value: 'Tel-Aviv',
-      label: 'Tel-Aviv',
+      value: "Tel-Aviv",
+      label: "Tel-Aviv",
     },
     {
-      value: 'Paris',
-      label: 'Paris',
+      value: "Paris",
+      label: "Paris",
     },
     {
-      value: 'Amsterdam',
-      label: 'Amsterdam',
+      value: "Amsterdam",
+      label: "Amsterdam",
     },
     {
-      value: 'London',
-      label: 'London',
+      value: "London",
+      label: "London",
     },
   ];
 
-  const [currency, setCurrency] = useState('');
+  const [currency, setCurrency] = useState("");
 
   const initForm = {
-    trip_name_city: '',
-    tour_date: '',
+    trip_name_city: "",
+    tour_date: "",
     tour_guide_id: props.user?.id,
-    tour_time: '',
-    start_time: '',
+    tour_time: "",
+    start_time: "",
     ticketsBought: 0,
   };
 
@@ -401,7 +399,9 @@ function AddTripForm(props) {
   }, [trip.trip_name_city]);
 
   const handleInputChange = (event) => {
-    if (event.target.name === 'trip_name_city') { setCurrency(event.target.value) }
+    if (event.target.name === "trip_name_city") {
+      setCurrency(event.target.value);
+    }
     const { name, value } = event.target;
     setTrip({ ...trip, [name]: value });
     console.log(trip.id);
@@ -434,7 +434,6 @@ function AddTripForm(props) {
   };
 
   function toggledStop(id) {
-
     const exists = selectedStops.find((stopId) => stopId === id);
     console.log("exists", id);
     if (exists) {
@@ -459,29 +458,80 @@ function AddTripForm(props) {
     event.preventDefault();
     props.updateForm(event);
     setCurrency(event.target.value);
-  }
+  };
 
-  console.log('tour_time:' , tour_time);
+  console.log("tour_time:", tour_time);
 
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item className={classes.gridForm} xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid
+        item
+        className={classes.gridForm}
+        xs={12}
+        sm={8}
+        md={5}
+        component={Paper}
+        elevation={6}
+        square
+      >
         <div className={classes.paper}>
           <Typography component="h1" variant="h5">
             Add New Trip
           </Typography>
           <form className={classes.form} ref={formRef} onSubmit={onSave}>
             <label className={classes.label}>City</label>
-            <TextField onChange={handleInputChange} fullWidth className={classes.inputs} id="select" value={trip.trip_name_city} label='City' select name='trip_name_city'>
-              {cities.map(option => (
+            <TextField
+              onChange={handleInputChange}
+              fullWidth
+              className={classes.inputs}
+              id="select"
+              value={trip.trip_name_city}
+              label="City"
+              select
+              name="trip_name_city"
+            >
+              {cities.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
                   {option.label}
                 </MenuItem>
               ))}
             </TextField>
-            < br />
-            <label className={classes.label}>Tour Date: dd/mm/yyyy</label>
+            <br />
+
+            <label>
+              Tour-Date:
+              <input
+                defaultValue={tour_date}
+                type="text"
+                placeholder="01/06/2021"
+                name="tour_date"
+                onChange={handleInputChange}
+              />
+              <br />
+            </label>
+            <label>
+              Tour-Time:
+              <input
+                defaultValue={tour_time}
+                type="text"
+                name="tour_time"
+                onChange={handleInputChange}
+              />
+              <br />
+            </label>
+            <label>
+              Start-Time:
+              <input
+                type="text"
+                defaultValue={start_time}
+                name="start_time"
+                onChange={handleInputChange}
+              />
+              <br />
+            </label>
+            
+            {/* <label className={classes.label}>Tour Date: dd/mm/yyyy</label>
             <TextField
               onChange={handleInputChange}
               variant="outlined"
@@ -491,7 +541,9 @@ function AddTripForm(props) {
               id="tour_date"
               // label="dd/mm/yyyy"
               name="tour_date"
-              value={tour_date}
+              defaultValue={tour_date}
+
+
             />
             <label className={classes.label}>Tour Time: 1-2</label>
             <TextField
@@ -501,7 +553,8 @@ function AddTripForm(props) {
               fullWidth
               name="tour_time"
               // label="1-2"
-              value={tour_time}
+              defaultValue={tour_time}
+
             id="tour_time"
             />
             <label className={classes.label}>Start Time: ex. 10AM</label>
@@ -514,26 +567,30 @@ function AddTripForm(props) {
               // label="10AM"
               id="start_time"
               value={start_time}
-            />
+              defaultValue={start_time}
 
-            <label className={classes.label}>Stops
-          {stops.map((stop) => {
-              return (
-                <div key={stop.id}>
-                  {/* {stop.stop_name} */}
-                  <FormControlLabel control={
-                    <Checkbox
-                      checked={selectedStops.includes(stop.id)}
-                      value={stop.stop_name}
-                      color="primary"
-                      onChange={() => toggledStop(stop.id)}
-                    />}
-                    label={stop.stop_name}
-                  />
-                  
-                </div>
-              );
-            })}
+            /> */}
+
+            <label className={classes.label}>
+              Stops
+              {stops.map((stop) => {
+                return (
+                  <div key={stop.id}>
+                    {/* {stop.stop_name} */}
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={selectedStops.includes(stop.id)}
+                          value={stop.stop_name}
+                          color="primary"
+                          onChange={() => toggledStop(stop.id)}
+                        />
+                      }
+                      label={stop.stop_name}
+                    />
+                  </div>
+                );
+              })}
             </label>
             <Button
               onClick={onSave}
@@ -554,7 +611,6 @@ function AddTripForm(props) {
           </form>
         </div>
       </Grid>
-
 
       <Grid className={classes.gridMap} item xs={false} sm={4} md={7}>
         <MapTG stops={stops} trip={trip} selectedStops={selectedStops} />
