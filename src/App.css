@@ -234,6 +234,10 @@ body {
   cursor: pointer;
 }
 
+#pageTitle{
+  color: blue;
+}
+
 
 /* -----NEw Ariel and Halel */
 /* traveler -> results */
