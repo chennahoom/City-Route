@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     // minWidth: 200,
     margin: 15,
-    width: "45%",
+    // width: "45%",
   },
   media: {
     height: 200,
@@ -71,10 +71,16 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 15,
   },
   modal: {
-    display: "flex",
+    // display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
+  trips:{
+    width: "35%",
+    display: "inline-block",
+    marginLeft: "3%",
+    // width:'100%',
+  }
 }));
 
 function TripResults(props) {
@@ -178,6 +184,7 @@ function TripResults(props) {
 
   console.log(props.low);
   return (
+    <div className={classes.trips}>
     <Card className={classes.root}>
       <CardActionArea>
         <CardMedia className={classes.media} image={img} title="City Gallery" />
@@ -292,6 +299,7 @@ function TripResults(props) {
         </Modal>
       </CardActions>
     </Card>
+    </div>
   );
 }
 
