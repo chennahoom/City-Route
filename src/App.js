@@ -219,7 +219,7 @@ function App() {
 		<div className="App">
 			<Header setlog={setlog} setUser={setUser} />
 			<Switch>
-      <Route path="/signUp" exact>
+      <Route path="/" exact>
 					<SignUp serverError={serverError} addUser={addUser} signIn={signIn} />
 				</Route>
 				<Route path="/maps/:city" exact>
